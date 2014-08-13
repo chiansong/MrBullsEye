@@ -9,17 +9,18 @@
 	<app main="Main" file="MrBullsEye" path="bin" />
 	
 	<window background="#000000" fps="60" />
-	<window width="800" height="480" unless="mobile" />
+	<window width="1920" height="1080" unless="mobile" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	
 	<!-- classpath, haxe libs -->
 	<source path="src" />
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
-	
+	<haxelib name="flixel" />
+		
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
-	<assets path="assets/img" rename="img" />
+	<assets path="assets/background" rename="background" />
 	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->

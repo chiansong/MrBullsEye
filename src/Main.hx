@@ -3,10 +3,11 @@ package ;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
-
+import src.game.MainGame;
+import flixel.FlxGame;
 /**
  * ...
- * @author CS.Lim
+ * @author C.S.LIM
  */
 
 class Main extends Sprite 
@@ -26,35 +27,34 @@ class Main extends Sprite
 		if (inited) return;
 		inited = true;
 
-		// (your code here)
-		
-		// Stage:
-		// stage.stageWidth x stage.stageHeight @ stage.dpiScale
-		
-		// Assets:
-		// nme.Assets.getBitmapData("img/assetname.jpg");
+        var game:FlxGame = new MainGame();
+        addChild(game);
 	}
 
 	/* SETUP */
 
 	public function new() 
 	{
-		super();	
-		addEventListener(Event.ADDED_TO_STAGE, added);
+		super();
+		if (stage != null) 
+			init();
+		else
+			addEventListener(Event.ADDED_TO_STAGE, added);
 	}
 
 	function added(e) 
 	{
 		removeEventListener(Event.ADDED_TO_STAGE, added);
 		stage.addEventListener(Event.RESIZE, resize);
+		
 		#if ios
-		haxe.Timer.delay(init, 100); // iOS 6
+			haxe.Timer.delay(init, 100); // iOS 6
 		#else
-		init();
+			init();
 		#end
 	}
 	
-	public static function main() 
+	public static function main():Void
 	{
 		// static entry point
 		Lib.current.stage.align = flash.display.StageAlign.TOP_LEFT;
