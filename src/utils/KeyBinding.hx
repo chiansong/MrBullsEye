@@ -9,9 +9,9 @@ import lime.helpers.Gamepad;
 class KeyBinding
 {
 	public static var pressed:Map < String, Void->Bool > ;
-	public static var justPressed:Map < String, Void->Bool > 
-
-	private static function init():Void
+	public static var justPressed:Map < String, Void->Bool > ;
+	
+	public static function init():Void
 	{
 		justPressed = ["click" => clickJustPressed];
 	}
@@ -21,7 +21,7 @@ class KeyBinding
 
 	}
 	
-	public static function clickJustPressed():Bool
+	private static function clickJustPressed():Bool
 	{
 		return FlxG.mouse.pressed;
 	}

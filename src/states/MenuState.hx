@@ -22,6 +22,7 @@ class MenuState extends FlxState
 	var character:FlxSprite;
 	var bulleye:FlxSprite;
 	var title:FlxSprite;
+	
 	override public function create():Void
 	{
 		////SCREEN

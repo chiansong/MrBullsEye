@@ -1,6 +1,9 @@
 package objects;
 
+import event.EventManager;
+import event.EventType;
 import openfl.Assets;
+import utils.KeyBinding;
 
 /**
  * ...
@@ -19,5 +22,9 @@ class Player extends GameObject
 	{
 		super.update();
 		
+		if (KeyBinding.pressed["click"]())
+		{
+			EventManager.triggerEvent(EventType.ARROW_FIRED,[_x:x, _y:y]);
+		}
 	}
 }
