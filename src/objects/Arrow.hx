@@ -16,4 +16,5 @@ class Arrow extends FlxSprite
 		loadGraphic(Assets.getBitmapData("assets/character/player.png"), true, false, 32, 8);
 	}
 	
+	
 }

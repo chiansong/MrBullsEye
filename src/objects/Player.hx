@@ -18,5 +18,6 @@ class Player extends GameObject
 	override public function update()
 	{
 		super.update();
+		
 	}
 }

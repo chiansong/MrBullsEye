@@ -1,5 +1,6 @@
 package objects;
 import flixel.group.FlxGroup;
+import utils.ObjectPool;
 
 /**
  * ...
@@ -8,6 +9,7 @@ import flixel.group.FlxGroup;
 class ArrowManager
 {
 	public static var mGroup:FlxGroup;
+	private static var mArrowPool:ObjectPool<>;
 	
 	public function new() 
 	{
