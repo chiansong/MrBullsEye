@@ -72,7 +72,7 @@ class BullsEyeManager
 		bullseye.activate(mStartingPosition, 0, 100);
 	}
 	
-	public static function update()
+	public static function update():Void
 	{
 		mLanuchTimer += FlxG.elapsed;
 		if (mLanuchTimer > 2)

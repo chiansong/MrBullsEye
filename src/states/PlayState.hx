@@ -18,6 +18,7 @@ import utils.KeyBinding;
 class PlayState extends FlxState
 {
 	private static var player:Player;
+	public static var mGameLevel:Int = 1;
 	
 	override public function create():Void
 	{
@@ -52,6 +53,7 @@ class PlayState extends FlxState
 		
 		EventManager.update();
 		KeyBinding.update();
+		ArrowManager.update();
 		BullsEyeManager.update();
 	}
 }
