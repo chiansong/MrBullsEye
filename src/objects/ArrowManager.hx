@@ -1,5 +1,6 @@
 package objects;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.util.FlxPoint;
 import haxe.xml.Fast;
 import managers.DisplayManager;
@@ -66,6 +67,21 @@ class ArrowManager
 		//Grab a Arrow
 		var arrow = mArrowPool.get();
 		arrow.fire(mFiringPosition, 300, 1);
+	}
+	
+	public static function update():Void
+	{
+		FlxG.overlap(mGroup, BullsEyeManager.mGroup, onArrowHit);
+	}
+	
+	private static function onArrowHit(_arrow:FlxObject, _bullseye:FlxObject):Void
+	{
+		var BasicArrow:Arrow = cast(_arrow, Arrow);
+		BasicArrow.mState = Arrow.HIT;
+		
+		EventManager.triggerEvent(EventType.BULLSEYE_HIT, { score:1 ,
+															arrow:_arrow,
+															bullseye:_bullseye} );
 	}
 	
 	public static function parseArrowData(assetFile:String)

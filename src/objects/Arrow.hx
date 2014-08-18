@@ -1,6 +1,8 @@
 package objects;
+import event.EventType;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
+import managers.EventManager;
 import openfl.Assets;
 
 /**
@@ -13,9 +15,9 @@ class Arrow extends FlxSprite
 	public var mSpeed:Float;
 	public var mState:Int;
 	
-	private inline static var IDLE:Int = 0;
-	private inline static var FIRED:Int = 1;
-	private inline static var HIT:Int = 2;
+	public inline static var IDLE:Int = 0;
+	public inline static var FIRED:Int = 1;
+	public inline static var HIT:Int = 2;
 
 	public function new() 
 	{
@@ -24,6 +26,8 @@ class Arrow extends FlxSprite
 		loadGraphic(Assets.getBitmapData("character/arrow.png"), true, false, 32, 8);
 		mState = IDLE;
 		visible = false;
+		
+		EventManager.subscrible(EventType.BULLSEYE_HIT, onBullsEyeHit);
 	}
 	
 	public function fire(_pos:FlxPoint, _speed:Float, _power:Int):Void
@@ -37,6 +41,16 @@ class Arrow extends FlxSprite
 		visible = true;
 	}
 	
+	public function onBullsEyeHit(evt:Int, params:Dynamic):Void
+	{
+		if (params.arrow != this)
+			return;
+		
+		mState = HIT;
+		var bullseyes:BullsEye = cast(params.bullseye, BullsEye);
+		velocity = bullseyes.velocity;
+	}
+	
 	public override function update():Void
 	{
 		super.update();
@@ -44,10 +58,6 @@ class Arrow extends FlxSprite
 		if (mState == FIRED)
 		{
 			velocity.x = mSpeed;
-		}
-		if (mState == HIT)
-		{
-			velocity.x = 0;
 		}
 	}
 }

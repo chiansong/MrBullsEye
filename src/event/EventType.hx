@@ -12,4 +12,5 @@ class EventType
 	//IN-GAME
 	public static inline var ARROW_FIRED:Int   = 2000;
 	public static inline var BULLSEYE_MOVE:Int = 2001;
+	public static inline var BULLSEYE_HIT:Int  = 2002;
 }
