@@ -1,4 +1,5 @@
-package event;
+package managers;
+import event.Event;
 
 /**
  * ...

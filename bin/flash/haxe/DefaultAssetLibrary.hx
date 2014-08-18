@@ -38,11 +38,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/arrow.png", __ASSET__character_arrow_png);
+		type.set ("character/arrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/arrowXML.xml", __ASSET__character_arrowxml_xml);
+		type.set ("character/arrowXML.xml", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("character/bulleye.png", __ASSET__character_bulleye_png);
+		type.set ("character/bulleye.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/player.png", __ASSET__character_player_png);
+		type.set ("character/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#elseif html5
 		
 		addExternal("background/splashscreen.png", "image", "background/splashscreen.png");
+		addExternal("character/arrow.png", "image", "character/arrow.png");
+		addExternal("character/arrowXML.xml", "text", "character/arrowXML.xml");
+		addExternal("character/bulleye.png", "image", "character/bulleye.png");
+		addExternal("character/player.png", "image", "character/player.png");
 		
 		
 		#else
@@ -53,6 +65,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("character/arrow.png", __ASSET__character_arrow_png);
+		type.set ("character/arrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("character/arrowXML.xml", __ASSET__character_arrowxml_xml);
+		type.set ("character/arrowXML.xml", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("character/bulleye.png", __ASSET__character_bulleye_png);
+		type.set ("character/bulleye.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("character/player.png", __ASSET__character_player_png);
+		type.set ("character/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#else
@@ -637,9 +661,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 #elseif flash
 
 @:keep class __ASSET__background_splashscreen_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_arrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_bulleye_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 
 
 #elseif html5
+
+
+
+
 
 
 
@@ -648,6 +680,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 @:bitmap("assets/background/splashscreen.png") class __ASSET__background_splashscreen_png extends flash.display.BitmapData {}
+@:bitmap("assets/character/arrow.png") class __ASSET__character_arrow_png extends flash.display.BitmapData {}
+@:file("assets/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
+@:bitmap("assets/character/bulleye.png") class __ASSET__character_bulleye_png extends flash.display.BitmapData {}
+@:bitmap("assets/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}
 
 
 #end

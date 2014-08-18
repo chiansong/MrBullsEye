@@ -23,6 +23,6 @@ class KeyBinding
 	
 	private static function clickJustPressed():Bool
 	{
-		return FlxG.mouse.pressed;
+		return FlxG.mouse.justPressed;
 	}
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<level start="10" speed="20" power="1">1<level/>
+	<level start="15" speed="30" power="2">2<level/>
+	<level start="20" speed="40" power="3">3<level/>
+	<level start="25" speed="50" power="4">4<level/>
+	<level start="30" speed="60" power="5">5<level/>
+</data>

@@ -21,7 +21,7 @@ class Arrow extends FlxSprite
 	{
 		super();
 		
-		loadGraphic(Assets.getBitmapData("assets/character/player.png"), true, false, 32, 8);
+		loadGraphic(Assets.getBitmapData("character/arrow.png"), true, false, 32, 8);
 		mState = IDLE;
 		visible = false;
 	}

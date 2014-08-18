@@ -1,7 +1,12 @@
 package states;
-import event.EventManager;
+import event.EventType;
+import flixel.FlxG;
+import managers.DisplayManager;
+import managers.EventManager;
 import flixel.FlxState;
 import objects.ArrowManager;
+import objects.BullsEyeManager;
+import objects.Player;
 import utils.KeyBinding;
 
 /////////////////////////*
@@ -12,18 +17,28 @@ import utils.KeyBinding;
 
 class PlayState extends FlxState
 {
+	private static var player:Player;
+	
 	override public function create():Void
 	{
 		super.create();
 		
+		KeyBinding.init();
 		EventManager.init();
 		ArrowManager.init();
-		KeyBinding.init();
+		BullsEyeManager.init();
+		DisplayManager.init();
+		
+		EventManager.triggerEvent(EventType.GAME_INIT);
+		
+		player = new Player();
+		reset();
 	}
 	
 	public static function reset():Void
 	{
-		
+		player.init();
+		player.setPosition(50, FlxG.height / 2 - player.height / 2);
 	}
 
 	override public function destroy():Void
@@ -35,6 +50,8 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
+		EventManager.update();
 		KeyBinding.update();
+		BullsEyeManager.update();
 	}
 }

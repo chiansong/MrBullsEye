@@ -13,6 +13,11 @@ class GameObject extends FlxSprite
 	
 	public function new() 
 	{
+		super();
+	}
+	
+	public function init()
+	{
 		
 	}
 	
