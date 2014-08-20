@@ -30,6 +30,11 @@ class BullsEye extends FlxSprite
 		mSpeedX = 0;
 		mSpeedY = -10;
 		mState = IDLE;
+		
+		width = width / 2;
+		height *= 0.75;
+		
+		centerOffsets();
 	}
 	
 	public function activate(_pos:FlxPoint, _speedX:Float, _speedY:Float):Void
@@ -63,6 +68,8 @@ class BullsEye extends FlxSprite
 		{
 			mActive = false;
 			mState = IDLE;
+			EventManager.triggerEvent(EventType.BULLSEYE_OUT, { object:this } );
+			kill();
 		}
 	}
 }

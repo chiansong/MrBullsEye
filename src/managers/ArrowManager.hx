@@ -1,6 +1,7 @@
-package objects;
+package managers;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.system.FlxCollisionType;
 import flixel.util.FlxPoint;
 import haxe.xml.Fast;
 import managers.DisplayManager;
@@ -32,6 +33,8 @@ class ArrowManager
 	public static var mGroup:FlxGroup;
 	public static var mFiringPosition:FlxPoint;
 	private static var mArrowPool:ObjectPool<Arrow>;
+	private static var mCurrentArrow:Int = 0;
+	private static var mMaxArrow:Int = 10;
 	
 	public static function init():Void
 	{
@@ -42,6 +45,7 @@ class ArrowManager
 		
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.ARROW_FIRED, onFire);
+		EventManager.subscrible(EventType.ARROW_MISSED, onMiss);
 	}
 	
 	private static function createArrow():Arrow
@@ -60,6 +64,7 @@ class ArrowManager
 	private static function onGameInit(evt:Int, params:Dynamic):Void
 	{
 		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT1LAYER.getIndex());
+		mCurrentArrow = mMaxArrow;
 	}
 	
 	private static function onFire(evt:Int, params:Dynamic):Void
@@ -67,6 +72,19 @@ class ArrowManager
 		//Grab a Arrow
 		var arrow = mArrowPool.get();
 		arrow.fire(mFiringPosition, 300, 1);
+		arrow.mCanHit = true;
+		mCurrentArrow -= 1;
+	}
+	
+	private static function onMiss(evt:Int, params:Dynamic):Void
+	{
+		mMaxArrow -= 1;
+		GUIManager.mNumberOfArrowLeft.text = Std.string(mMaxArrow);
+		ScoreManager.mCombo = 0;
+		if (mMaxArrow == 0)
+		{
+			EventManager.triggerEvent(EventType.GAME_OVER);
+		}
 	}
 	
 	public static function update():Void
@@ -79,9 +97,20 @@ class ArrowManager
 		var BasicArrow:Arrow = cast(_arrow, Arrow);
 		BasicArrow.mState = Arrow.HIT;
 		
+		if (BasicArrow.mCanHit)
+		{
+			BasicArrow.mCanHit = false;
+			ScoreManager.mCombo += 1;
+			ScoreManager.addScore();
+		}
 		EventManager.triggerEvent(EventType.BULLSEYE_HIT, { score:1 ,
 															arrow:_arrow,
 															bullseye:_bullseye} );
+	}
+	
+	public static function getMaxArrow():Int
+	{
+		return mMaxArrow;
 	}
 	
 	public static function parseArrowData(assetFile:String)

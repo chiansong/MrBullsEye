@@ -4,8 +4,10 @@ import flixel.FlxG;
 import managers.DisplayManager;
 import managers.EventManager;
 import flixel.FlxState;
-import objects.ArrowManager;
-import objects.BullsEyeManager;
+import managers.ArrowManager;
+import managers.BullsEyeManager;
+import managers.GUIManager;
+import managers.ScoreManager;
 import objects.Player;
 import utils.KeyBinding;
 
@@ -29,6 +31,8 @@ class PlayState extends FlxState
 		ArrowManager.init();
 		BullsEyeManager.init();
 		DisplayManager.init();
+		ScoreManager.init();
+		GUIManager.init();
 		
 		EventManager.triggerEvent(EventType.GAME_INIT);
 		
