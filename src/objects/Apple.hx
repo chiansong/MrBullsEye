@@ -1,49 +1,39 @@
 package objects;
-import event.Event;
 import event.EventType;
 import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxPoint;
 import managers.EventManager;
 import managers.ScoreManager;
 import openfl.Assets;
 
 /**
  * ...
- * @author Lim Chian Song
+ * @author CS.Lim
  */
-class BullsEye extends GameObject
-{	
+class Apple extends GameObject
+{
 	public function new() 
 	{
 		super();
-		loadGraphic(Assets.getBitmapData("character/bulleye.png"),true, false, 32, 68);
+		loadGraphic(Assets.getBitmapData("character/apple.png"), false, false, 36, 36);
 		
 		mSpeedX = 0;
 		mSpeedY = 0;
 		mState = GameObject.IDLE;
 		
 		width = width / 2;
-		height *= 0.75;
+		height *= 0.60;
 		centerOffsets();
 		
 		EventManager.subscrible(EventType.OBJECT_HIT, onHit);
 	}
 	
-	public function onHit(evt:Int, params:Dynamic):Void
+	private function onHit(evt:Int, params:Dynamic):Void
 	{
 		if (params.object != this)
 			return;
-			
-		ScoreManager.addScore();
-	}
-	public function getHitPoint(_y:Float):Int
-	{
-		if(_y > y + height/2 - 5 && _y < y + height/2 + 5)
-		{
-			return 3;
-		}
-		return 1;
+		
+		ScoreManager.mMultipler += 1;
+		ScoreManager.mScore += 100 * ScoreManager.mMultipler;
 	}
 	
 	public override function update():Void

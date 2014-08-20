@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
 import managers.EventManager;
+import managers.ScoreManager;
 import openfl.Assets;
 
 /**
@@ -29,7 +30,7 @@ class Arrow extends FlxSprite
 		mState = IDLE;
 		visible = false;
 		
-		EventManager.subscrible(EventType.BULLSEYE_HIT, onBullsEyeHit);
+		EventManager.subscrible(EventType.OBJECT_HIT, onObjectHit);
 	}
 	
 	public function fire(_pos:FlxPoint, _speed:Float, _power:Int):Void
@@ -49,21 +50,20 @@ class Arrow extends FlxSprite
 		mCanHit = true;
 	}
 	
-	public function onBullsEyeHit(evt:Int, params:Dynamic):Void
+	public function onObjectHit(evt:Int, params:Dynamic):Void
 	{
 		if (params.arrow != this)
 			return;
 		
 		mState = HIT;
-		var bullseyes:BullsEye = cast(params.bullseye, BullsEye);
-		velocity.x = bullseyes.velocity.x;
-		velocity.y = bullseyes.velocity.y;
+		var object:GameObject = cast(params.object, GameObject);	
+		velocity.x = object.velocity.x;
+		velocity.y = object.velocity.y;
 	}
 	
 	public override function update():Void
 	{
 		super.update();
-		
 		if (mState == FIRED)
 		{
 			velocity.x = mSpeed;

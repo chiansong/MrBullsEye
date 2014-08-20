@@ -38,6 +38,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/apple.png", __ASSET__character_apple_png);
+		type.set ("character/apple.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/arrow.png", __ASSET__character_arrow_png);
 		type.set ("character/arrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/arrowXML.xml", __ASSET__character_arrowxml_xml);
@@ -51,6 +53,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		addExternal("background/splashscreen.png", "image", "background/splashscreen.png");
+		addExternal("character/apple.png", "image", "character/apple.png");
 		addExternal("character/arrow.png", "image", "character/arrow.png");
 		addExternal("character/arrowXML.xml", "text", "character/arrowXML.xml");
 		addExternal("character/bulleye.png", "image", "character/bulleye.png");
@@ -65,6 +68,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("character/apple.png", __ASSET__character_apple_png);
+		type.set ("character/apple.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("character/arrow.png", __ASSET__character_arrow_png);
 		type.set ("character/arrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -661,6 +667,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 #elseif flash
 
 @:keep class __ASSET__background_splashscreen_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_apple_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_arrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_bulleye_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -676,14 +683,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
 #elseif (windows || mac || linux)
 
 
-@:bitmap("assets/background/splashscreen.png") class __ASSET__background_splashscreen_png extends flash.display.BitmapData {}
-@:bitmap("assets/character/arrow.png") class __ASSET__character_arrow_png extends flash.display.BitmapData {}
-@:file("assets/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
-@:bitmap("assets/character/bulleye.png") class __ASSET__character_bulleye_png extends flash.display.BitmapData {}
-@:bitmap("assets/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/splashscreen.png") class __ASSET__background_splashscreen_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/character/apple.png") class __ASSET__character_apple_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/character/arrow.png") class __ASSET__character_arrow_png extends flash.display.BitmapData {}
+@:file("assets/texture/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/character/bulleye.png") class __ASSET__character_bulleye_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}
 
 
 #end

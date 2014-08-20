@@ -6,9 +6,12 @@ import managers.DisplayManager;
 import managers.EventManager;
 import event.EventType;
 import flixel.group.FlxGroup;
+import objects.Apple;
 import objects.Arrow;
 import objects.BullsEye;
+import objects.GameObject;
 import utils.DisplayLayers;
+import utils.MathUtil;
 import utils.ObjectPool;
 
 /**
@@ -27,12 +30,13 @@ class BullsEyeStats
 	public var power:Float;
 }
  
-class BullsEyeManager
+class GameObjectManager
 {
 	public static var mGroup:FlxGroup;
 	public static var mStartingPosition:FlxPoint;
-	private static var mBullsEyePool:ObjectPool<BullsEye>;
-	private static var mActiveArray:Array<BullsEye>;
+	private static var mBullEyePool:ObjectPool<GameObject>;
+	private static var mApplePool:ObjectPool<Apple>;
+	private static var mActiveArray:Array<GameObject>;
 	private static var mLanuchTime:Float;
 	private static var mLanuchTimer:Float;
 	
@@ -42,18 +46,20 @@ class BullsEyeManager
 	public static function init():Void
 	{
 		mGroup = new FlxGroup();
-		mActiveArray = new Array<BullsEye>();
-		mBullsEyePool = new ObjectPool<BullsEye>(50, createBullsEye);
+		mActiveArray = new Array<GameObject>();
+		mBullEyePool = new ObjectPool<GameObject>(50, createBullsEye);
+		mApplePool = new ObjectPool<Apple>(10, createApple);
+		
 		mStartingPosition = new FlxPoint();
 		setPosition(FlxG.width - 100, -34);
 		mPreviousMovementSpeedY = 0;
 		mMovementSpeedY = 100;
-		mLanuchTime = 2;
+		mLanuchTime = 1;
 		mLanuchTimer = 0;
 		
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
-		EventManager.subscrible(EventType.BULLSEYE_MOVE, onLanuch);
-		EventManager.subscrible(EventType.BULLSEYE_OUT, onOut);
+		EventManager.subscrible(EventType.OBJECT_MOVE, onLanuch);
+		EventManager.subscrible(EventType.OBJECT_OUT, onOut);
 	}
 	
 	private static function createBullsEye():BullsEye
@@ -62,6 +68,14 @@ class BullsEyeManager
 		bullseye.kill();
 		mGroup.add(bullseye);
 		return bullseye;
+	}
+	
+	private static function createApple():Apple
+	{
+		var apple = new Apple();
+		apple.kill();
+		mGroup.add(apple);
+		return apple;
 	}
 	
 	public static function setPosition(_x:Float, _y:Float)
@@ -82,18 +96,22 @@ class BullsEyeManager
 	
 	private static function onLanuch(evt:Int, params:Dynamic):Void
 	{
-		//Grab a Arrow
-		var bullseye = mBullsEyePool.get();
-		bullseye.activate(mStartingPosition, 0, mMovementSpeedY);
-		mActiveArray.push(bullseye);
+		//Grab an Apple
+		var object:GameObject;
+		if (MathUtil.getRandomBetween(0, 100) < 15)
+			object = mApplePool.get();
+		else
+			object = mBullEyePool.get();
+		object.activate(mStartingPosition, 0, mMovementSpeedY);
+		mActiveArray.push(object);
 	}
 	
 	public static function update():Void
 	{
 		mLanuchTimer += FlxG.elapsed;
-		if (mLanuchTimer > 2)
+		if (mLanuchTimer > mLanuchTime)
 		{
-			EventManager.triggerEvent(EventType.BULLSEYE_MOVE);
+			EventManager.triggerEvent(EventType.OBJECT_MOVE);
 			mLanuchTimer = 0;
 		}
 		updateSpeed();
@@ -103,17 +121,17 @@ class BullsEyeManager
 	{
 		for (count in 0 ... mActiveArray.length)
 		{
-			mActiveArray[count].velocity.y = speed;
+			mActiveArray[count].mSpeedY = speed;
 		}
 	}
 	
 	public static function updateSpeed():Void
 	{
-		if(ScoreManager.mScore < 50)
+		if(ScoreManager.mScore < 25)
 			mMovementSpeedY = 100;
-		else if (ScoreManager.mScore > 50 && ScoreManager.mScore < 100)
+		else if (ScoreManager.mScore > 25 && ScoreManager.mScore < 50)
 			mMovementSpeedY = 150;
-		else if (ScoreManager.mScore > 100 && ScoreManager.mScore < 250)
+		else if (ScoreManager.mScore > 50 && ScoreManager.mScore < 100)
 			mMovementSpeedY = 200;
 			
 		if (mPreviousMovementSpeedY != mMovementSpeedY)

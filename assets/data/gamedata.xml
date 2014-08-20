@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<level time="1" speedY="100" max="25" apple="0" lvl2="0" lvl3="0" lvl4="0" lvl5="0">1</level>
+<level time="1.15" speedY="100" max="50" apple="10" lvl2="15" lvl3="0" lvl4="0" lvl5="0">2</level>
+<level time="1.25" speedY="105" max="100" apple="15" lvl2="25" lvl3="0" lvl4="0" lvl5="0">3</level>
+<level time="1.35" speedY="110" max="150" apple="15" lvl2="35" lvl3="5" lvl4="0" lvl5="0">4</level>
+<level time="1.35" speedY="110" max="150" apple="15" lvl2="45" lvl3="10" lvl4="0" lvl5="0">5</level>
+</data>

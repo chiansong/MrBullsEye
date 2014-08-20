@@ -89,10 +89,10 @@ class ArrowManager
 	
 	public static function update():Void
 	{
-		FlxG.overlap(mGroup, BullsEyeManager.mGroup, onArrowHit);
+		FlxG.overlap(mGroup, GameObjectManager.mGroup, onArrowHit);
 	}
 	
-	private static function onArrowHit(_arrow:FlxObject, _bullseye:FlxObject):Void
+	private static function onArrowHit(_arrow:FlxObject, _object:FlxObject):Void
 	{
 		var BasicArrow:Arrow = cast(_arrow, Arrow);
 		BasicArrow.mState = Arrow.HIT;
@@ -101,11 +101,11 @@ class ArrowManager
 		{
 			BasicArrow.mCanHit = false;
 			ScoreManager.mCombo += 1;
-			ScoreManager.addScore();
+			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
+															  arrow:_arrow,
+															  object:_object} );
 		}
-		EventManager.triggerEvent(EventType.BULLSEYE_HIT, { score:1 ,
-															arrow:_arrow,
-															bullseye:_bullseye} );
+		
 	}
 	
 	public static function getMaxArrow():Int

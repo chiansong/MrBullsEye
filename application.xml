@@ -20,8 +20,8 @@
 		
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
-	<assets path="assets/background" rename="background" />
-	<assets path="assets/character" rename="character" />
+	<assets path="assets/texture/background" rename="background" />
+	<assets path="assets/texture/character" rename="character" />
 	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->

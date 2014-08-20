@@ -5,7 +5,7 @@ import managers.DisplayManager;
 import managers.EventManager;
 import flixel.FlxState;
 import managers.ArrowManager;
-import managers.BullsEyeManager;
+import managers.GameObjectManager;
 import managers.GUIManager;
 import managers.ScoreManager;
 import objects.Player;
@@ -29,7 +29,7 @@ class PlayState extends FlxState
 		KeyBinding.init();
 		EventManager.init();
 		ArrowManager.init();
-		BullsEyeManager.init();
+		GameObjectManager.init();
 		DisplayManager.init();
 		ScoreManager.init();
 		GUIManager.init();
@@ -58,6 +58,6 @@ class PlayState extends FlxState
 		EventManager.update();
 		KeyBinding.update();
 		ArrowManager.update();
-		BullsEyeManager.update();
+		GameObjectManager.update();
 	}
 }
