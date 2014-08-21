@@ -103,7 +103,7 @@ class ArrowManager
 			ScoreManager.mCombo += 1;
 			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
 															  arrow:_arrow,
-															  object:_object} );
+															  object:_object } );												  
 		}
 		
 	}

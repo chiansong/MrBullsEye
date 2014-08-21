@@ -1,7 +1,9 @@
 package objects;
+import flash.utils.ObjectInput;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxPoint;
+import objects.ObjectType;
 
 /**
  * ...
@@ -20,6 +22,8 @@ class GameObject extends FlxSprite
 	
 	public var name:String;
 	public var parent:FlxGroup;
+	
+	public var mType:ObjectType;
 	
 	public function new() 
 	{

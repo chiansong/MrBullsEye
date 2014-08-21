@@ -27,15 +27,15 @@ class BullsEye extends GameObject
 		height *= 0.75;
 		centerOffsets();
 		
-		EventManager.subscrible(EventType.OBJECT_HIT, onHit);
+		mType = ObjectType.BULLSEYE;
+		//EventManager.subscrible(EventType.OBJECT_HIT, onHit);
 	}
 	
 	public function onHit(evt:Int, params:Dynamic):Void
 	{
 		if (params.object != this)
 			return;
-			
-		ScoreManager.addScore();
+		
 	}
 	public function getHitPoint(_y:Float):Int
 	{

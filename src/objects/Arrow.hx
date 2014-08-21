@@ -59,6 +59,16 @@ class Arrow extends FlxSprite
 		var object:GameObject = cast(params.object, GameObject);	
 		velocity.x = object.velocity.x;
 		velocity.y = object.velocity.y;
+		
+		if (object.mType == ObjectType.APPLE)
+		{
+			ScoreManager.mMultipler += 1;
+			ScoreManager.instantAddScore(ScoreManager.mMultipler * 25);
+		}
+		else if (object.mType == ObjectType.BULLSEYE)
+		{	
+			ScoreManager.addScore();
+		}
 	}
 	
 	public override function update():Void

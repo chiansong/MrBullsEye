@@ -24,16 +24,7 @@ class Apple extends GameObject
 		height *= 0.60;
 		centerOffsets();
 		
-		EventManager.subscrible(EventType.OBJECT_HIT, onHit);
-	}
-	
-	private function onHit(evt:Int, params:Dynamic):Void
-	{
-		if (params.object != this)
-			return;
-		
-		ScoreManager.mMultipler += 1;
-		ScoreManager.mScore += 100 * ScoreManager.mMultipler;
+		mType = ObjectType.APPLE;
 	}
 	
 	public override function update():Void

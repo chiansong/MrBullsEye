@@ -21,6 +21,12 @@ class ScoreManager
 		mCurrentPoint = 1;
 	}
 	
+	public static function instantAddScore(score:Int):Void
+	{
+		mScore += score;
+		GUIManager.mScore.text = Std.string(mScore);
+	}
+	
 	public static function addScore():Void
 	{
 		mScore += mCombo * mMultipler * mCurrentPoint;
