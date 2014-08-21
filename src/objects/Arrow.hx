@@ -57,6 +57,7 @@ class Arrow extends FlxSprite
 		
 		mState = HIT;
 		var object:GameObject = cast(params.object, GameObject);	
+		object.mArrow = params.arrow;
 		velocity.x = object.velocity.x;
 		velocity.y = object.velocity.y;
 		

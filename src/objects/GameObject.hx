@@ -24,6 +24,7 @@ class GameObject extends FlxSprite
 	public var parent:FlxGroup;
 	
 	public var mType:ObjectType;
+	public var mArrow:Arrow;
 	
 	public function new() 
 	{

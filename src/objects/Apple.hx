@@ -25,6 +25,7 @@ class Apple extends GameObject
 		centerOffsets();
 		
 		mType = ObjectType.APPLE;
+		mArrow = null;
 	}
 	
 	public override function update():Void

@@ -10,6 +10,7 @@ import objects.Apple;
 import objects.Arrow;
 import objects.BullsEye;
 import objects.GameObject;
+import openfl.Assets;
 import utils.DisplayLayers;
 import utils.MathUtil;
 import utils.ObjectPool;
@@ -18,7 +19,7 @@ import utils.ObjectPool;
  * ...
  * @author Lim Chian Song
  */
-class BullsEyeStats
+class GameInfoStats
 {
 	public function new(_speed:Float, _power:Float)
 	{
@@ -29,6 +30,35 @@ class BullsEyeStats
 	public var speed:Float;
 	public var power:Float;
 }
+
+class GameData
+{
+	public function new(_time:Float,
+						_speedY:Int,
+						_maxPoint:Int,	
+						_lvl2Chance:Int,	
+						_lvl3Chance:Int,
+						_lvl4Chance:Int,	
+						_lvl5Chance:Int)
+	{
+		time     	= _time;
+		speedY	    = _speedY;
+		maxPoint	= _maxPoint;	
+		lvl2Chance	= _lvl2Chance;
+		lvl3Chance	= _lvl3Chance;
+		lvl4Chance	= _lvl4Chance;
+		lvl5Chance	= _lvl5Chance;
+	}
+	
+	public var time:Float;
+	public var speedY:Int;
+	public var maxPoint:Int;
+	public var appleChance:Int;
+	public var lvl2Chance:Int;
+	public var lvl3Chance:Int;
+	public var lvl4Chance:Int;
+	public var lvl5Chance:Int;
+}
  
 class GameObjectManager
 {
@@ -37,16 +67,19 @@ class GameObjectManager
 	private static var mBullEyePool:ObjectPool<GameObject>;
 	private static var mApplePool:ObjectPool<Apple>;
 	private static var mActiveArray:Array<GameObject>;
+	private static var mGameDataMap:Map<Int,GameData>;
 	private static var mLanuchTime:Float;
 	private static var mLanuchTimer:Float;
 	
 	private static var mPreviousMovementSpeedY:Float;
 	private static var mMovementSpeedY:Float;
+	private static var mGameLevel:Int;
 	
 	public static function init():Void
 	{
 		mGroup = new FlxGroup();
 		mActiveArray = new Array<GameObject>();
+		mGameDataMap = new Map<Int,GameData>();
 		mBullEyePool = new ObjectPool<GameObject>(50, createBullsEye);
 		mApplePool = new ObjectPool<Apple>(10, createApple);
 		
@@ -54,8 +87,11 @@ class GameObjectManager
 		setPosition(FlxG.width - 100, -34);
 		mPreviousMovementSpeedY = 0;
 		mMovementSpeedY = 100;
+		mGameLevel = 1;
 		mLanuchTime = 1;
 		mLanuchTimer = 0;
+		
+		parseGameData(Assets.getText("data/gamedata.xml"));
 		
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.OBJECT_MOVE, onLanuch);
@@ -91,6 +127,7 @@ class GameObjectManager
 	private static function onOut(evt:Int, params:Dynamic):Void
 	{
 		mActiveArray.remove(params.object);
+		params.object.mArrow = null;
 	}
 	
 	
@@ -98,12 +135,17 @@ class GameObjectManager
 	{
 		//Grab an Apple
 		var object:GameObject;
-		if (MathUtil.getRandomBetween(0, 100) < 15)
+		if (MathUtil.getRandomBetween(0, 100) < 0)
 			object = mApplePool.get();
 		else
 			object = mBullEyePool.get();
 		object.activate(mStartingPosition, 0, mMovementSpeedY);
 		mActiveArray.push(object);
+	}
+	
+	private static function onLevelUp(evt:Int, params:Dynamic):Void
+	{
+		
 	}
 	
 	public static function update():Void
@@ -122,22 +164,48 @@ class GameObjectManager
 		for (count in 0 ... mActiveArray.length)
 		{
 			mActiveArray[count].mSpeedY = speed;
+			if(mActiveArray[count].mArrow != null)
+				mActiveArray[count].mArrow.velocity.y = speed;
 		}
 	}
 	
 	public static function updateSpeed():Void
 	{
-		if(ScoreManager.mScore < 25)
-			mMovementSpeedY = 100;
-		else if (ScoreManager.mScore > 25 && ScoreManager.mScore < 50)
-			mMovementSpeedY = 150;
-		else if (ScoreManager.mScore > 50 && ScoreManager.mScore < 100)
-			mMovementSpeedY = 200;
-			
+		if (ScoreManager.mScore > mGameDataMap.get(mGameLevel).maxPoint)
+		{
+			mGameLevel += 1;
+		}
+		mLanuchTime = mGameDataMap.get(mGameLevel).time;
+		mMovementSpeedY = mGameDataMap.get(mGameLevel).speedY;
+		
 		if (mPreviousMovementSpeedY != mMovementSpeedY)
 		{
 			updateActiveSpeed(mMovementSpeedY);
 			mPreviousMovementSpeedY = mMovementSpeedY;
+		}
+	}
+	
+	public static function parseGameData(assetFile:String)
+	{
+		var gameDataXML = new Fast(Xml.parse(assetFile).firstElement());
+		//Let Grab the INFO
+		for (data in gameDataXML.nodes.level)
+		{
+			var level:Int = Std.parseInt(data.innerData);
+			var time:Float = Std.parseFloat(data.att.time);
+			var speedY:Int = Std.parseInt(data.att.speedY);
+			var max:Int = Std.parseInt(data.att.max);
+			//Get the Levels
+			var lvl2:Int = Std.parseInt(data.att.lvl2);
+			var lvl3:Int = Std.parseInt(data.att.lvl3);
+			var lvl4:Int = Std.parseInt(data.att.lvl4);
+			var lvl5:Int = Std.parseInt(data.att.lvl5);
+		
+			var dataStats:GameData = new GameData(time, speedY, max,
+												  lvl2, lvl3, lvl4, lvl5);
+											
+			
+			mGameDataMap.set(level, dataStats);
 		}
 	}
 	

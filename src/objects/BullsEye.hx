@@ -28,6 +28,7 @@ class BullsEye extends GameObject
 		centerOffsets();
 		
 		mType = ObjectType.BULLSEYE;
+		mArrow = null;
 		//EventManager.subscrible(EventType.OBJECT_HIT, onHit);
 	}
 	

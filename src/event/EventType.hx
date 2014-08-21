@@ -15,5 +15,6 @@ class EventType
 	public static inline var ARROW_MISSED:Int  	= 2001;
 	public static inline var OBJECT_MOVE:Int 	= 2101;
 	public static inline var OBJECT_HIT:Int  	= 2102;
-	public static inline var OBJECT_OUT:Int  	= 2102;
+	public static inline var OBJECT_OUT:Int  	= 2103;
+	public static inline var LEVEL_UP:Int		= 2104;
 }
