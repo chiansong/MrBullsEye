@@ -15,19 +15,7 @@ import utils.ObjectPool;
 /**
  * ...
  * @author Lim Chian Song
- */
-class ArrowStats
-{
-	public function new(_speed:Float, _power:Float)
-	{
-		speed = _speed;
-		power = _power;
-	}
-	
-	public var speed:Float;
-	public var power:Float;
-}
- 
+ */	
 class ArrowManager
 {
 	public static var mGroup:FlxGroup;
@@ -35,9 +23,9 @@ class ArrowManager
 	private static var mArrowPool:ObjectPool<Arrow>;
 	private static var mActiveArrow:Array<Arrow>;
 	private static var mCurrentArrow:Int = 0;
-	private static var mMaxArrow:Int = 1;
+	private static var mMaxArrow:Int = 10;
 	private static var mArrowSpeed:Int;
-	
+
 	public static function init():Void
 	{
 		mGroup = new FlxGroup();
@@ -71,7 +59,7 @@ class ArrowManager
 	private static function onGameInit(evt:Int, params:Dynamic):Void
 	{
 		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT1LAYER.getIndex());
-		mMaxArrow = 1;
+		mMaxArrow = 10;
 		mCurrentArrow = mMaxArrow;
 	}
 	
@@ -184,10 +172,5 @@ class ArrowManager
 	public static function getMaxArrow():Int
 	{
 		return mMaxArrow;
-	}
-	
-	public static function parseArrowData(assetFile:String)
-	{
-		//var arrowXML = new Fast(Xml.parse(assetFile).firstElement());
 	}
 }

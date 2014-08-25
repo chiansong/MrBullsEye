@@ -3,7 +3,9 @@ import event.EventType;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
+import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import game.GlobalGameData;
 import openfl.Assets;
 import utils.DisplayLayers;
 import utils.ShopSelection;
@@ -15,11 +17,13 @@ import utils.ShopSelection;
 class ShopManager
 {
 	public static var mGUIGroup:FlxGroup; //Shop GUI
-	
+	//Top
+	public static var mGold:FlxText;
+	//Middle
 	public static var mSelected:ShopSelection;
 	public static var mUpgradeArrowSpeedButton:FlxButton;
 	public static var mButtonOutline:FlxSprite;
-	
+	//Buttom
 	public static var mUpgradeButton:FlxButton;
 	public static var mPlayButton:FlxButton;
 	
@@ -29,25 +33,22 @@ class ShopManager
 		mGUIGroup.visible = false;
 		mSelected = ShopSelection.NIL;
 		setupShop();
-		
+
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
 		DisplayManager.addToLayer(mGUIGroup, DisplayLayers.GUILAYER.getIndex());
 	}
 	
-	public static function hideShop()
-	{
-		mGUIGroup.visible = false;
-	}
-	
-	private static function onShopEnter(evt:Int, params:Dynamic):Void
-	{
-		mGUIGroup.visible = true;
-	}
-		
 	private static function setupShop():Void
 	{
-		var mStartingX:Float = FlxG.width / 5;
-		var mStartingY:Float = FlxG.height / 5;
+		var mStartingX:Float = FlxG.width / 2;
+		var mStartingY:Float = FlxG.height / 6;
+		
+		mGold = new FlxText(mStartingX, mStartingY, 200, "", 25);
+		mGold.text = Std.string(GlobalGameData.getGold());
+		mGUIGroup.add(mGold);
+		
+		mStartingX = FlxG.width / 5;
+		mStartingY = FlxG.height / 5;
 		
 		mButtonOutline = new FlxSprite(0, 0);
 		mButtonOutline.loadGraphic(Assets.getBitmapData("shop/button_outline.png"), true, false, 100, 100);
@@ -80,6 +81,28 @@ class ShopManager
 	{
 		mButtonOutline.setPosition(mUpgradeArrowSpeedButton.x - 10, mUpgradeArrowSpeedButton.y - 10);
 		mButtonOutline.visible = true;
+		
+		mUpgradeButton.visible = true;
+		mUpgradeButton.revive();
+	}
+	
+		
+	public static function hideShop()
+	{
+		mGUIGroup.visible = false;
+		mUpgradeButton.kill();
+		mPlayButton.kill();
+	}
+	
+	private static function onShopEnter(evt:Int, params:Dynamic):Void
+	{
+		//We can see it !!! 
+		mGUIGroup.visible = true;
+		mPlayButton.revive();
+		mUpgradeButton.kill();
+		
+		//Time to get some data ... Let grab gold text.
+		mGold.text = Std.string(GlobalGameData.getGold());
 	}
 	
 	private static function Upgrade():Void

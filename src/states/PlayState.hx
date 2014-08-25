@@ -5,6 +5,7 @@ import managers.DisplayManager;
 import managers.EventManager;
 import flixel.FlxState;
 import managers.ArrowManager;
+import managers.GameDataManager;
 import managers.GameObjectManager;
 import managers.InGameGUIManager;
 import managers.ScoreManager;
@@ -35,6 +36,7 @@ class PlayState extends FlxState
 		ScoreManager.init();
 		InGameGUIManager.init();
 		ShopManager.init();
+		GameDataManager.init();
 		
 		EventManager.triggerEvent(EventType.GAME_INIT);
 		

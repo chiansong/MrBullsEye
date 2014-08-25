@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxAngle;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import game.GlobalGameData;
 import openfl.Assets;
 
 /**
@@ -32,6 +33,11 @@ class SplashState extends FlxState
 		screen.y -= screen.height / 2;
 		
 		FlxTimer.start(2.5, go);
+		
+		//Load the needed data of the game.
+		
+		GlobalGameData.init();
+		GlobalGameData.load();
 	}
 	
 	//Play it
