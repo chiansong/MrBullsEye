@@ -1,4 +1,4 @@
-package src.game;
+package game;
 
 import flash.Lib;
 import flixel.FlxGame;
@@ -24,12 +24,10 @@ class MainGame extends FlxGame
 			super(Math.ceil(stageWidth / ratio), 
 				  Math.ceil(stageHeight / ratio), 
 				  SplashState, ratio, fps, fps);
-				  
-			
 	}
 	
-	public function Init():Void
+	public override function update():Void
 	{
-		MouseEventManager.init();
+		super.update();
 	}
 }

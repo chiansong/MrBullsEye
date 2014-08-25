@@ -3,7 +3,7 @@ package ;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
-import src.game.MainGame;
+import game.MainGame;
 import flixel.FlxGame;
 /**
  * ...

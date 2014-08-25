@@ -6,8 +6,9 @@ import managers.EventManager;
 import flixel.FlxState;
 import managers.ArrowManager;
 import managers.GameObjectManager;
-import managers.GUIManager;
+import managers.InGameGUIManager;
 import managers.ScoreManager;
+import managers.ShopManager;
 import objects.Player;
 import utils.KeyBinding;
 
@@ -25,14 +26,15 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		
+	
 		KeyBinding.init();
 		EventManager.init();
 		ArrowManager.init();
 		GameObjectManager.init();
 		DisplayManager.init();
 		ScoreManager.init();
-		GUIManager.init();
+		InGameGUIManager.init();
+		ShopManager.init();
 		
 		EventManager.triggerEvent(EventType.GAME_INIT);
 		

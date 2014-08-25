@@ -24,13 +24,13 @@ class ScoreManager
 	public static function instantAddScore(score:Int):Void
 	{
 		mScore += score;
-		GUIManager.mScore.text = Std.string(mScore);
+		InGameGUIManager.mScore.text = Std.string(mScore);
 	}
 	
 	public static function addScore():Void
 	{
 		mScore += mCombo * mMultipler * mCurrentPoint;
-		GUIManager.mScore.text = Std.string(mScore);
+		InGameGUIManager.mScore.text = Std.string(mScore);
 	}
 	
 	public static function increaseMultipler():Void
@@ -41,6 +41,6 @@ class ScoreManager
 	public static function increaseCombo():Void
 	{
 		mCombo += 1;
-		GUIManager.mCombo.text = Std.string(mCombo);
+		InGameGUIManager.mCombo.text = Std.string(mCombo);
 	}
 }

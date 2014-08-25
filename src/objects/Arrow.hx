@@ -57,7 +57,7 @@ class Arrow extends FlxSprite
 		
 		mState = HIT;
 		var object:GameObject = cast(params.object, GameObject);	
-		object.mArrow = params.arrow;
+		//object.mArrow = params.arrow;
 		velocity.x = object.velocity.x;
 		velocity.y = object.velocity.y;
 		
@@ -81,9 +81,18 @@ class Arrow extends FlxSprite
 			
 			if (x >= FlxG.width + width)
 			{
-				EventManager.triggerEvent(EventType.ARROW_MISSED);
+				EventManager.triggerEvent(EventType.ARROW_MISSED, {object:this});
 				kill();
 			}
 		}
+		else if (mState == HIT)
+		{
+			//Check if it belong the screen
+			if (y > FlxG.height)
+			{
+				EventManager.triggerEvent(EventType.ARROW_OUT, {object:this});
+			}
+		}
+		
 	}
 }

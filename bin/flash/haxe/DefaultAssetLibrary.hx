@@ -48,6 +48,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("character/bulleye.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/player.png", __ASSET__character_player_png);
 		type.set ("character/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("shop/arrowspeed.png", __ASSET__shop_arrowspeed_png);
+		type.set ("shop/arrowspeed.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("shop/button_outline.png", __ASSET__shop_button_outline_png);
+		type.set ("shop/button_outline.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("shop/upgrade.png", __ASSET__shop_upgrade_png);
+		type.set ("shop/upgrade.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("data/gamedata.xml", __ASSET__data_gamedata_xml);
 		type.set ("data/gamedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		
@@ -60,6 +66,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("character/arrowXML.xml", "text", "character/arrowXML.xml");
 		addExternal("character/bulleye.png", "image", "character/bulleye.png");
 		addExternal("character/player.png", "image", "character/player.png");
+		addExternal("shop/arrowspeed.png", "image", "shop/arrowspeed.png");
+		addExternal("shop/button_outline.png", "image", "shop/button_outline.png");
+		addExternal("shop/upgrade.png", "image", "shop/upgrade.png");
 		addExternal("data/gamedata.xml", "text", "data/gamedata.xml");
 		
 		
@@ -86,6 +95,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("character/player.png", __ASSET__character_player_png);
 		type.set ("character/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("shop/arrowspeed.png", __ASSET__shop_arrowspeed_png);
+		type.set ("shop/arrowspeed.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("shop/button_outline.png", __ASSET__shop_button_outline_png);
+		type.set ("shop/button_outline.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("shop/upgrade.png", __ASSET__shop_upgrade_png);
+		type.set ("shop/upgrade.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("data/gamedata.xml", __ASSET__data_gamedata_xml);
 		type.set ("data/gamedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
@@ -678,10 +696,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_bulleye_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__shop_arrowspeed_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__shop_button_outline_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__shop_upgrade_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__data_gamedata_xml extends flash.utils.ByteArray { }
 
 
 #elseif html5
+
+
+
 
 
 
@@ -701,6 +725,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/texture/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/bulleye.png") class __ASSET__character_bulleye_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/shop/arrowspeed.png") class __ASSET__shop_arrowspeed_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/shop/button_outline.png") class __ASSET__shop_button_outline_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/shop/upgrade.png") class __ASSET__shop_upgrade_png extends flash.display.BitmapData {}
 @:file("assets/data/gamedata.xml") class __ASSET__data_gamedata_xml extends flash.utils.ByteArray {}
 
 

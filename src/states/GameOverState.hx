@@ -16,21 +16,15 @@ import openfl.Assets;
  * @author C.S.LIM
  */
 
-class MenuState extends FlxState
+class Game extends FlxState
 {
 	var screen:FlxSprite;
 	var character:FlxSprite;
 	var bulleye:FlxSprite;
 	var title:FlxSprite;
 	
-	var mText:FlxText;
-	
 	override public function create():Void
 	{
-		mText = new FlxText(FlxG.width / 2, FlxG.height/2, 100, "Click To Begin");
-		mText.color = FlxColor.WHITE;
-		add(mText);
-		
 		////SCREEN
 		//screen = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
 		//screen.loadGraphic("img/background.png", false, false, 640, 480);

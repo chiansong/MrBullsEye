@@ -74,6 +74,7 @@ class GameObjectManager
 	private static var mPreviousMovementSpeedY:Float;
 	private static var mMovementSpeedY:Float;
 	private static var mGameLevel:Int;
+	private static var mGameOver:Bool;
 	
 	public static function init():Void
 	{
@@ -91,11 +92,16 @@ class GameObjectManager
 		mLanuchTime = 1;
 		mLanuchTimer = 0;
 		
+		mGameOver = false;
+		
 		parseGameData(Assets.getText("data/gamedata.xml"));
 		
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
+		EventManager.subscrible(EventType.GAME_OVER, onGameOver);
 		EventManager.subscrible(EventType.OBJECT_MOVE, onLanuch);
 		EventManager.subscrible(EventType.OBJECT_OUT, onOut);
+		EventManager.subscrible(EventType.SPEED_UP, onSpeedUp);
+		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
 	}
 	
 	private static function createBullsEye():BullsEye
@@ -122,14 +128,38 @@ class GameObjectManager
 	private static function onGameInit(evt:Int, params:Dynamic):Void
 	{
 		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT1LAYER.getIndex());
+		
+		mMovementSpeedY = 100;
+		mGameLevel = 1;
+		mLanuchTime = 1;
+		mLanuchTimer = 0;
+		
+		mGameOver = false;
+	}
+	
+	private static function onGameOver(evt:Int, params:Dynamic):Void
+	{
+		//STOP EVERYTHING
+		for (count in 0 ... mActiveArray.length)
+		{
+			mActiveArray[count].mSpeedY = 0;
+		}
+		mGameOver = true;
+	}
+	
+	private static function onShopEnter(evt:Int, params:Dynamic):Void
+	{
+		//STOP EVERYTHING
+		for (count in 0 ... mActiveArray.length)
+		{
+			mActiveArray[count].kill();
+		}
 	}
 	
 	private static function onOut(evt:Int, params:Dynamic):Void
 	{
 		mActiveArray.remove(params.object);
-		params.object.mArrow = null;
 	}
-	
 	
 	private static function onLanuch(evt:Int, params:Dynamic):Void
 	{
@@ -150,6 +180,9 @@ class GameObjectManager
 	
 	public static function update():Void
 	{
+		if (mGameOver)
+			return;
+		
 		mLanuchTimer += FlxG.elapsed;
 		if (mLanuchTimer > mLanuchTime)
 		{
@@ -159,13 +192,12 @@ class GameObjectManager
 		updateSpeed();
 	}
 	
-	public static function updateActiveSpeed(speed:Float)
+	private static function onSpeedUp(evt:Int, params:Dynamic):Void
 	{
+		//Reduce the max and reset combo
 		for (count in 0 ... mActiveArray.length)
 		{
-			mActiveArray[count].mSpeedY = speed;
-			if(mActiveArray[count].mArrow != null)
-				mActiveArray[count].mArrow.velocity.y = speed;
+			mActiveArray[count].mSpeedY = params.speed;
 		}
 	}
 	
@@ -180,7 +212,7 @@ class GameObjectManager
 		
 		if (mPreviousMovementSpeedY != mMovementSpeedY)
 		{
-			updateActiveSpeed(mMovementSpeedY);
+			EventManager.triggerEvent(EventType.SPEED_UP, { speed:mMovementSpeedY } );
 			mPreviousMovementSpeedY = mMovementSpeedY;
 		}
 	}
