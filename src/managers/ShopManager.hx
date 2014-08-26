@@ -35,7 +35,8 @@ class ShopManager
 		setupShop();
 
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
-		DisplayManager.addToLayer(mGUIGroup, DisplayLayers.GUILAYER.getIndex());
+		EventManager.triggerEvent(EventType.ENTER_SHOP);
+		//DisplayManager.addToLayer(mGUIGroup, DisplayLayers.GUILAYER.getIndex());
 	}
 	
 	private static function setupShop():Void
@@ -45,7 +46,7 @@ class ShopManager
 		
 		mGold = new FlxText(mStartingX, mStartingY, 200, "", 25);
 		mGold.text = Std.string(GlobalGameData.getGold());
-		mGUIGroup.add(mGold);
+		//mGUIGroup.add(mGold);
 		
 		mStartingX = FlxG.width / 5;
 		mStartingY = FlxG.height / 5;
@@ -53,25 +54,26 @@ class ShopManager
 		mButtonOutline = new FlxSprite(0, 0);
 		mButtonOutline.loadGraphic(Assets.getBitmapData("shop/button_outline.png"), true, false, 100, 100);
 		mButtonOutline.visible = false;
-		mGUIGroup.add(mButtonOutline);
+		//mGUIGroup.add(mButtonOutline);
 		
 		mUpgradeArrowSpeedButton = new FlxButton(mStartingX, mStartingY, null, onUpgradeArrowSpeedClick);
 		mUpgradeArrowSpeedButton.loadGraphic(Assets.getBitmapData("shop/arrowspeed.png"), true, false, 80, 80);
-		mGUIGroup.add(mUpgradeArrowSpeedButton);
+		//mGUIGroup.add(mUpgradeArrowSpeedButton);
 		
 		mStartingX = FlxG.width - 250;
 		mStartingY = FlxG.height - 200;
 		mUpgradeButton = new FlxButton(mStartingX, mStartingY, null, Upgrade);
 		mUpgradeButton.loadGraphic(Assets.getBitmapData("shop/upgrade.png"), true, false, 150, 50);
-		mGUIGroup.add(mUpgradeButton);
+		//mGUIGroup.add(mUpgradeButton);
 		
 		mStartingX = FlxG.width - 200;
 		mStartingY = FlxG.height - 75;
 		mPlayButton = new FlxButton(mStartingX, mStartingY, null, Play);
 		mPlayButton.loadGraphic(Assets.getBitmapData("shop/upgrade.png"), true, false, 150, 50);
-		mGUIGroup.add(mPlayButton);
+		//mGUIGroup.add(mPlayButton);
 		
 		mGUIGroup.visible = false;
+		//mGUIGroup.visible = true;
 	}
 		
 	/**************/
@@ -98,8 +100,8 @@ class ShopManager
 	{
 		//We can see it !!! 
 		mGUIGroup.visible = true;
-		mPlayButton.revive();
-		mUpgradeButton.kill();
+		//mPlayButton.revive();
+		//mUpgradeButton.kill();
 		
 		//Time to get some data ... Let grab gold text.
 		mGold.text = Std.string(GlobalGameData.getGold());
@@ -112,6 +114,6 @@ class ShopManager
 	
 	private static function Play():Void
 	{
-		EventManager.triggerEvent(EventType.GAME_INIT);
+		EventManager.triggerEvent(EventType.LEAVE_SHOP);
 	}
 }

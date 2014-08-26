@@ -1,6 +1,7 @@
 package states;
 import event.EventType;
 import flixel.FlxG;
+import flixel.FlxSubState;
 import managers.DisplayManager;
 import managers.EventManager;
 import flixel.FlxState;
@@ -23,6 +24,7 @@ class PlayState extends FlxState
 {
 	private static var player:Player;
 	public static var mGameLevel:Int = 1;
+	private static var mShopState:ShopState;
 	
 	override public function create():Void
 	{
@@ -35,16 +37,23 @@ class PlayState extends FlxState
 		DisplayManager.init();
 		ScoreManager.init();
 		InGameGUIManager.init();
-		ShopManager.init();
 		GameDataManager.init();
 		
 		EventManager.triggerEvent(EventType.GAME_INIT);
-		
+		EventManager.subscrible(EventType.ENTER_SHOP, onEnterShop);
+
+		mShopState = new ShopState();
+		mShopState.close();
 		player = new Player();
 		reset();
 	}
 	
-	public static function reset():Void
+	public function onEnterShop(evt:Int, params:Dynamic):Void
+	{
+		openSubState(mShopState);
+	}
+	
+	public function reset():Void
 	{
 		player.init();
 		player.setPosition(50, FlxG.height / 2 - player.height / 2);
@@ -54,6 +63,8 @@ class PlayState extends FlxState
 	{
 		super.destroy();
 	}
+	
+
 	
 	override public function update():Void 
 	{

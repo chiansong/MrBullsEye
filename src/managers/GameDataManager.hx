@@ -21,7 +21,7 @@ import utils.ObjectPool;
  * @author Lim Chian Song
  */
 
-class arrowSpeedStats
+class ArrowSpeedStats
 {
 	public function new(_speed:Float, _cost:Float)
 	{
@@ -37,13 +37,16 @@ class GameDataManager
 	private static var mGoldEarned:Int;
 	private static var mHighestScore:Int;
 	
-	private static var mArrowSpeedMap:Map<Int,arrowSpeedStats>;
+	private static var mArrowSpeedMap:Map<Int,ArrowSpeedStats>;
 	private static var mArrowSpeedDescription:String;
 	
 	public static function init():Void
 	{
 		EventManager.subscrible(EventType.GAME_INIT, onGameEnter);
 		EventManager.subscrible(EventType.GAME_OVER, onGameOver);
+		
+		mArrowSpeedMap = new Map<Int,ArrowSpeedStats>();
+		parseArrowSpeedData(Assets.getText("data/arrowspeeddata.xml"));
 	}
 	
 	public static function addGoldEarned(value:Int):Void
@@ -66,6 +69,18 @@ class GameDataManager
 	public static function parseArrowSpeedData(assetFile:String)
 	{
 		var arrowspeedXML = new Fast(Xml.parse(assetFile).firstElement());
-		mArrowSpeedDescription = gameDataXML.nodes.description;
+		mArrowSpeedDescription = arrowspeedXML.node.description.innerData;
+		
+		for (data in arrowspeedXML.nodes.level)
+		{
+			var level:Int = Std.parseInt(data.innerData);
+			//The info
+			var speed:Int = Std.parseInt(data.att.speed);
+			var cost:Int = Std.parseInt(data.att.cost);
+			
+			var arrowData:ArrowSpeedStats = new ArrowSpeedStats(speed, cost);
+			
+			mArrowSpeedMap.set(level, arrowData);
+		}
 	}
 }

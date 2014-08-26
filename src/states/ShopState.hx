@@ -1,14 +1,19 @@
 package states;
 
+import event.EventType;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxRandom;
 import flixel.util.FlxTimer;
+import managers.DisplayManager;
+import managers.EventManager;
+import managers.ShopManager;
 import openfl.Assets;
 
 /**
@@ -16,15 +21,26 @@ import openfl.Assets;
  * @author C.S.LIM
  */
 
-class Game extends FlxState
+class ShopState extends FlxSubState
 {
 	var screen:FlxSprite;
 	var character:FlxSprite;
 	var bulleye:FlxSprite;
 	var title:FlxSprite;
 	
+	//public function ShopState()
+	//{
+		//EventManager.subscrible(EventType.SHOP_GAME, onShopToGame);
+	//}
+	
 	override public function create():Void
 	{
+		ShopManager.init();
+		add(ShopManager.mGUIGroup);
+		EventManager.subscrible(EventType.LEAVE_SHOP, onShopToGame);
+		
+		//ShopManager.showShop();
+		//Eve
 		////SCREEN
 		//screen = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
 		//screen.loadGraphic("img/background.png", false, false, 640, 480);
@@ -61,14 +77,21 @@ class Game extends FlxState
 		//bullMove();
 		//FlxG.mouse.show();
 	}
-	
+	private function onShopToGame(evt:Int, params:Dynamic):Void
+	{
+		close();
+	}
+
 	override public function update():Void
 	{
-		if (FlxG.mouse.justPressed)
-		{
-			FlxG.switchState(new PlayState());
-		}
 		super.update();
+		
+		EventManager.update();
+		//if (FlxG.mouse.justPressed)
+		//{
+			//FlxG.switchState(new PlayState());
+		//}
+		//super.update();
 	}
 	
 	////************//

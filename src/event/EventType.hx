@@ -21,4 +21,5 @@ class EventType
 	public static inline var OBJECT_OUT:Int  	= 2103;
 	public static inline var SPEED_UP:Int		= 2104;
 	public static inline var ENTER_SHOP:Int		= 2105;
+	public static inline var LEAVE_SHOP:Int		= 2106;
 }

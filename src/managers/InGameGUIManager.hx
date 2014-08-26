@@ -6,6 +6,8 @@ import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import openfl.Assets;
+import states.MenuState;
+import states.ShopState;
 import utils.DisplayLayers;
 
 /**
@@ -98,7 +100,7 @@ class InGameGUIManager
 	{
 		mGUIGroup1.visible = true;
 		mGUIGroup2.visible = false;
-		ShopManager.hideShop();
+		//ShopManager.hideShop();
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
