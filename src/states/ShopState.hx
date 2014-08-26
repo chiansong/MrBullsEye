@@ -11,6 +11,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxRandom;
 import flixel.util.FlxTimer;
+import game.GlobalGameData;
 import managers.DisplayManager;
 import managers.EventManager;
 import managers.ShopManager;
@@ -21,65 +22,24 @@ import openfl.Assets;
  * @author C.S.LIM
  */
 
-class ShopState extends FlxSubState
+class ShopState extends FlxState
 {
 	var screen:FlxSprite;
 	var character:FlxSprite;
 	var bulleye:FlxSprite;
 	var title:FlxSprite;
 	
-	//public function ShopState()
-	//{
-		//EventManager.subscrible(EventType.SHOP_GAME, onShopToGame);
-	//}
-	
 	override public function create():Void
 	{
 		ShopManager.init();
 		add(ShopManager.mGUIGroup);
-		EventManager.subscrible(EventType.LEAVE_SHOP, onShopToGame);
 		
-		//ShopManager.showShop();
-		//Eve
-		////SCREEN
-		//screen = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
-		//screen.loadGraphic("img/background.png", false, false, 640, 480);
-		//add(screen);
-		////reset it.
-		//screen.x -= screen.width / 2;
-		//screen.y -= screen.height / 2;
-		//
-		//character = new FlxSprite(35, 185);
-		//character.loadGraphic("img/player.png", true, false, 64, 64);
-		//character.animation.add("shoot", [3, 4, 3, 5], 12, false);
-		//character.scale.x = 7;
-		//character.scale.y = 7;
-		//add(character);
-		//
-		//bulleye = new FlxSprite(FlxG.width - 75, 195);
-		//bulleye.loadGraphic("img/bulleye.png", true, false, 32, 68);
-		//bulleye.animation.add("Walk", [0, 1, 0, 1], 6, false);
-		//bulleye.scale.x = 6;
-		//bulleye.scale.y = 6;
-		//add(bulleye);
-		//
-		//title = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
-		//title.loadGraphic("img/title.png", false, false);
-		//title.x -= title.width / 2;
-		//title.y -= title.height / 2 + 135;
-		//add(title);
-		//
-		//FlxTween.linearMotion(character, -200, character.y, character.x, character.y, 1, true, { ease:FlxEase.backOut } );
-		//FlxTween.linearMotion(bulleye, 800, bulleye.y, bulleye.x, bulleye.y, 1.5, true, { ease:FlxEase.backOut} );
-		//FlxTween.linearMotion(title, title.x, -200, title.x, title.y, 2.5, true, { ease:FlxEase.bounceOut} );
-		//
-		//playerShoot();
-		//bullMove();
-		//FlxG.mouse.show();
+		EventManager.subscrible(EventType.LEAVE_SHOP, onShopToGame);
 	}
+	
 	private function onShopToGame(evt:Int, params:Dynamic):Void
 	{
-		close();
+		FlxG.switchState(new PlayState());
 	}
 
 	override public function update():Void
@@ -89,9 +49,8 @@ class ShopState extends FlxSubState
 		EventManager.update();
 		//if (FlxG.mouse.justPressed)
 		//{
-			//FlxG.switchState(new PlayState());
+			//FlxG.switchState(GlobalGameData.mPlayState);
 		//}
-		//super.update();
 	}
 	
 	////************//

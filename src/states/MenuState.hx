@@ -9,6 +9,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxRandom;
 import flixel.util.FlxTimer;
+import game.GlobalGameData;
 import openfl.Assets;
 
 /**

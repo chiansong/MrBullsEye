@@ -23,7 +23,7 @@ class ArrowManager
 	private static var mArrowPool:ObjectPool<Arrow>;
 	private static var mActiveArrow:Array<Arrow>;
 	private static var mCurrentArrow:Int = 0;
-	private static var mMaxArrow:Int = 10;
+	private static var mMaxArrow:Int = 1;
 	private static var mArrowSpeed:Int;
 
 	public static function init():Void
@@ -40,7 +40,7 @@ class ArrowManager
 		EventManager.subscrible(EventType.ARROW_MISSED, onMiss);
 		EventManager.subscrible(EventType.ARROW_OUT, onOut);
 		EventManager.subscrible(EventType.SPEED_UP, onSpeedUp);
-		EventManager.subscrible(EventType.ENTER_SHOP, onSpeedUp);
+		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
 	}
 	
 	private static function createArrow():Arrow

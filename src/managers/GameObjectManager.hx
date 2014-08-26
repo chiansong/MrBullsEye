@@ -173,11 +173,6 @@ class GameObjectManager
 		mActiveArray.push(object);
 	}
 	
-	private static function onLevelUp(evt:Int, params:Dynamic):Void
-	{
-		
-	}
-	
 	public static function update():Void
 	{
 		if (mGameOver)

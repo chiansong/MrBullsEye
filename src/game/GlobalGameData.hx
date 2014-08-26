@@ -1,5 +1,8 @@
 package game;
 import flixel.util.FlxSave;
+import managers.ShopManager;
+import states.PlayState;
+import states.ShopState;
 
 /**
  * ...
@@ -12,8 +15,14 @@ class GlobalGameData
 	private static var highestScore:Int;
 	private static var arrowSpeedLevel:Int;
 	
+	public static var mPlayState:PlayState;
+	public static var mShopState:ShopState;
+	
 	public static function init():Void
 	{
+		mPlayState = new PlayState();
+		mShopState = new ShopState();
+		
 		gameSaveData = new FlxSave();
 		gameSaveData.bind("SaveData");
 	}

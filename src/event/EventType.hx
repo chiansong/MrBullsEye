@@ -7,6 +7,7 @@ package event;
 class EventType
 {
 	//STATE EVENT
+	public static inline var FIRST_INIT:Int		= 0001;
 	public static inline var GAME_INIT:Int     	= 1000;
 	public static inline var GAME_OVER:Int     	= 1001;
 	

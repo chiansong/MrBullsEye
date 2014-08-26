@@ -2,6 +2,7 @@ package states;
 import event.EventType;
 import flixel.FlxG;
 import flixel.FlxSubState;
+import game.GlobalGameData;
 import managers.DisplayManager;
 import managers.EventManager;
 import flixel.FlxState;
@@ -24,12 +25,24 @@ class PlayState extends FlxState
 {
 	private static var player:Player;
 	public static var mGameLevel:Int = 1;
-	private static var mShopState:ShopState;
-	
+	public static var mHasInit:Bool = false;
+
 	override public function create():Void
 	{
 		super.create();
+		
+		//if (mHasInit == false)
+		//{
+			initGame();
+			mHasInit = true;
+		//}
+		
+		//Trigger Events
+		EventManager.triggerEvent(EventType.GAME_INIT);
+	}
 	
+	public function initGame():Void
+	{
 		KeyBinding.init();
 		EventManager.init();
 		ArrowManager.init();
@@ -39,18 +52,18 @@ class PlayState extends FlxState
 		InGameGUIManager.init();
 		GameDataManager.init();
 		
-		EventManager.triggerEvent(EventType.GAME_INIT);
-		EventManager.subscrible(EventType.ENTER_SHOP, onEnterShop);
-
-		mShopState = new ShopState();
-		mShopState.close();
 		player = new Player();
 		reset();
+	
+		//Subscrible to this event
+		EventManager.subscrible(EventType.ENTER_SHOP, onEnterShop);
 	}
+	
 	
 	public function onEnterShop(evt:Int, params:Dynamic):Void
 	{
-		openSubState(mShopState);
+		FlxG.switchState(new ShopState());
+		//FlxG.switchState(GlobalGameData.mShopState);
 	}
 	
 	public function reset():Void
@@ -64,10 +77,8 @@ class PlayState extends FlxState
 		super.destroy();
 	}
 	
-
-	
 	override public function update():Void 
-	{
+	{	
 		super.update();
 		
 		EventManager.update();
