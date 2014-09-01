@@ -1,6 +1,7 @@
 package game;
 
 import flash.Lib;
+import flixel.FlxG;
 import flixel.FlxGame;
 import states.SplashState;
 import flixel.plugin.MouseEventManager;
@@ -29,5 +30,11 @@ class MainGame extends FlxGame
 	public override function update():Void
 	{
 		super.update();
+		
+		//Remove when 
+		if (FlxG.keys.justPressed.M)
+		{
+			GlobalGameData.gameSaveData.erase();
+		}
 	}
 }

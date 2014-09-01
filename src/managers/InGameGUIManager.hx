@@ -18,7 +18,6 @@ class InGameGUIManager
 {
 	public static var mGUIGroup1:FlxGroup; //In-Game GUI
 	public static var mGUIGroup2:FlxGroup; //Stats GUI
-	
 	//G1
 	public static var mScore:FlxText;
 	public static var mNumberOfArrowLeft:FlxText;
@@ -100,13 +99,17 @@ class InGameGUIManager
 	{
 		mGUIGroup1.visible = true;
 		mGUIGroup2.visible = false;
-		//ShopManager.hideShop();
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
 	{
 		mGUIGroup1.visible = false;
 		mGUIGroup2.visible = true;
+		
+		//Update the information ... remove the text in the future.
+		mGoldEarned.text = "Gold Earned: " + GameDataManager.mGoldEarned;
+		mBestCombo.text = "Highest Combo: " + GameDataManager.mHighestCombo;
+		mNoOfCritical.text = "No. of Critical: " + GameDataManager.mCriticalCount;
 	}
 	
 	public static function setArrows(_current:Int, _max:Int)
@@ -114,8 +117,8 @@ class InGameGUIManager
 		mNumberOfArrowLeft.text = Std.string(_current) + " / " + Std.string(_max);
 	}
 	
-	public function update():Void
+	public static function update():Void
 	{
-	
+		mCombo.text = Std.string(ScoreManager.mCombo);
 	}
 }

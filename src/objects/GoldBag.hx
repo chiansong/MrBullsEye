@@ -2,6 +2,7 @@ package objects;
 import event.EventType;
 import flixel.FlxG;
 import managers.EventManager;
+import managers.GameDataManager;
 import managers.ScoreManager;
 import openfl.Assets;
 
@@ -9,12 +10,12 @@ import openfl.Assets;
  * ...
  * @author CS.Lim
  */
-class Apple extends GameObject
+class GoldBag extends GameObject
 {
 	public function new() 
 	{
 		super();
-		loadGraphic(Assets.getBitmapData("character/apple.png"), false, false, 36, 36);
+		loadGraphic(Assets.getBitmapData("character/goldbag.png"), false, false, 64, 64);
 		
 		mSpeedX = 0;
 		mSpeedY = 0;
@@ -24,19 +25,19 @@ class Apple extends GameObject
 		height *= 0.60;
 		centerOffsets();
 		
-		mType = ObjectType.APPLE;
+		mType = ObjectType.GOLD;
 
-		EventManager.subscrible(EventType.APPLE_HIT, onHit);
+		EventManager.subscrible(EventType.GOLDBAG_HIT, onHit);
 	}
 	
 	public function onHit(evt:Int, params:Dynamic):Void
 	{
 		//Not the apple u are looking for
-		if (params.apple != this)
+		if (params.gold != this)
 			return;
 		
 		//Increase Multipler and Add Score by it worth
-		ScoreManager.mMultipler += 1;
+		GameDataManager.addGoldEarned(25);
 		ScoreManager.instantAddScore(ScoreManager.mMultipler * 10);
 	}
 	

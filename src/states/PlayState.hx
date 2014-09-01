@@ -85,5 +85,6 @@ class PlayState extends FlxState
 		KeyBinding.update();
 		ArrowManager.update();
 		GameObjectManager.update();
+		InGameGUIManager.update();
 	}
 }

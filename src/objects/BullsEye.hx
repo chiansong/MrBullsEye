@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
 import managers.EventManager;
+import managers.GameDataManager;
 import managers.ScoreManager;
 import openfl.Assets;
 
@@ -14,37 +15,57 @@ import openfl.Assets;
  */
 class BullsEye extends GameObject
 {	
+	private var mScore = 1;
 	public function new() 
 	{
 		super();
-		loadGraphic(Assets.getBitmapData("character/bulleye.png"),true, false, 32, 68);
 		
+		//Get Graphics Animation
+		loadGraphic(Assets.getBitmapData("character/bulleye.png"), true, false, 32, 68);
+		animation.add("level0", [0]);
+		animation.add("level1", [1]);
+		animation.add("level2", [2]);
+		animation.add("level3", [3]);
+		animation.add("level4", [4]);
+		
+		//No Speed
 		mSpeedX = 0;
 		mSpeedY = 0;
 		mState = GameObject.IDLE;
 		
+		//Resize the Collision Detection
 		width = width / 2;
 		height *= 0.75;
 		centerOffsets();
 		
 		mType = ObjectType.BULLSEYE;
-		mArrow = null;
-		//EventManager.subscrible(EventType.OBJECT_HIT, onHit);
+
+		EventManager.subscrible(EventType.BULLSEYE_HIT, onHit);
+	}
+	
+	public function setBullEyes(level:Int)
+	{
+		animation.play("level" + level);
+		mScore = level + 1;
 	}
 	
 	public function onHit(evt:Int, params:Dynamic):Void
 	{
-		if (params.object != this)
+		if (params.bullseye != this)
 			return;
 		
-	}
-	public function getHitPoint(_y:Float):Int
-	{
-		if(_y > y + height/2 - 5 && _y < y + height/2 + 5)
+		var score:Int = mScore;
+		//Check
+		var centerY:Float = y + height / 2;
+		if (params.arrow.y > centerY - 5 &&
+			params.arrow.y < centerY + 5)
 		{
-			return 3;
+			score = mScore * 2;
+			GameDataManager.mCriticalCount += 1;
 		}
-		return 1;
+		
+		//Add the score
+		ScoreManager.addScore(score);
 	}
 	
 	public override function update():Void

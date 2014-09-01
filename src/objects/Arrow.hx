@@ -62,14 +62,11 @@ class Arrow extends FlxSprite
 		velocity.y = object.velocity.y;
 		
 		if (object.mType == ObjectType.APPLE)
-		{
-			ScoreManager.mMultipler += 1;
-			ScoreManager.instantAddScore(ScoreManager.mMultipler * 25);
-		}
-		else if (object.mType == ObjectType.BULLSEYE)
-		{	
-			ScoreManager.addScore();
-		}
+			EventManager.triggerEvent(EventType.APPLE_HIT, {apple:object, arrow:this});
+		else if (object.mType == ObjectType.BULLSEYE)	
+			EventManager.triggerEvent(EventType.BULLSEYE_HIT, {bullseye:object, arrow:this});
+		else if (object.mType == ObjectType.GOLD)
+			EventManager.triggerEvent(EventType.GOLDBAG_HIT, {gold:object, arrow:this});
 	}
 	
 	public override function update():Void

@@ -3,6 +3,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.system.FlxCollisionType;
 import flixel.util.FlxPoint;
+import game.GlobalGameData;
 import haxe.xml.Fast;
 import managers.DisplayManager;
 import managers.EventManager;
@@ -59,8 +60,10 @@ class ArrowManager
 	private static function onGameInit(evt:Int, params:Dynamic):Void
 	{
 		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT1LAYER.getIndex());
-		mMaxArrow = 10;
+		mMaxArrow = GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).data;
 		mCurrentArrow = mMaxArrow;
+		
+		mArrowSpeed = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
 	}
 	
 	private static function onFire(evt:Int, params:Dynamic):Void
@@ -85,6 +88,7 @@ class ArrowManager
 		mMaxArrow -= 1;
 		InGameGUIManager.mNumberOfArrowLeft.text = Std.string(mMaxArrow);
 		ScoreManager.mCombo = 0;
+		
 		//Remove the object
 		mActiveArrow.remove(params.object);
 		
@@ -135,7 +139,6 @@ class ArrowManager
 		if (BasicArrow.mCanHit)
 		{
 			BasicArrow.mCanHit = false;
-			ScoreManager.mCombo += 1;
 			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
 															  arrow:_arrow,
 															  object:_object } );												  
@@ -151,7 +154,7 @@ class ArrowManager
 		if (BasicArrow.mCanHit)
 		{
 			BasicArrow.mCanHit = false;
-			ScoreManager.mCombo += 1;
+			ScoreManager.increaseCombo();
 			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
 															  arrow:_arrow,
 															  object:_object } );												  
@@ -159,14 +162,16 @@ class ArrowManager
 		
 	}
 	
-	public static function increaseUpgradeSpeed():Void
+	public static function increaseUpgradeNo():Void
 	{
-		mArrowSpeed += 50;
+		GlobalGameData.arrowNoLevel += 1;
+		mMaxArrow = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
 	}
 	
-	public static function increaseArrow():Void
+	public static function increaseUpgradeSpeed():Void
 	{
-		++mCurrentArrow;
+		GlobalGameData.arrowSpeedLevel += 1;
+		mArrowSpeed = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
 	}
 	
 	public static function getMaxArrow():Int

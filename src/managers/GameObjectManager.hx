@@ -1,6 +1,7 @@
 package managers;
 import flixel.FlxG;
 import flixel.util.FlxPoint;
+import game.GlobalGameData;
 import haxe.xml.Fast;
 import managers.DisplayManager;
 import managers.EventManager;
@@ -10,6 +11,7 @@ import objects.Apple;
 import objects.Arrow;
 import objects.BullsEye;
 import objects.GameObject;
+import objects.GoldBag;
 import openfl.Assets;
 import utils.DisplayLayers;
 import utils.MathUtil;
@@ -36,6 +38,7 @@ class GameData
 	public function new(_time:Float,
 						_speedY:Int,
 						_maxPoint:Int,	
+						_gold:Int,
 						_lvl2Chance:Int,	
 						_lvl3Chance:Int,
 						_lvl4Chance:Int,	
@@ -43,13 +46,15 @@ class GameData
 	{
 		time     	= _time;
 		speedY	    = _speedY;
-		maxPoint	= _maxPoint;	
+		maxPoint	= _maxPoint;
+		gold		= _gold;
 		lvl2Chance	= _lvl2Chance;
 		lvl3Chance	= _lvl3Chance;
 		lvl4Chance	= _lvl4Chance;
 		lvl5Chance	= _lvl5Chance;
 	}
 	
+	public var gold:Int;
 	public var time:Float;
 	public var speedY:Int;
 	public var maxPoint:Int;
@@ -66,6 +71,7 @@ class GameObjectManager
 	public static var mStartingPosition:FlxPoint;
 	private static var mBullEyePool:ObjectPool<GameObject>;
 	private static var mApplePool:ObjectPool<Apple>;
+	private static var mGoldPool:ObjectPool<GoldBag>;
 	private static var mActiveArray:Array<GameObject>;
 	private static var mGameDataMap:Map<Int,GameData>;
 	private static var mLanuchTime:Float;
@@ -83,6 +89,7 @@ class GameObjectManager
 		mGameDataMap = new Map<Int,GameData>();
 		mBullEyePool = new ObjectPool<GameObject>(50, createBullsEye);
 		mApplePool = new ObjectPool<Apple>(10, createApple);
+		mGoldPool = new ObjectPool<GoldBag>(10, createGoldBag);
 		
 		mStartingPosition = new FlxPoint();
 		setPosition(FlxG.width - 100, -34);
@@ -120,6 +127,14 @@ class GameObjectManager
 		return apple;
 	}
 	
+	private static function createGoldBag():GoldBag
+	{
+		var gold = new GoldBag();
+		gold.kill();
+		mGroup.add(gold);
+		return gold;
+	}
+	
 	public static function setPosition(_x:Float, _y:Float)
 	{
 		mStartingPosition.set(_x, _y);
@@ -145,6 +160,9 @@ class GameObjectManager
 			mActiveArray[count].mSpeedY = 0;
 		}
 		mGameOver = true;
+		
+		//It is game over, add the gold earn.
+		GameDataManager.mGoldEarned += mGameDataMap.get(mGameLevel).gold;
 	}
 	
 	private static function onShopEnter(evt:Int, params:Dynamic):Void
@@ -165,12 +183,45 @@ class GameObjectManager
 	{
 		//Grab an Apple
 		var object:GameObject;
-		if (MathUtil.getRandomBetween(0, 100) < 0)
+		if (MathUtil.getRandomBetween(0, 1000) 
+		< GameDataManager.mAppleMap.get(GlobalGameData.appleLevel).data)
+		{
 			object = mApplePool.get();
-		else
-			object = mBullEyePool.get();
-		object.activate(mStartingPosition, 0, mMovementSpeedY);
-		mActiveArray.push(object);
+			object.activate(mStartingPosition, 0, mMovementSpeedY);
+			mActiveArray.push(object);
+			return;
+		}
+		
+		//Grab Gold Bag
+		if (MathUtil.getRandomBetween(0, 1000) <
+		GameDataManager.mGoldMap.get(GlobalGameData.goldLevel).data)
+		{
+			object = mGoldPool.get();
+			object.activate(mStartingPosition, 0, mMovementSpeedY);
+			mActiveArray.push(object);
+			return;
+		}
+		
+		//IT IS A BULLSEYE
+		object = mBullEyePool.get();
+		var value:Int = 0;
+		var bulleye:BullsEye = cast(object, BullsEye);	
+		//Level 4
+		if (MathUtil.getRandomBetween(0, 100) < mGameDataMap.get(mGameLevel).lvl5Chance)
+			value = 4;
+		//Level 3
+		if (MathUtil.getRandomBetween(0, 100) < mGameDataMap.get(mGameLevel).lvl4Chance)
+			value = 3;
+		//Level 2
+		if (MathUtil.getRandomBetween(0, 100) < mGameDataMap.get(mGameLevel).lvl3Chance)
+			value = 2;
+		//Level 1
+		if (MathUtil.getRandomBetween(0, 100) < mGameDataMap.get(mGameLevel).lvl2Chance)
+			value = 1;
+		//Level 0
+		bulleye.setBullEyes(value);	
+		bulleye.activate(mStartingPosition, 0, mMovementSpeedY);
+		mActiveArray.push(bulleye);
 	}
 	
 	public static function update():Void
@@ -222,13 +273,14 @@ class GameObjectManager
 			var time:Float = Std.parseFloat(data.att.time);
 			var speedY:Int = Std.parseInt(data.att.speedY);
 			var max:Int = Std.parseInt(data.att.max);
+			var gold:Int = Std.parseInt(data.att.gold);
 			//Get the Levels
 			var lvl2:Int = Std.parseInt(data.att.lvl2);
 			var lvl3:Int = Std.parseInt(data.att.lvl3);
 			var lvl4:Int = Std.parseInt(data.att.lvl4);
 			var lvl5:Int = Std.parseInt(data.att.lvl5);
 		
-			var dataStats:GameData = new GameData(time, speedY, max,
+			var dataStats:GameData = new GameData(time, speedY, max, gold,
 												  lvl2, lvl3, lvl4, lvl5);
 											
 			
@@ -236,8 +288,16 @@ class GameObjectManager
 		}
 	}
 	
-	public static function parseArrowData(assetFile:String)
+	/**
+	 * Increase the apple chance ... more apple more multipler
+	 */
+	public static function appleChanceIncrease():Void
 	{
-		//var arrowXML = new Fast(Xml.parse(assetFile).firstElement());
+		GlobalGameData.appleLevel += 1;
+	}
+	
+	public static function goldChanceIncrease():Void
+	{
+		GlobalGameData.goldLevel += 1;
 	}
 }

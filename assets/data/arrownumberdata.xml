@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<description>"Increase The Number Of The Arrows. Be The Bullseye, Shoot The Bullseye."</description>
+<level number="10" cost="500">0</level>
+<level number="15" cost="1000">1</level>
+<level number="20" cost="1500">2</level>
+<level number="25" cost="3000">3</level>
+</data>

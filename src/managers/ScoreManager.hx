@@ -11,13 +11,13 @@ class ScoreManager
 	public static var mCombo:Int;
 	public static var mHighestScore:Int;
 	public static var mMultipler:Int;
-	
+
 	public static function init():Void 
 	{
 		mScore = 0;
 		mHighestScore = 0;
 		mMultipler = 1;
-		mCombo = 1;
+		mCombo = 0;
 		mCurrentPoint = 1;
 	}
 	
@@ -27,9 +27,9 @@ class ScoreManager
 		InGameGUIManager.mScore.text = Std.string(mScore);
 	}
 	
-	public static function addScore():Void
+	public static function addScore(_point):Void
 	{
-		mScore += mCombo * mMultipler * mCurrentPoint;
+		mScore += mMultipler * _point;
 		InGameGUIManager.mScore.text = Std.string(mScore);
 	}
 	
@@ -41,6 +41,23 @@ class ScoreManager
 	public static function increaseCombo():Void
 	{
 		mCombo += 1;
-		InGameGUIManager.mCombo.text = Std.string(mCombo);
+		
+		if (GameDataManager.mHighestCombo < mCombo)
+			GameDataManager.mHighestCombo = mCombo;
+		
+		//Check the combo ...
+		//Add Gold ... Add Bonus Score & Gold ... might move to XML style
+		switch(mCombo)
+		{
+			case 5:
+				mScore += 10;
+				GameDataManager.addGoldEarned(10);
+			case 10:
+				mScore += 20;
+				GameDataManager.addGoldEarned(20);
+			case 25:
+				mScore += 50;
+				GameDataManager.addGoldEarned(50);
+		}
 	}
 }

@@ -16,11 +16,17 @@ class EventType
 	public static inline var ARROW_FIRED:Int   	= 2000;
 	public static inline var ARROW_MISSED:Int  	= 2001;
 	public static inline var ARROW_OUT:Int  	= 2002;
+	
 	//OBJECT
 	public static inline var OBJECT_MOVE:Int 	= 2101;
 	public static inline var OBJECT_HIT:Int  	= 2102;
 	public static inline var OBJECT_OUT:Int  	= 2103;
 	public static inline var SPEED_UP:Int		= 2104;
-	public static inline var ENTER_SHOP:Int		= 2105;
-	public static inline var LEAVE_SHOP:Int		= 2106;
+	//GAME OBJECT
+	public static inline var BULLSEYE_HIT:Int	= 2150;
+	public static inline var APPLE_HIT:Int		= 2151;
+	public static inline var GOLDBAG_HIT:Int	= 2152;
+	//SHOP STUFF
+	public static inline var ENTER_SHOP:Int		= 2205;
+	public static inline var LEAVE_SHOP:Int		= 2206;
 }
