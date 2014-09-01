@@ -296,6 +296,9 @@ class GameObjectManager
 		GlobalGameData.appleLevel += 1;
 	}
 	
+	/**
+	 * Increase the gold chance ... more gold more multipler
+	 */	
 	public static function goldChanceIncrease():Void
 	{
 		GlobalGameData.goldLevel += 1;
