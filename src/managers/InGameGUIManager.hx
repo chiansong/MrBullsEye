@@ -16,8 +16,13 @@ import utils.DisplayLayers;
  */
 class InGameGUIManager
 {
+	public static var mGUIGroup0:FlxGroup; //
 	public static var mGUIGroup1:FlxGroup; //In-Game GUI
 	public static var mGUIGroup2:FlxGroup; //Stats GUI
+	
+	//G0
+	public static var mBackground:FlxSprite; //Background.
+	
 	//G1
 	public static var mScore:FlxText;
 	public static var mNumberOfArrowLeft:FlxText;
@@ -32,9 +37,15 @@ class InGameGUIManager
 
 	public static function init():Void
 	{
+		mGUIGroup0 = new FlxGroup();
 		mGUIGroup1 = new FlxGroup();
 		mGUIGroup2 = new FlxGroup();
 	
+		//Group 0
+		mBackground = new FlxSprite(0, 0);
+		mBackground.loadGraphic(Assets.getBitmapData("background/background.png"));
+		mGUIGroup0.add(mBackground);
+		
 		//Group 1: In Game Stuff.
 		mScore = new FlxText(FlxG.width / 2, 15, 100, "", 24);
 		mScore.text = "0";
@@ -76,6 +87,7 @@ class InGameGUIManager
 		//Hide The GUI Group
 		mGUIGroup2.visible = false;
 
+		DisplayManager.addToLayer(mGUIGroup0, DisplayLayers.BACKGROUND.getIndex());
 		DisplayManager.addToLayer(mGUIGroup1, DisplayLayers.GUILAYER.getIndex());
 		DisplayManager.addToLayer(mGUIGroup2, DisplayLayers.GUILAYER.getIndex());
 		

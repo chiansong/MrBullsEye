@@ -38,6 +38,7 @@ class PlayState extends FlxState
 		//}
 		
 		//Trigger Events
+		FlxG.camera.bgColor = 0xFFFFFFFF;
 		EventManager.triggerEvent(EventType.GAME_INIT);
 	}
 	

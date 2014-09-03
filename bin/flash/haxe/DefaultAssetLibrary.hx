@@ -36,6 +36,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		className.set ("background/background.png", __ASSET__background_background_png);
+		type.set ("background/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/apple.png", __ASSET__character_apple_png);
@@ -74,6 +76,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#elseif html5
 		
+		addExternal("background/background.png", "image", "background/background.png");
 		addExternal("background/splashscreen.png", "image", "background/splashscreen.png");
 		addExternal("character/apple.png", "image", "character/apple.png");
 		addExternal("character/arrow.png", "image", "character/arrow.png");
@@ -98,6 +101,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var loadManifest = false;
+		
+		className.set ("background/background.png", __ASSET__background_background_png);
+		type.set ("background/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -732,6 +738,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if pixi
 #elseif flash
 
+@:keep class __ASSET__background_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_splashscreen_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_apple_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_arrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -772,9 +779,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
 #elseif (windows || mac || linux)
 
 
+@:bitmap("assets/texture/background/background.png") class __ASSET__background_background_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/splashscreen.png") class __ASSET__background_splashscreen_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/apple.png") class __ASSET__character_apple_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/arrow.png") class __ASSET__character_arrow_png extends flash.display.BitmapData {}

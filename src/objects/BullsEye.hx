@@ -47,6 +47,8 @@ class BullsEye extends GameObject
 	{
 		animation.play("level" + level);
 		mScore = level + 1;
+		scale.x = 0.25;
+		scale.y = 0.25;
 	}
 	
 	public function onHit(evt:Int, params:Dynamic):Void
@@ -71,6 +73,10 @@ class BullsEye extends GameObject
 	public override function update():Void
 	{
 		super.update();
+		
+		scale.x += 0.25 * FlxG.elapsed;
+		scale.y += 0.25 * FlxG.elapsed;
+		
 		//Move Downward.
 		if (mState == GameObject.IDLE)
 		{
