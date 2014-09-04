@@ -3,14 +3,14 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="MrBullsEye" package="MrBullsEye" version="1.0.0" company="CS.Lim" />
+	<meta title="MrBullsEye" package="rottenmage.MrBullsEye" version="1.0.0" company="CS.Lim" />
 	
 	<!-- output -->
 	<app main="Main" file="MrBullsEye" path="bin" />
 	
 	<window background="#FFFFFF" fps="60" />
 	<window width="640" height="480" unless="mobile" />
-	<window width="" height="" if="mobile" />
+	<window width="1920" height="1080" if="mobile" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	
 	<!-- classpath, haxe libs -->
@@ -18,7 +18,7 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="flixel" />
-		
+	
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
 	<assets path="assets/texture/background" rename="background" />

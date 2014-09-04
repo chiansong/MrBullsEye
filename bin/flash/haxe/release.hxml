@@ -2,8 +2,11 @@
 -lib actuate
 -lib flixel
 -lib openfl
+-lib lime
 -cp src
 -D tools=1.4.0
+-D no-compilation
+-D fdb
 -D web
 -swf-version 11.2
 -swf bin/flash/bin/MrBullsEye.swf
