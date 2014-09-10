@@ -17,14 +17,18 @@ import utils.ShopSelection;
 class ShopManager
 {
 	public static var mGUIGroup:FlxGroup; //Shop GUI
+	//Background
+	public static var mBackground:FlxSprite; //Background.
+	public static var mUpgradeGrid:FlxSprite; //Upgrade Grid.
+	
 	//Top
 	public static var mGold:FlxText;
 	public static var mStatusText:FlxText;
 	//Middle
 	public static var mSelected:ShopSelection;
 	public static var mButtonOutline:FlxSprite;
-	public static var mUpgradeArrowSpeedButton:FlxButton;
-	public static var mUpgradeArrowCost:FlxText;
+	public static var mUpgradeTimerButton:FlxButton;
+	public static var mUpgradeTimerCost:FlxText;
 	public static var mUpgradeArrowNoButton:FlxButton;
 	public static var mUpgradeArrowNoCost:FlxText;
 	public static var mUpgradeGoldButton:FlxButton;
@@ -41,28 +45,48 @@ class ShopManager
 		mGUIGroup = new FlxGroup();
 		mGUIGroup.visible = false;
 		mSelected = ShopSelection.NIL;
+		
+		setupBackground();
 		setupShop();
 		
 		//DisplayManager.addToLayer(mGUIGroup, DisplayLayers.GUILAYER.getIndex());
 	}
 	
+	private static function setupBackground():Void
+	{
+		//The background
+		mBackground = new FlxSprite();
+		mBackground.loadGraphic(Assets.getBitmapData("shop/shopbackground.png"));
+		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2, FlxG.height / 2 - mBackground.height / 2);
+		//The upgrade grid background
+		mUpgradeGrid = new FlxSprite();
+		mUpgradeGrid.loadGraphic(Assets.getBitmapData("shop/upgradegrid.png"));
+		mUpgradeGrid.setPosition(FlxG.width / 2 - mUpgradeGrid.width / 2, FlxG.height / 2 - mUpgradeGrid.height / 2);
+
+		//Let add it
+		mGUIGroup.add(mBackground);
+		mGUIGroup.add(mUpgradeGrid);
+	}
+	
 	private static function setupShop():Void
 	{
 		var mStartingX:Float = FlxG.width / 2;
-		var mStartingY:Float = FlxG.height / 8;
+		var mStartingY:Float = FlxG.height / 2 - FlxG.height / 3.5;
 		
+		//The Gold Text
 		mGold = new FlxText(mStartingX, mStartingY, 200, "", 25);
+		mGold.x -= mGold.width / 2;
 		mGold.text = Std.string(GlobalGameData.getGold());
+		mGold.alignment = "center";
 		mGUIGroup.add(mGold);
-		
-		mGold = new FlxText(mStartingX, mStartingY, 200, "", 25);
-		mGold.text = Std.string(GlobalGameData.getGold());
-		mGUIGroup.add(mGold);
+	
+		//With status
 		mStatusText = new FlxText(mStartingX, mStartingY + 30, 200, "", 15);
 		mGUIGroup.add(mStatusText);
 		
-		mStartingX = FlxG.width / 5;
-		mStartingY = FlxG.height / 5;
+		//Buttons
+		mStartingX = FlxG.width / 2 - FlxG.width/3;
+		mStartingY += FlxG.height / 10;
 		
 		mButtonOutline = new FlxSprite(0, 0);
 		mButtonOutline.loadGraphic(Assets.getBitmapData("shop/button_outline.png"), true, false, 100, 100);
@@ -70,27 +94,27 @@ class ShopManager
 		mGUIGroup.add(mButtonOutline);
 		
 		//Upgrade Arrow Speed
-		mUpgradeArrowSpeedButton = new FlxButton(mStartingX, mStartingY, null, onUpgradeArrowSpeedClick);
-		mUpgradeArrowSpeedButton.loadGraphic(Assets.getBitmapData("shop/arrowspeed.png"), true, false, 80, 80);
-		mGUIGroup.add(mUpgradeArrowSpeedButton);
-		mUpgradeArrowCost = new FlxText(mStartingX, mUpgradeArrowSpeedButton.y + mUpgradeArrowSpeedButton.height + 10,
-										Std.int(mUpgradeArrowSpeedButton.width), "", 12);
-		mUpgradeArrowCost.text = Std.string(GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).cost);
-		mUpgradeArrowCost.alignment = "center";
-		mGUIGroup.add(mUpgradeArrowCost);
+		mUpgradeTimerButton = new FlxButton(mStartingX, mStartingY, null, onUpgradeTimerClick);
+		mUpgradeTimerButton.loadGraphic(Assets.getBitmapData("shop/arrowspeed.png"), true, false, 80, 80);
+		mGUIGroup.add(mUpgradeTimerButton);
+		mUpgradeTimerCost = new FlxText(mStartingX, mUpgradeTimerButton.y + mUpgradeTimerButton.height + 10,
+										Std.int(mUpgradeTimerButton.width), "", 12);
+		mUpgradeTimerCost.text = Std.string(GameDataManager.mTimerMap.get(GlobalGameData.timerLevel).cost);
+		mUpgradeTimerCost.alignment = "center";
+		mGUIGroup.add(mUpgradeTimerCost);
 			
 		//Upgrade Arrow No
-		mUpgradeArrowNoButton = new FlxButton(mStartingX + mUpgradeArrowSpeedButton.width + 20, mStartingY, null, onUpgradeArrowNoClick);
+		mUpgradeArrowNoButton = new FlxButton(mStartingX + mUpgradeTimerButton.width + 20, mStartingY, null, onUpgradeArrowNoClick);
 		mUpgradeArrowNoButton.loadGraphic(Assets.getBitmapData("shop/arrowspeed.png"), true, false, 80, 80);
 		mGUIGroup.add(mUpgradeArrowNoButton);
 		mUpgradeArrowNoCost = new FlxText(mUpgradeArrowNoButton.x, mUpgradeArrowNoButton.y + mUpgradeArrowNoButton.height + 10,
 										Std.int(mUpgradeArrowNoButton.width), "", 12);
-		mUpgradeArrowNoCost.text = Std.string(GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowNoLevel).cost);
+		mUpgradeArrowNoCost.text = Std.string(GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).cost);
 		mUpgradeArrowNoCost.alignment = "center";
 		mGUIGroup.add(mUpgradeArrowNoCost);
 		
 		//Upgrade Gold No
-		mUpgradeGoldButton = new FlxButton(mUpgradeArrowNoButton.x + mUpgradeArrowSpeedButton.width + 20, mStartingY, null, onUpgradeGoldClick);
+		mUpgradeGoldButton = new FlxButton(mUpgradeArrowNoButton.x + mUpgradeTimerButton.width + 20, mStartingY, null, onUpgradeGoldClick);
 		mUpgradeGoldButton.loadGraphic(Assets.getBitmapData("shop/arrowspeed.png"), true, false, 80, 80);
 		mGUIGroup.add(mUpgradeGoldButton);
 		mUpgradeGoldCost = new FlxText(mUpgradeGoldButton.x, mUpgradeGoldButton.y + mUpgradeGoldButton.height + 10,
@@ -109,23 +133,24 @@ class ShopManager
 		mUpgradeAppleCost.alignment = "center";
 		mGUIGroup.add(mUpgradeAppleCost);
 		
-		mStartingX = FlxG.width - 250;
-		mStartingY = FlxG.height - 200;
+		//Setup description text.
+		mStartingX = mUpgradeTimerButton.x;
+		mStartingY = mUpgradeTimerButton.y + mUpgradeTimerButton.height + FlxG.height / 8;
+		mDescription = new FlxText(mStartingX, mStartingY, 250, "", 15);
+		mGUIGroup.add(mDescription);
+		
+		//Upgrade Button
+		mStartingX = mDescription.x + mDescription.width + 15;
 		mUpgradeButton = new FlxButton(mStartingX, mStartingY, null, Upgrade);
 		mUpgradeButton.loadGraphic(Assets.getBitmapData("shop/upgrade.png"), true, false, 150, 50);
 		mGUIGroup.add(mUpgradeButton);
 		
-		mStartingX = FlxG.width - 200;
-		mStartingY = FlxG.height - 75;
+		mStartingY = mUpgradeButton.y + mUpgradeButton.height + 15;
 		mPlayButton = new FlxButton(mStartingX, mStartingY, null, Play);
 		mPlayButton.loadGraphic(Assets.getBitmapData("shop/upgrade.png"), true, false, 150, 50);
 		mGUIGroup.add(mPlayButton);
 		
-		mStartingX = 50;
-		mStartingY = FlxG.height - 150;
-		mDescription = new FlxText(mStartingX, mStartingY, 300, "", 15);
-		mGUIGroup.add(mDescription);
-		
+		//Show it
 		mGUIGroup.visible = true;
 		mPlayButton.revive();
 		mUpgradeButton.kill();
@@ -134,15 +159,15 @@ class ShopManager
 	/**************/
 	//Shop Buttons//
 	/**************/
-	private static function onUpgradeArrowSpeedClick():Void
+	private static function onUpgradeTimerClick():Void
 	{
-		mButtonOutline.setPosition(mUpgradeArrowSpeedButton.x - 10, mUpgradeArrowSpeedButton.y - 10);
+		mButtonOutline.setPosition(mUpgradeTimerButton.x - 10, mUpgradeTimerButton.y - 10);
 		mButtonOutline.visible = true;	
 		mUpgradeButton.visible = true;
 		mUpgradeButton.revive();
 		
-		mDescription.text = GameDataManager.mArrowSpeedDescription;
-		mSelected = ShopSelection.ARROWSPEEDUPGRADE;
+		mDescription.text = GameDataManager.mTimerDescription;
+		mSelected = ShopSelection.TIMERUPGRADE;
 	}
 	
 	private static function onUpgradeArrowNoClick():Void
@@ -188,19 +213,18 @@ class ShopManager
 		{
 			case NIL:
 				return;
-			case ARROWSPEEDUPGRADE:
+			case TIMERUPGRADE:
 			{
 				//Check if high level.
-				if (GameDataManager.mArrowSpeedLevel == GlobalGameData.arrowSpeedLevel)
+				if (GameDataManager.mTimerLevel == GlobalGameData.timerLevel)
 				{
 					mStatusText.text = "Already At Max Level";
 					return;
 				}
 
-				if (GlobalGameData.deductGold(GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).cost))
+				if (GlobalGameData.deductGold(GameDataManager.mTimerMap.get(GlobalGameData.timerLevel).cost))
 				{
-					mStatusText.text = "Arrow Speed Leveled Up";
-					ArrowManager.increaseUpgradeSpeed();
+					mStatusText.text = "Timer Leveled Up";
 				}
 				else
 					notEnough = true;

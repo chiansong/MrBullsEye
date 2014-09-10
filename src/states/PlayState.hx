@@ -70,7 +70,7 @@ class PlayState extends FlxState
 	public function reset():Void
 	{
 		player.init();
-		player.setPosition(50, FlxG.height / 2 - player.height / 2);
+		player.setPosition(FlxG.width/2 - FlxG.width/2.75, FlxG.height / 2 - player.height / 2);
 	}
 
 	override public function destroy():Void
@@ -87,5 +87,6 @@ class PlayState extends FlxState
 		ArrowManager.update();
 		GameObjectManager.update();
 		InGameGUIManager.update();
+		GameDataManager.update();
 	}
 }

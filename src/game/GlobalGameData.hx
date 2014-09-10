@@ -21,6 +21,7 @@ class GlobalGameData
 	public static var arrowNoLevel:Int;
 	public static var goldLevel:Int;
 	public static var appleLevel:Int;
+	public static var timerLevel:Int; //Newly added timer.
 	
 	public static var mPlayState:PlayState;
 	public static var mShopState:ShopState;
@@ -57,12 +58,17 @@ class GlobalGameData
 			arrowNoLevel = 0;
 			goldLevel = 0;
 			appleLevel = 0;
+			timerLevel = 0;
 			return;
 		}
 		
 		gold = gameSaveData.data.gold;
 		arrowSpeedLevel = gameSaveData.data.arrowSpeedLevel;
 		arrowNoLevel = gameSaveData.data.arrowNoLevel;
+		goldLevel = gameSaveData.data.goldLevel;
+		appleLevel = gameSaveData.data.appleLevel;
+		highestScore = gameSaveData.data.highestScore;
+		timerLevel = gameSaveData.data.timerLevel;
 	}
 	
 	public static function getGold():Int

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 <description>"Increase The Speed Of The Arrows. More Speed, More Luck!"</description>
-<level speed="350" cost="500">0</level>
+<level speed="400" cost="500">0</level>
 <level speed="300" cost="1000">1</level>
 <level speed="350" cost="1500">2</level>
 <level speed="400" cost="3000">3</level>

@@ -11,6 +11,7 @@ import event.EventType;
 import flixel.group.FlxGroup;
 import objects.Arrow;
 import utils.DisplayLayers;
+import utils.MathUtil;
 import utils.ObjectPool;
 
 /**
@@ -63,7 +64,7 @@ class ArrowManager
 		mMaxArrow = GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).data;
 		mCurrentArrow = mMaxArrow;
 		
-		mArrowSpeed = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
+		mArrowSpeed = 500;
 	}
 	
 	private static function onFire(evt:Int, params:Dynamic):Void
@@ -87,7 +88,7 @@ class ArrowManager
 		//Reduce the max and reset combo
 		mMaxArrow -= 1;
 		InGameGUIManager.mNumberOfArrowLeft.text = Std.string(mMaxArrow);
-		ScoreManager.mCombo = 0;
+		ScoreManager.resetOnMiss();
 		
 		//Remove the object
 		mActiveArrow.remove(params.object);
@@ -127,7 +128,7 @@ class ArrowManager
 	
 	public static function update():Void
 	{
-		FlxG.overlap(mGroup, GameObjectManager.mGroup, onArrowHit);
+		//FlxG.overlap(mGroup, GameObjectManager.mGroup, onArrowHit);
 		InGameGUIManager.setArrows(mCurrentArrow, mMaxArrow);
 	}
 	
@@ -165,14 +166,14 @@ class ArrowManager
 	public static function increaseUpgradeNo():Void
 	{
 		GlobalGameData.arrowNoLevel += 1;
-		mMaxArrow = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
+		mMaxArrow = GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).data;
 	}
 	
-	public static function increaseUpgradeSpeed():Void
-	{
-		GlobalGameData.arrowSpeedLevel += 1;
-		mArrowSpeed = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
-	}
+	//public static function increaseUpgradeSpeed():Void
+	//{
+		//GlobalGameData.arrowSpeedLevel += 1;
+		//mArrowSpeed = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
+	//}
 	
 	public static function getMaxArrow():Int
 	{

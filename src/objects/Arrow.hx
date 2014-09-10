@@ -4,8 +4,10 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxPoint;
 import managers.EventManager;
+import managers.GameObjectManager;
 import managers.ScoreManager;
 import openfl.Assets;
+import utils.MathUtil;
 
 /**
  * ...
@@ -18,6 +20,9 @@ class Arrow extends FlxSprite
 	public var mState:Int;
 	public var mCanHit:Bool;
 	
+	public var mCurrentPosition:FlxPoint;
+	public var mPreviousPosition:FlxPoint;
+	
 	public inline static var IDLE:Int = 0;
 	public inline static var FIRED:Int = 1;
 	public inline static var HIT:Int = 2;
@@ -29,6 +34,9 @@ class Arrow extends FlxSprite
 		loadGraphic(Assets.getBitmapData("character/arrow.png"), true, false, 32, 8);
 		mState = IDLE;
 		visible = false;
+		
+		mCurrentPosition = new FlxPoint();
+		mPreviousPosition = new FlxPoint();
 		
 		EventManager.subscrible(EventType.OBJECT_HIT, onObjectHit);
 	}
@@ -71,10 +79,41 @@ class Arrow extends FlxSprite
 	
 	public override function update():Void
 	{
+		if (GameObjectManager.mGameOver)
+			return;
+		
 		super.update();
+
+		//Get Previous Position
+		mPreviousPosition.x = x;
+		mPreviousPosition.y = y;
+		
+		//Set the next Position
+		mCurrentPosition.x = x + velocity.x * FlxG.elapsed;
+		mCurrentPosition.y = y;
+		
 		if (mState == FIRED)
 		{
 			velocity.x = mSpeed;
+			
+			for (_object in GameObjectManager.mActiveArray)
+			{
+				if (MathUtil.simpleLineObjectTest(this, _object))
+				{
+					//y = object.y + height / 2;
+					mState = Arrow.HIT;
+		
+					if (mCanHit)
+					{
+						mCanHit = false;
+						ScoreManager.increaseCombo();
+						EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
+																		  arrow:this,
+																		  object:_object } );												  
+					}
+					break;
+				}
+			}
 			
 			if (x >= FlxG.width + width)
 			{
@@ -90,6 +129,5 @@ class Arrow extends FlxSprite
 				EventManager.triggerEvent(EventType.ARROW_OUT, {object:this});
 			}
 		}
-		
 	}
 }

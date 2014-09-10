@@ -3,6 +3,7 @@ import flash.utils.ObjectInput;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxPoint;
+import managers.GameObjectManager;
 import objects.ObjectType;
 
 /**

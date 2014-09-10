@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import flixel.util.FlxPoint;
 import managers.EventManager;
 import managers.GameDataManager;
+import managers.GameObjectManager;
 import managers.ScoreManager;
 import openfl.Assets;
 
@@ -35,7 +36,7 @@ class BullsEye extends GameObject
 		
 		//Resize the Collision Detection
 		width = width / 2;
-		height *= 0.75;
+		height *= 0.85;
 		centerOffsets();
 		
 		mType = ObjectType.BULLSEYE;
@@ -72,6 +73,9 @@ class BullsEye extends GameObject
 	
 	public override function update():Void
 	{
+		if (GameObjectManager.mGameOver)
+			return;
+		
 		super.update();
 		
 		scale.x += 0.25 * FlxG.elapsed;

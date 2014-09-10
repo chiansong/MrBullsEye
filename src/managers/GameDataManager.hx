@@ -44,9 +44,9 @@ class GameDataManager
 	//Upgrade Stuff//
 	/////////////////
 	//Arrow Speed
-	public static var mArrowSpeedMap:Map<Int,DataStats>;
-	public static var mArrowSpeedDescription:String;
-	public static var mArrowSpeedLevel:Int;
+	//public static var mArrowSpeedMap:Map<Int,DataStats>;
+	//public static var mArrowSpeedDescription:String;
+	//public static var mArrowSpeedLevel:Int;
 	//Arrow Number
 	public static var mArrowNoMap:Map<Int,DataStats>;
 	public static var mArrowNoDescription:String;
@@ -55,31 +55,38 @@ class GameDataManager
 	public static var mGoldMap:Map<Int,DataStats>;
 	public static var mGoldDescription:String;
 	public static var mGoldLevel:Int;
-	//Gold% Number
+	//Apple% Number
 	public static var mAppleMap:Map<Int,DataStats>;
 	public static var mAppleDescription:String;
 	public static var mAppleLevel:Int;
+	//Timer time Number
+	public static var mTimerMap:Map<Int,DataStats>;
+	public static var mTimerDescription:String;
+	public static var mTimerLevel:Int;
 	
 	//Current Level
 	public static var mAppleCurrentLevel:Int;
 	public static var mGoldCurrentLevel:Int;
 	public static var mAppleChance:Int;
 	public static var mGoldChance:Int;
+	public static var mGameTimer:Float;
 	
 	public static function init():Void
 	{
 		EventManager.subscrible(EventType.GAME_INIT, onGameEnter);
 		EventManager.subscrible(EventType.GAME_OVER, onGameOver);
 		
-		mArrowSpeedMap 	= new Map<Int,DataStats>();
+		//mArrowSpeedMap 	= new Map<Int,DataStats>();
 		mArrowNoMap 	= new Map<Int,DataStats>();
 		mGoldMap 		= new Map<Int,DataStats>();
 		mAppleMap 		= new Map<Int,DataStats>();
+		mTimerMap		= new Map<Int,DataStats>();
 		
-		parseArrowSpeedData(Assets.getText("data/arrowspeeddata.xml"));
+		//parseArrowSpeedData(Assets.getText("data/arrowspeeddata.xml"));
 		parseArrowNoData(Assets.getText("data/arrownumberdata.xml"));
 		parseGoldData(Assets.getText("data/goldchancedata.xml"));
 		parseAppleData(Assets.getText("data/applechancedata.xml"));
+		parseTimerData(Assets.getText("data/timertimedata.xml"));
 	}
 	
 	public static function addGoldEarned(value:Int):Void
@@ -97,6 +104,7 @@ class GameDataManager
 		mGoldEarned = 0;
 		mHighestCombo = 0;
 		mCriticalCount = 0;
+		mGameTimer = mTimerMap.get(GlobalGameData.timerLevel).data;
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
@@ -105,27 +113,43 @@ class GameDataManager
 		GlobalGameData.addGold(mGoldEarned);
 		GlobalGameData.save();
 	}
-		
-	public static function parseArrowSpeedData(assetFile:String)
+	
+	public static function update()
 	{
-		var arrowspeedXML = new Fast(Xml.parse(assetFile).firstElement());
-		mArrowSpeedDescription = arrowspeedXML.node.description.innerData;
+		if (GameObjectManager.mGameOver)
+			return;
 		
-		var count:Int = 0;
-		for (data in arrowspeedXML.nodes.level)
-		{
-			var level:Int = Std.parseInt(data.innerData);
-			//The info
-			var speed:Int = Std.parseInt(data.att.speed);
-			var cost:Int = Std.parseInt(data.att.cost);
-			
-			var arrowData:DataStats = new DataStats(speed, cost);
-			
-			++count;
-			mArrowSpeedMap.set(level, arrowData);
-		}
-		mArrowSpeedLevel = count;
+		mGameTimer -= FlxG.elapsed;
+		
+		if (mGameTimer <= 0)
+			EventManager.triggerEvent(EventType.GAME_OVER);
 	}
+	
+	public static function addTime(time:Float):Void
+	{
+		mGameTimer += time;
+	}
+	
+	//public static function parseArrowSpeedData(assetFile:String)
+	//{
+		//var arrowspeedXML = new Fast(Xml.parse(assetFile).firstElement());
+		//mArrowSpeedDescription = arrowspeedXML.node.description.innerData;
+		//
+		//var count:Int = 0;
+		//for (data in arrowspeedXML.nodes.level)
+		//{
+			//var level:Int = Std.parseInt(data.innerData);
+			////The info
+			//var speed:Int = Std.parseInt(data.att.speed);
+			//var cost:Int = Std.parseInt(data.att.cost);
+			//
+			//var arrowData:DataStats = new DataStats(speed, cost);
+			//
+			//++count;
+			//mArrowSpeedMap.set(level, arrowData);
+		//}
+		//mArrowSpeedLevel = count;
+	//}
 	
 	public static function parseArrowNoData(assetFile:String)
 	{
@@ -145,7 +169,7 @@ class GameDataManager
 			++count;
 			mArrowNoMap.set(level, arrowData);
 		}
-		mArrowSpeedLevel = count;
+		mArrowNoLevel = count;
 	}
 	
 	/**
@@ -196,5 +220,30 @@ class GameDataManager
 			mAppleMap.set(level, appleData);
 		}
 		mAppleLevel = count;
+	}
+	
+	 /**
+	 * Get The Data File Needed for Timer
+	 * @param	assetFile
+	 */
+	public static function parseTimerData(assetFile:String)
+	{
+		var timerXML = new Fast(Xml.parse(assetFile).firstElement());
+		mTimerDescription = timerXML.node.description.innerData;
+		
+		var count:Int = 0;
+		for (data in timerXML.nodes.level)
+		{
+			var level:Int = Std.parseInt(data.innerData);
+			//The info
+			var no:Int = Std.parseInt(data.att.time);
+			var cost:Int = Std.parseInt(data.att.cost);
+			
+			var timerData:DataStats = new DataStats(no, cost);
+			
+			++count;
+			mTimerMap.set(level, timerData);
+		}
+		mTimerLevel = count;
 	}
 }

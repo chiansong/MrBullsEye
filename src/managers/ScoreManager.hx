@@ -1,9 +1,29 @@
 package managers;
+import event.EventType;
+import haxe.xml.Fast;
+import openfl.Assets;
 
 /**
  * ...
  * @author CS.Lim
  */
+class BonusData
+{
+	public function new(_combo:Int, _points:Int,
+						_gold:Int, _time:Float)
+	{
+		combo 	= _combo;
+		points 	= _points;
+		gold 	= _gold;
+		time 	= _time;
+	}
+	
+	public var combo:Int;
+	public var points:Int;
+	public var gold:Int;
+	public var time:Float;
+}
+ 
 class ScoreManager
 {
 	public static var mScore:Int;
@@ -11,13 +31,33 @@ class ScoreManager
 	public static var mCombo:Int;
 	public static var mHighestScore:Int;
 	public static var mMultipler:Int;
-
+	public static var mBonusLevel:Int;
+	
+	//Map
+	public static var mBonusMap:Map<Int,BonusData>;
+	
 	public static function init():Void 
 	{
+		mBonusMap = new Map<Int, BonusData>();
+		
 		mScore = 0;
 		mHighestScore = 0;
 		mMultipler = 1;
 		mCombo = 0;
+		mBonusLevel = 1;
+		mCurrentPoint = 1;
+		
+		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
+		
+		parseBonusData(Assets.getText("data/bonusdata.xml"));
+	}
+	
+	private static function onGameInit(evt:Int, params:Dynamic):Void
+	{
+		mScore = 0;
+		mMultipler = 1;
+		mCombo = 0;
+		mBonusLevel = 1;
 		mCurrentPoint = 1;
 	}
 	
@@ -42,22 +82,43 @@ class ScoreManager
 	{
 		mCombo += 1;
 		
+		//Highest Combo Yo.
 		if (GameDataManager.mHighestCombo < mCombo)
 			GameDataManager.mHighestCombo = mCombo;
 		
-		//Check the combo ...
-		//Add Gold ... Add Bonus Score & Gold ... might move to XML style
-		switch(mCombo)
+		if (mBonusMap.get(mBonusLevel).combo == mCombo)
 		{
-			case 5:
-				mScore += 10;
-				GameDataManager.addGoldEarned(10);
-			case 10:
-				mScore += 20;
-				GameDataManager.addGoldEarned(20);
-			case 25:
-				mScore += 50;
-				GameDataManager.addGoldEarned(50);
+			//Let add score, gold, time
+			mScore += mBonusMap.get(mBonusLevel).points;
+			GameDataManager.addGoldEarned(mBonusMap.get(mBonusLevel).gold);
+			GameDataManager.addTime(mBonusMap.get(mBonusLevel).time);
+			
+			//Next Level
+			mBonusLevel += 1;
+		}
+	}
+	
+	public static function resetOnMiss():Void
+	{
+		ScoreManager.mCombo = 0;
+		ScoreManager.mBonusLevel = 1;
+	}
+	
+	public static function parseBonusData(assetFile:String)	
+	{
+		var gameDataXML = new Fast(Xml.parse(assetFile).firstElement());
+		//Let Grab the INFO
+		for (data in gameDataXML.nodes.level)
+		{
+			var level:Int 	= Std.parseInt(data.innerData);
+			var combo:Int 	= Std.parseInt(data.att.combo);
+			var points:Int 	= Std.parseInt(data.att.points);
+			var gold:Int   	= Std.parseInt(data.att.gold);
+			var time:Float 	= Std.parseFloat(data.att.time);
+
+			var dataStats:BonusData = new BonusData(combo, points, gold, time);
+									
+			mBonusMap.set(level, dataStats);
 		}
 	}
 }

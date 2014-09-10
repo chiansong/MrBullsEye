@@ -3,6 +3,7 @@ package objects;
 import managers.DisplayManager;
 import managers.EventManager;
 import event.EventType;
+import managers.GameObjectManager;
 import openfl.Assets;
 import utils.DisplayLayers;
 import utils.KeyBinding;
@@ -28,6 +29,9 @@ class Player extends GameObject
 	override public function update()
 	{
 		super.update();
+		
+		if (GameObjectManager.mGameOver)
+			return;
 		
 		if (KeyBinding.justPressed["click"]())
 		{

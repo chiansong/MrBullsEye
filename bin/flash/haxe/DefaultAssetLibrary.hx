@@ -36,10 +36,38 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		className.set ("background/audience.png", __ASSET__background_audience_png);
+		type.set ("background/audience.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/audience.pyxel", __ASSET__background_audience_pyxel);
+		type.set ("background/audience.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/audiencerow1.png", __ASSET__background_audiencerow1_png);
+		type.set ("background/audiencerow1.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/background - Copy.png", __ASSET__background_background___copy_png);
+		type.set ("background/background - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/background.png", __ASSET__background_background_png);
 		type.set ("background/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/backtent.png", __ASSET__background_backtent_png);
+		type.set ("background/backtent.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/gamerailing - Copy.png", __ASSET__background_gamerailing___copy_png);
+		type.set ("background/gamerailing - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/gamerailing.png", __ASSET__background_gamerailing_png);
+		type.set ("background/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/lighting.png", __ASSET__background_lighting_png);
+		type.set ("background/lighting.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/middlecircle.psd", __ASSET__background_middlecircle_psd);
+		type.set ("background/middlecircle.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/railing.png", __ASSET__background_railing_png);
+		type.set ("background/railing.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/railing.pyxel", __ASSET__background_railing_pyxel);
+		type.set ("background/railing.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/railingfull.png", __ASSET__background_railingfull_png);
+		type.set ("background/railingfull.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/ring.png", __ASSET__background_ring_png);
+		type.set ("background/ring.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/withrailing.psd", __ASSET__background_withrailing_psd);
+		type.set ("background/withrailing.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/apple.png", __ASSET__character_apple_png);
 		type.set ("character/apple.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/arrow.png", __ASSET__character_arrow_png);
@@ -62,24 +90,50 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("shop/button_outline.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("shop/button_outline.pyxel", __ASSET__shop_button_outline_pyxel);
 		type.set ("shop/button_outline.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("shop/shopbackground.png", __ASSET__shop_shopbackground_png);
+		type.set ("shop/shopbackground.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("shop/shopbackground.psd", __ASSET__shop_shopbackground_psd);
+		type.set ("shop/shopbackground.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("shop/upgrade.png", __ASSET__shop_upgrade_png);
 		type.set ("shop/upgrade.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("shop/upgrade.psd", __ASSET__shop_upgrade_psd);
+		type.set ("shop/upgrade.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("shop/upgradegrid.png", __ASSET__shop_upgradegrid_png);
+		type.set ("shop/upgradegrid.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("data/applechancedata.xml", __ASSET__data_applechancedata_xml);
 		type.set ("data/applechancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("data/arrownumberdata.xml", __ASSET__data_arrownumberdata_xml);
 		type.set ("data/arrownumberdata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("data/arrowspeeddata.xml", __ASSET__data_arrowspeeddata_xml);
 		type.set ("data/arrowspeeddata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("data/bonusdata.xml", __ASSET__data_bonusdata_xml);
+		type.set ("data/bonusdata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("data/gamedata.xml", __ASSET__data_gamedata_xml);
 		type.set ("data/gamedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("data/goldchancedata.xml", __ASSET__data_goldchancedata_xml);
 		type.set ("data/goldchancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("data/timertimedata.xml", __ASSET__data_timertimedata_xml);
+		type.set ("data/timertimedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		
 		
 		#elseif html5
 		
+		addExternal("background/audience.png", "image", "background/audience.png");
+		addExternal("background/audience.pyxel", "binary", "background/audience.pyxel");
+		addExternal("background/audiencerow1.png", "image", "background/audiencerow1.png");
+		addExternal("background/background - Copy.png", "image", "background/background - Copy.png");
 		addExternal("background/background.png", "image", "background/background.png");
+		addExternal("background/backtent.png", "image", "background/backtent.png");
+		addExternal("background/gamerailing - Copy.png", "image", "background/gamerailing - Copy.png");
+		addExternal("background/gamerailing.png", "image", "background/gamerailing.png");
+		addExternal("background/lighting.png", "image", "background/lighting.png");
+		addExternal("background/middlecircle.psd", "binary", "background/middlecircle.psd");
+		addExternal("background/railing.png", "image", "background/railing.png");
+		addExternal("background/railing.pyxel", "binary", "background/railing.pyxel");
+		addExternal("background/railingfull.png", "image", "background/railingfull.png");
+		addExternal("background/ring.png", "image", "background/ring.png");
 		addExternal("background/splashscreen.png", "image", "background/splashscreen.png");
+		addExternal("background/withrailing.psd", "binary", "background/withrailing.psd");
 		addExternal("character/apple.png", "image", "character/apple.png");
 		addExternal("character/arrow.png", "image", "character/arrow.png");
 		addExternal("character/arrowXML.xml", "text", "character/arrowXML.xml");
@@ -91,12 +145,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("shop/arrowspeed.png", "image", "shop/arrowspeed.png");
 		addExternal("shop/button_outline.png", "image", "shop/button_outline.png");
 		addExternal("shop/button_outline.pyxel", "binary", "shop/button_outline.pyxel");
+		addExternal("shop/shopbackground.png", "image", "shop/shopbackground.png");
+		addExternal("shop/shopbackground.psd", "binary", "shop/shopbackground.psd");
 		addExternal("shop/upgrade.png", "image", "shop/upgrade.png");
+		addExternal("shop/upgrade.psd", "binary", "shop/upgrade.psd");
+		addExternal("shop/upgradegrid.png", "image", "shop/upgradegrid.png");
 		addExternal("data/applechancedata.xml", "text", "data/applechancedata.xml");
 		addExternal("data/arrownumberdata.xml", "text", "data/arrownumberdata.xml");
 		addExternal("data/arrowspeeddata.xml", "text", "data/arrowspeeddata.xml");
+		addExternal("data/bonusdata.xml", "text", "data/bonusdata.xml");
 		addExternal("data/gamedata.xml", "text", "data/gamedata.xml");
 		addExternal("data/goldchancedata.xml", "text", "data/goldchancedata.xml");
+		addExternal("data/timertimedata.xml", "text", "data/timertimedata.xml");
 		
 		
 		#else
@@ -105,11 +165,53 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		var loadManifest = false;
 		
+		className.set ("background/audience.png", __ASSET__background_audience_png);
+		type.set ("background/audience.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/audience.pyxel", __ASSET__background_audience_pyxel);
+		type.set ("background/audience.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("background/audiencerow1.png", __ASSET__background_audiencerow1_png);
+		type.set ("background/audiencerow1.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/background - Copy.png", __ASSET__background_background___copy_png);
+		type.set ("background/background - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("background/background.png", __ASSET__background_background_png);
 		type.set ("background/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
+		className.set ("background/backtent.png", __ASSET__background_backtent_png);
+		type.set ("background/backtent.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/gamerailing - Copy.png", __ASSET__background_gamerailing___copy_png);
+		type.set ("background/gamerailing - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/gamerailing.png", __ASSET__background_gamerailing_png);
+		type.set ("background/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/lighting.png", __ASSET__background_lighting_png);
+		type.set ("background/lighting.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/middlecircle.psd", __ASSET__background_middlecircle_psd);
+		type.set ("background/middlecircle.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("background/railing.png", __ASSET__background_railing_png);
+		type.set ("background/railing.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/railing.pyxel", __ASSET__background_railing_pyxel);
+		type.set ("background/railing.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("background/railingfull.png", __ASSET__background_railingfull_png);
+		type.set ("background/railingfull.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/ring.png", __ASSET__background_ring_png);
+		type.set ("background/ring.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/withrailing.psd", __ASSET__background_withrailing_psd);
+		type.set ("background/withrailing.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("character/apple.png", __ASSET__character_apple_png);
 		type.set ("character/apple.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -144,8 +246,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("shop/button_outline.pyxel", __ASSET__shop_button_outline_pyxel);
 		type.set ("shop/button_outline.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("shop/shopbackground.png", __ASSET__shop_shopbackground_png);
+		type.set ("shop/shopbackground.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("shop/shopbackground.psd", __ASSET__shop_shopbackground_psd);
+		type.set ("shop/shopbackground.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
 		className.set ("shop/upgrade.png", __ASSET__shop_upgrade_png);
 		type.set ("shop/upgrade.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("shop/upgrade.psd", __ASSET__shop_upgrade_psd);
+		type.set ("shop/upgrade.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("shop/upgradegrid.png", __ASSET__shop_upgradegrid_png);
+		type.set ("shop/upgradegrid.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("data/applechancedata.xml", __ASSET__data_applechancedata_xml);
 		type.set ("data/applechancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
@@ -156,11 +270,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("data/arrowspeeddata.xml", __ASSET__data_arrowspeeddata_xml);
 		type.set ("data/arrowspeeddata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		
+		className.set ("data/bonusdata.xml", __ASSET__data_bonusdata_xml);
+		type.set ("data/bonusdata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
+		
 		className.set ("data/gamedata.xml", __ASSET__data_gamedata_xml);
 		type.set ("data/gamedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		
 		className.set ("data/goldchancedata.xml", __ASSET__data_goldchancedata_xml);
 		type.set ("data/goldchancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("data/timertimedata.xml", __ASSET__data_timertimedata_xml);
+		type.set ("data/timertimedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		
 		
 		#else
@@ -744,8 +864,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if pixi
 #elseif flash
 
+@:keep class __ASSET__background_audience_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_audience_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__background_audiencerow1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_background___copy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_backtent_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_gamerailing___copy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_gamerailing_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_lighting_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_middlecircle_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__background_railing_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_railing_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__background_railingfull_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_ring_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_splashscreen_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_withrailing_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_apple_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_arrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray { }
@@ -757,12 +891,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__shop_arrowspeed_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_button_outline_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_button_outline_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__shop_shopbackground_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__shop_shopbackground_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__shop_upgrade_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__shop_upgrade_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__shop_upgradegrid_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__data_applechancedata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_arrownumberdata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_arrowspeeddata_xml extends flash.utils.ByteArray { }
+@:keep class __ASSET__data_bonusdata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_gamedata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_goldchancedata_xml extends flash.utils.ByteArray { }
+@:keep class __ASSET__data_timertimedata_xml extends flash.utils.ByteArray { }
 
 
 #elseif html5
@@ -788,11 +928,45 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #elseif (windows || mac || linux)
 
 
+@:bitmap("assets/texture/background/audience.png") class __ASSET__background_audience_png extends flash.display.BitmapData {}
+@:file("assets/texture/background/audience.pyxel") class __ASSET__background_audience_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/background/audiencerow1.png") class __ASSET__background_audiencerow1_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/background - Copy.png") class __ASSET__background_background___copy_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/background.png") class __ASSET__background_background_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/backtent.png") class __ASSET__background_backtent_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/gamerailing - Copy.png") class __ASSET__background_gamerailing___copy_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/gamerailing.png") class __ASSET__background_gamerailing_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/lighting.png") class __ASSET__background_lighting_png extends flash.display.BitmapData {}
+@:file("assets/texture/background/middlecircle.psd") class __ASSET__background_middlecircle_psd extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/background/railing.png") class __ASSET__background_railing_png extends flash.display.BitmapData {}
+@:file("assets/texture/background/railing.pyxel") class __ASSET__background_railing_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/background/railingfull.png") class __ASSET__background_railingfull_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/ring.png") class __ASSET__background_ring_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/splashscreen.png") class __ASSET__background_splashscreen_png extends flash.display.BitmapData {}
+@:file("assets/texture/background/withrailing.psd") class __ASSET__background_withrailing_psd extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/apple.png") class __ASSET__character_apple_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/arrow.png") class __ASSET__character_arrow_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
@@ -804,12 +978,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/shop/arrowspeed.png") class __ASSET__shop_arrowspeed_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/shop/button_outline.png") class __ASSET__shop_button_outline_png extends flash.display.BitmapData {}
 @:file("assets/texture/shop/button_outline.pyxel") class __ASSET__shop_button_outline_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/shop/shopbackground.png") class __ASSET__shop_shopbackground_png extends flash.display.BitmapData {}
+@:file("assets/texture/shop/shopbackground.psd") class __ASSET__shop_shopbackground_psd extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/shop/upgrade.png") class __ASSET__shop_upgrade_png extends flash.display.BitmapData {}
+@:file("assets/texture/shop/upgrade.psd") class __ASSET__shop_upgrade_psd extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/shop/upgradegrid.png") class __ASSET__shop_upgradegrid_png extends flash.display.BitmapData {}
 @:file("assets/data/applechancedata.xml") class __ASSET__data_applechancedata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/arrownumberdata.xml") class __ASSET__data_arrownumberdata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/arrowspeeddata.xml") class __ASSET__data_arrowspeeddata_xml extends flash.utils.ByteArray {}
+@:file("assets/data/bonusdata.xml") class __ASSET__data_bonusdata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/gamedata.xml") class __ASSET__data_gamedata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/goldchancedata.xml") class __ASSET__data_goldchancedata_xml extends flash.utils.ByteArray {}
+@:file("assets/data/timertimedata.xml") class __ASSET__data_timertimedata_xml extends flash.utils.ByteArray {}
 
 
 #end

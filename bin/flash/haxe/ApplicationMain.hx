@@ -24,7 +24,7 @@ class ApplicationMain {
 		
 		
 		
-		//nme.Lib.setPackage("CS.Lim", "MrBullsEye", "MrBullsEye", "1.0.0");
+		//nme.Lib.setPackage("CS.Lim", "MrBullsEye", "rottenmage.MrBullsEye", "1.0.0");
 		
 		loaderInfo = flash.Lib.current.loaderInfo;
 		

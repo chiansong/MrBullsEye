@@ -72,7 +72,8 @@ class GameObjectManager
 	private static var mBullEyePool:ObjectPool<GameObject>;
 	private static var mApplePool:ObjectPool<Apple>;
 	private static var mGoldPool:ObjectPool<GoldBag>;
-	private static var mActiveArray:Array<GameObject>;
+	
+	public static var mActiveArray:Array<GameObject>;
 	private static var mGameDataMap:Map<Int,GameData>;
 	private static var mLanuchTime:Float;
 	private static var mLanuchTimer:Float;
@@ -80,7 +81,7 @@ class GameObjectManager
 	private static var mPreviousMovementSpeedY:Float;
 	private static var mMovementSpeedY:Float;
 	private static var mGameLevel:Int;
-	private static var mGameOver:Bool;
+	public static var mGameOver:Bool;
 	
 	public static function init():Void
 	{
@@ -92,7 +93,7 @@ class GameObjectManager
 		mGoldPool = new ObjectPool<GoldBag>(10, createGoldBag);
 		
 		mStartingPosition = new FlxPoint();
-		setPosition(FlxG.width - 100, -34);
+		setPosition(FlxG.width/2 + FlxG.width/3, -34);
 		mPreviousMovementSpeedY = 0;
 		mMovementSpeedY = 100;
 		mGameLevel = 1;
