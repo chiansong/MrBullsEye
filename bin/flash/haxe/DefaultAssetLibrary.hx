@@ -78,12 +78,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("character/bulleye.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/bulleye.pyxel", __ASSET__character_bulleye_pyxel);
 		type.set ("character/bulleye.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/eggman.pyxel", __ASSET__character_eggman_pyxel);
+		type.set ("character/eggman.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/eggman2.png", __ASSET__character_eggman2_png);
+		type.set ("character/eggman2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/eggman2.pyxel", __ASSET__character_eggman2_pyxel);
+		type.set ("character/eggman2.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/goldbag.png", __ASSET__character_goldbag_png);
 		type.set ("character/goldbag.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/player - Copy.png", __ASSET__character_player___copy_png);
+		type.set ("character/player - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/player.png", __ASSET__character_player_png);
 		type.set ("character/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/player.pyxel", __ASSET__character_player_pyxel);
 		type.set ("character/player.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/playermold.png", __ASSET__character_playermold_png);
+		type.set ("character/playermold.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("shop/arrowspeed.png", __ASSET__shop_arrowspeed_png);
 		type.set ("shop/arrowspeed.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("shop/button_outline.png", __ASSET__shop_button_outline_png);
@@ -139,9 +149,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("character/arrowXML.xml", "text", "character/arrowXML.xml");
 		addExternal("character/bulleye.png", "image", "character/bulleye.png");
 		addExternal("character/bulleye.pyxel", "binary", "character/bulleye.pyxel");
+		addExternal("character/eggman.pyxel", "binary", "character/eggman.pyxel");
+		addExternal("character/eggman2.png", "image", "character/eggman2.png");
+		addExternal("character/eggman2.pyxel", "binary", "character/eggman2.pyxel");
 		addExternal("character/goldbag.png", "image", "character/goldbag.png");
+		addExternal("character/player - Copy.png", "image", "character/player - Copy.png");
 		addExternal("character/player.png", "image", "character/player.png");
 		addExternal("character/player.pyxel", "binary", "character/player.pyxel");
+		addExternal("character/playermold.png", "image", "character/playermold.png");
 		addExternal("shop/arrowspeed.png", "image", "shop/arrowspeed.png");
 		addExternal("shop/button_outline.png", "image", "shop/button_outline.png");
 		addExternal("shop/button_outline.pyxel", "binary", "shop/button_outline.pyxel");
@@ -228,14 +243,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("character/bulleye.pyxel", __ASSET__character_bulleye_pyxel);
 		type.set ("character/bulleye.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("character/eggman.pyxel", __ASSET__character_eggman_pyxel);
+		type.set ("character/eggman.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/eggman2.png", __ASSET__character_eggman2_png);
+		type.set ("character/eggman2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("character/eggman2.pyxel", __ASSET__character_eggman2_pyxel);
+		type.set ("character/eggman2.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
 		className.set ("character/goldbag.png", __ASSET__character_goldbag_png);
 		type.set ("character/goldbag.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("character/player - Copy.png", __ASSET__character_player___copy_png);
+		type.set ("character/player - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("character/player.png", __ASSET__character_player_png);
 		type.set ("character/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("character/player.pyxel", __ASSET__character_player_pyxel);
 		type.set ("character/player.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/playermold.png", __ASSET__character_playermold_png);
+		type.set ("character/playermold.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("shop/arrowspeed.png", __ASSET__shop_arrowspeed_png);
 		type.set ("shop/arrowspeed.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -885,9 +915,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_bulleye_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_bulleye_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_eggman_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_eggman2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_eggman2_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_goldbag_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_player___copy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_player_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_playermold_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_arrowspeed_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_button_outline_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_button_outline_pyxel extends flash.utils.ByteArray { }
@@ -906,6 +941,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
 
 
 
@@ -972,9 +1012,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/texture/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/bulleye.png") class __ASSET__character_bulleye_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/bulleye.pyxel") class __ASSET__character_bulleye_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/eggman.pyxel") class __ASSET__character_eggman_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/character/eggman2.png") class __ASSET__character_eggman2_png extends flash.display.BitmapData {}
+@:file("assets/texture/character/eggman2.pyxel") class __ASSET__character_eggman2_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/goldbag.png") class __ASSET__character_goldbag_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/character/player - Copy.png") class __ASSET__character_player___copy_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/player.pyxel") class __ASSET__character_player_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/character/playermold.png") class __ASSET__character_playermold_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/shop/arrowspeed.png") class __ASSET__shop_arrowspeed_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/shop/button_outline.png") class __ASSET__shop_button_outline_png extends flash.display.BitmapData {}
 @:file("assets/texture/shop/button_outline.pyxel") class __ASSET__shop_button_outline_pyxel extends flash.utils.ByteArray {}

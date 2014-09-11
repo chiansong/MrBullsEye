@@ -33,9 +33,11 @@ class InGameGUIManager
 	
 	//G2
 	public static var mScore:FlxText;
+	public static var mAddedScore:FlxText;
 	public static var mNumberOfArrowLeft:FlxText;
 	public static var mCombo:FlxText;
 	public static var mTimer:FlxText;
+	public static var mAddedTimer:FlxText;
 	
 	//G3
 	public static var mGoldEarned:FlxText;
@@ -53,61 +55,11 @@ class InGameGUIManager
 		mGUIGroup2 = new FlxGroup();
 		mGUIGroup3 = new FlxGroup();
 		mGUIGroup4 = new FlxGroup();
-	
-		//Group 0
-		mBackground = new FlxSprite(0, 0);
-		mBackground.loadGraphic(Assets.getBitmapData("background/background.png"));
-		//Let setup the position properly
-		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2,
-								FlxG.height / 2 - mBackground.height / 2);
-		mGUIGroup0.add(mBackground);
 		
-		//Group 2: In Game Stuff.
-		mScore = new FlxText(FlxG.width - 120, 15, 100, "", 24);
-		mScore.text = "0";
-		mScore.alignment = "right";
-		mGUIGroup2.add(mScore);
-		
-		mNumberOfArrowLeft = new FlxText(10, 15, 100, "",24);
-		mNumberOfArrowLeft.text = Std.string(ArrowManager.getMaxArrow());
-		mGUIGroup2.add(mNumberOfArrowLeft);
-		
-		mCombo = new FlxText(FlxG.width - 150, FlxG.height/2 - 10, 150, 24);
-		mCombo.text = Std.string(ScoreManager.mCombo);
-		mGUIGroup2.add(mCombo);
-		
-		mTimer = new FlxText(FlxG.width/2 - 20, 10, 100, 24);
-		mGUIGroup2.add(mTimer);
-		
-		//Group 3: Stats After Game
-		var mStartingX:Float = FlxG.width / 3 - 250;
-		var mStartingY:Float = FlxG.height / 3;
-		var mDiff:Float = 50;
-		
-		mGoldEarned = new FlxText(mStartingX, mStartingY, 500, "", 24);
-		mGoldEarned.text = "Gold Earned: XXX";
-		mGoldEarned.alignment = "right";
-		mGUIGroup3.add(mGoldEarned);
-		
-		mBestCombo = new FlxText(mStartingX, mStartingY + mDiff, 500, "", 24);
-		mBestCombo.text = "Best Combo: XXX";
-		mBestCombo.alignment = "right";
-		mGUIGroup3.add(mBestCombo);
-		
-		mNoOfCritical = new FlxText(mStartingX,  mStartingY + mDiff * 2, 500, "", 24);
-		mNoOfCritical.text = "No Of Critical: XXX";
-		mNoOfCritical.alignment = "right";
-		mGUIGroup3.add(mNoOfCritical);
-	
-		mStartingX = FlxG.width / 2 + FlxG.width / 4;
-		mStartingY = mStartingY + mDiff * 4;
-		mUpgradeShop = new FlxButton(mStartingX, mStartingY, "Shop", onClick);
-		mGUIGroup3.add(mUpgradeShop);
-		
-		//Hide The GUI Group
-		mGUIGroup3.visible = false;
-
+		//Setup Eveything
 		//Setup Background Audience, Lighting.
+		setupInGameGUI();
+		setupAfterGameText();
 		setupBackgroundAudience();
 		setupLighting();
 		
@@ -122,9 +74,80 @@ class InGameGUIManager
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
 	}	
 	
-	//Setup 
+	//Setup the in-game GUI during the game
+	private static function setupInGameGUI():Void
+	{
+		//Group 2: In Game Stuff.
+		//Score
+		mScore = new FlxText(FlxG.width - 120, 15, 100, "", 28);
+		mScore.text = "0";
+		mScore.alignment = "right";
+		mGUIGroup2.add(mScore);
+		//Added score below added score.
+		mAddedScore = new FlxText(mScore.x, mScore.y + 15, 100, "", 20);
+		mAddedScore.alignment = "right";
+		mGUIGroup2.add(mAddedScore);
+		
+		//Number of Arrow to left
+		mNumberOfArrowLeft = new FlxText(10, 15, 100, "",24);
+		mNumberOfArrowLeft.text = Std.string(ArrowManager.getMaxArrow());
+		mGUIGroup2.add(mNumberOfArrowLeft);
+		
+		//Combos
+		mCombo = new FlxText(FlxG.width - 150, FlxG.height/2 - 10, 150, 24);
+		mCombo.text = Std.string(ScoreManager.mCombo);
+		mGUIGroup2.add(mCombo);
+		
+		//Timer and Added Timer 
+		mTimer = new FlxText(FlxG.width/2 - 20, 10, 100, "", 36);
+		mGUIGroup2.add(mTimer);
+		mAddedTimer = new FlxText(mTimer.x, mTimer.y - 25, 100, "", 20);
+		mGUIGroup2.add(mAddedTimer);
+	}
+	
+	//Text after a game
+	private static function setupAfterGameText():Void
+	{
+		//Group 3: Stats After Game
+		var mStartingX:Float = FlxG.width / 3 - 250;
+		var mStartingY:Float = FlxG.height / 3;
+		var mDiff:Float = 50;
+		
+		mGoldEarned = new FlxText(mStartingX, mStartingY, 500, "", 24);
+		mGoldEarned.text = "Gold Earned: ";
+		mGoldEarned.alignment = "right";
+		mGUIGroup3.add(mGoldEarned);
+		
+		mBestCombo = new FlxText(mStartingX, mStartingY + mDiff, 500, "", 24);
+		mBestCombo.text = "Best Combo: ";
+		mBestCombo.alignment = "right";
+		mGUIGroup3.add(mBestCombo);
+		
+		mNoOfCritical = new FlxText(mStartingX,  mStartingY + mDiff * 2, 500, "", 24);
+		mNoOfCritical.text = "No Of Critical: ";
+		mNoOfCritical.alignment = "right";
+		mGUIGroup3.add(mNoOfCritical);
+	
+		mStartingX = FlxG.width / 2 + FlxG.width / 4;
+		mStartingY = mStartingY + mDiff * 4;
+		mUpgradeShop = new FlxButton(mStartingX, mStartingY, "Shop", onClick);
+		mGUIGroup3.add(mUpgradeShop);
+		
+		//Hide The GUI Group
+		mGUIGroup3.visible = false;
+	}
+	
+	//Setup Behind Fellow 
 	private static function setupBackgroundAudience():Void
 	{
+		//Group 0
+		mBackground = new FlxSprite(0, 0);
+		mBackground.loadGraphic(Assets.getBitmapData("background/background.png"));
+		//Let setup the position properly
+		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2,
+								FlxG.height / 2 - mBackground.height / 2);
+		mGUIGroup0.add(mBackground);
+		
 		//Group 1 //Stuff in front of background ... railing , crowd
 		//Audience behind crowd mah so let add that first
 		mAudienceRow1 = new FlxSprite(0, 0);

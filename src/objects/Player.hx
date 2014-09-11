@@ -18,7 +18,7 @@ class Player extends GameObject
 	public function new() 
 	{
 		super();
-		loadGraphic(Assets.getBitmapData("character/player.png"), true, false, 64, 64);
+		loadGraphic(Assets.getBitmapData("character/player.png"), true, false, 80, 80);
 	}
 	
 	override public function init()
@@ -30,9 +30,11 @@ class Player extends GameObject
 	{
 		super.update();
 		
+		//Let not care about anything. the game is over.
 		if (GameObjectManager.mGameOver)
 			return;
 		
+		//Shoot it.
 		if (KeyBinding.justPressed["click"]())
 		{
 			EventManager.triggerEvent(EventType.ARROW_FIRED);

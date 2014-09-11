@@ -10,8 +10,9 @@ class EventType
 	public static inline var FIRST_INIT:Int		= 0001;
 	public static inline var GAME_INIT:Int     	= 1000;
 	public static inline var GAME_OVER:Int     	= 1001;
-	
 	//IN-GAME
+	public static inline var TIMEADDED:Int     	= 0501;
+	public static inline var SCOREADDED:Int     = 0502;
 	//ARROW
 	public static inline var ARROW_FIRED:Int   	= 2000;
 	public static inline var ARROW_MISSED:Int  	= 2001;
