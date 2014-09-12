@@ -34,9 +34,8 @@ class ArrowManager
 		mActiveArrow = new Array<Arrow>();
 		mArrowPool = new ObjectPool<Arrow>(50, createArrow);
 		mFiringPosition = new FlxPoint();
-		mArrowSpeed = 300;
-		setPosition(100, FlxG.height / 2);
-		
+		mArrowSpeed = 400;
+	
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.ARROW_FIRED, onFire);
 		EventManager.subscrible(EventType.ARROW_MISSED, onMiss);

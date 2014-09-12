@@ -70,7 +70,9 @@ class ScoreManager
 	public static function addScore(_point):Void
 	{
 		mScore += mMultipler * _point;
+		EventManager.triggerEvent(EventType.SCOREADDED, {score: (mMultipler * _point)});
 		InGameGUIManager.mScore.text = Std.string(mScore);
+		
 	}
 	
 	public static function increaseMultipler():Void
@@ -81,6 +83,7 @@ class ScoreManager
 	public static function increaseCombo():Void
 	{
 		mCombo += 1;
+		EventManager.triggerEvent(EventType.COMBOADDED, {combo: mCombo});
 		
 		//Highest Combo Yo.
 		if (GameDataManager.mHighestCombo < mCombo)
@@ -92,6 +95,10 @@ class ScoreManager
 			mScore += mBonusMap.get(mBonusLevel).points;
 			GameDataManager.addGoldEarned(mBonusMap.get(mBonusLevel).gold);
 			GameDataManager.addTime(mBonusMap.get(mBonusLevel).time);
+			
+			//Time Added ... show it
+			EventManager.triggerEvent(EventType.TIMEADDED, {time: mBonusMap.get(mBonusLevel).time});
+			EventManager.triggerEvent(EventType.SCOREADDED, {score: mBonusMap.get(mBonusLevel).points});
 			
 			//Next Level
 			mBonusLevel += 1;

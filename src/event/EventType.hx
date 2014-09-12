@@ -13,6 +13,7 @@ class EventType
 	//IN-GAME
 	public static inline var TIMEADDED:Int     	= 0501;
 	public static inline var SCOREADDED:Int     = 0502;
+	public static inline var COMBOADDED:Int		= 0503;
 	//ARROW
 	public static inline var ARROW_FIRED:Int   	= 2000;
 	public static inline var ARROW_MISSED:Int  	= 2001;

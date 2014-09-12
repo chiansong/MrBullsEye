@@ -70,7 +70,10 @@ class PlayState extends FlxState
 	public function reset():Void
 	{
 		player.init();
-		player.setPosition(FlxG.width/2 - FlxG.width/2.75, FlxG.height / 2 - player.height / 2);
+		player.setPosition(FlxG.width / 2 - FlxG.width / 2.75, 
+						  (FlxG.height / 2) + player.height / 3);
+		ArrowManager.setPosition(player.x + player.width / 2 , 
+								 player.y + player.height / 2);
 	}
 
 	override public function destroy():Void

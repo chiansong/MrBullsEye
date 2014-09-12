@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import openfl.Assets;
 import states.MenuState;
@@ -72,6 +73,10 @@ class InGameGUIManager
 		EventManager.subscrible(EventType.GAME_OVER, onGameOver);
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
+		
+		//Add score and time
+		EventManager.subscrible(EventType.SCOREADDED, onAddedScore);
+		EventManager.subscrible(EventType.TIMEADDED, onAddedTime);
 	}	
 	
 	//Setup the in-game GUI during the game
@@ -84,7 +89,7 @@ class InGameGUIManager
 		mScore.alignment = "right";
 		mGUIGroup2.add(mScore);
 		//Added score below added score.
-		mAddedScore = new FlxText(mScore.x, mScore.y + 15, 100, "", 20);
+		mAddedScore = new FlxText(mScore.x, mScore.y + 35, 100, "", 20);
 		mAddedScore.alignment = "right";
 		mGUIGroup2.add(mAddedScore);
 		
@@ -101,8 +106,13 @@ class InGameGUIManager
 		//Timer and Added Timer 
 		mTimer = new FlxText(FlxG.width/2 - 20, 10, 100, "", 36);
 		mGUIGroup2.add(mTimer);
-		mAddedTimer = new FlxText(mTimer.x, mTimer.y - 25, 100, "", 20);
+		mAddedTimer = new FlxText(mTimer.x, mTimer.y + 45, 100, "", 20);
 		mGUIGroup2.add(mAddedTimer);
+		
+		//Hide some stuff
+		mCombo.alpha = 0;
+		mAddedScore.alpha = 0;
+		mAddedTimer.alpha = 0;
 	}
 	
 	//Text after a game
@@ -227,6 +237,27 @@ class InGameGUIManager
 		mGoldEarned.text = "Gold Earned: " + GameDataManager.mGoldEarned;
 		mBestCombo.text = "Highest Combo: " + GameDataManager.mHighestCombo;
 		mNoOfCritical.text = "No. of Critical: " + GameDataManager.mCriticalCount;
+	}
+	
+	private static function onAddedTime(evt:Int, params:Dynamic):Void
+	{
+		mAddedTimer.alpha = 1;
+		mAddedTimer.text = "+" + params.time + "s";
+		FlxTween.tween(mAddedTimer, {alpha:0}, 1.5);
+	}
+	
+	private static function onAddedScore(evt:Int, params:Dynamic):Void
+	{
+		mAddedScore.alpha = 1;
+		mAddedScore.text = "+" + params.score;
+		FlxTween.tween(mAddedScore, {alpha:0}, 1.5);
+	}
+	
+	private static function onAddedCombo(evt:Int, params:Dynamic):Void
+	{
+		mCombo.alpha = 1;
+		mCombo.text = params.combo = "Combo";
+		FlxTween.tween(mCombo, {alpha:0}, 1.5);
 	}
 	
 	public static function setArrows(_current:Int, _max:Int)
