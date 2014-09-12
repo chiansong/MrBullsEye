@@ -217,7 +217,6 @@ class InGameGUIManager
 	
 	private static function onShopEnter(evt:Int, params:Dynamic):Void
 	{
-		
 		mGUIGroup2.visible = false;
 		mGUIGroup3.visible = false;
 	}
@@ -226,12 +225,14 @@ class InGameGUIManager
 	{
 		mGUIGroup2.visible = true;
 		mGUIGroup3.visible = false;
+		mUpgradeShop.kill();
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
 	{
 		mGUIGroup2.visible = false;
 		mGUIGroup3.visible = true;
+		mUpgradeShop.revive();
 		
 		//Update the information ... remove the text in the future.
 		mGoldEarned.text = "Gold Earned: " + GameDataManager.mGoldEarned;
