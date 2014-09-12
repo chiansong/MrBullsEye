@@ -77,6 +77,7 @@ class InGameGUIManager
 		//Add score and time
 		EventManager.subscrible(EventType.SCOREADDED, onAddedScore);
 		EventManager.subscrible(EventType.TIMEADDED, onAddedTime);
+		EventManager.subscrible(EventType.COMBOADDED, onAddedCombo);
 	}	
 	
 	//Setup the in-game GUI during the game
@@ -99,8 +100,9 @@ class InGameGUIManager
 		mGUIGroup2.add(mNumberOfArrowLeft);
 		
 		//Combos
-		mCombo = new FlxText(FlxG.width - 150, FlxG.height/2 - 10, 150, 24);
+		mCombo = new FlxText(FlxG.width - FlxG.width/2.5, FlxG.height/2 - 10, 250, 36);
 		mCombo.text = Std.string(ScoreManager.mCombo);
+		mCombo.alignment = "right";
 		mGUIGroup2.add(mCombo);
 		
 		//Timer and Added Timer 
@@ -257,8 +259,8 @@ class InGameGUIManager
 	private static function onAddedCombo(evt:Int, params:Dynamic):Void
 	{
 		mCombo.alpha = 1;
-		mCombo.text = params.combo = "Combo";
-		FlxTween.tween(mCombo, {alpha:0}, 1.5);
+		mCombo.text = params.combo + " Combo";
+		FlxTween.tween(mCombo, {alpha:0}, 2.0);
 	}
 	
 	public static function setArrows(_current:Int, _max:Int)
@@ -268,7 +270,6 @@ class InGameGUIManager
 	
 	public static function update():Void
 	{
-		mCombo.text = Std.string(ScoreManager.mCombo);
 		mTimer.text = Std.string(Std.int(GameDataManager.mGameTimer));
 	}
 }

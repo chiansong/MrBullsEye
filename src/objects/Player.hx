@@ -19,11 +19,13 @@ class Player extends GameObject
 	{
 		super();
 		loadGraphic(Assets.getBitmapData("character/player.png"), true, false, 80, 80);
+		animation.add("idle", [0, 1, 2, 3], 6, true);
 	}
 	
 	override public function init()
 	{
 		DisplayManager.addToLayer(this, DisplayLayers.OBJECT1LAYER.getIndex());
+		animation.play("idle");
 	}
 	
 	override public function update()

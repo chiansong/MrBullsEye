@@ -4,6 +4,7 @@
 -lib openfl
 -cp src
 -D tools=1.4.0
+-D fdb
 -D web
 -swf-version 11.2
 -swf bin/flash/bin/MrBullsEye.swf

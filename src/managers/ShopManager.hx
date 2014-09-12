@@ -39,6 +39,8 @@ class ShopManager
 	public static var mUpgradeButton:FlxButton;
 	public static var mPlayButton:FlxButton;
 	public static var mDescription:FlxText;
+	public static var mDescriptionBox:FlxSprite;
+	public static var mShopCharacter:FlxSprite;
 	
 	public static function init():Void 
 	{
@@ -48,8 +50,6 @@ class ShopManager
 		
 		setupBackground();
 		setupShop();
-		
-		//DisplayManager.addToLayer(mGUIGroup, DisplayLayers.GUILAYER.getIndex());
 	}
 	
 	private static function setupBackground():Void
@@ -62,10 +62,24 @@ class ShopManager
 		mUpgradeGrid = new FlxSprite();
 		mUpgradeGrid.loadGraphic(Assets.getBitmapData("shop/upgradegrid.png"));
 		mUpgradeGrid.setPosition(FlxG.width / 2 - mUpgradeGrid.width / 2, FlxG.height / 2 - mUpgradeGrid.height / 2);
+		
+		//Character
+		mShopCharacter = new FlxSprite();
+		mShopCharacter.loadGraphic(Assets.getBitmapData("shop/shopcharacter.png"),true,false,80,80);
+		mShopCharacter.setPosition(FlxG.width / 5 - mShopCharacter.width, 
+								   FlxG.height - mShopCharacter.height / 1.15);
+		mShopCharacter.animation.add("talk", [3, 4, 5, 3, 5, 0, 4, 3, 0], 12, false);
+		mShopCharacter.animation.add("buy", [0, 1, 0, 2, 0, 1, 0, 2, 0], 12, false);
+		mShopCharacter.scale.x = 3;
+		mShopCharacter.scale.y = 3;
+		
+		mDescriptionBox = new FlxSprite();
 
 		//Let add it
 		mGUIGroup.add(mBackground);
 		mGUIGroup.add(mUpgradeGrid);
+		mGUIGroup.add(mDescriptionBox);
+		mGUIGroup.add(mShopCharacter);
 	}
 	
 	private static function setupShop():Void
@@ -139,6 +153,11 @@ class ShopManager
 		mDescription = new FlxText(mStartingX, mStartingY, 250, "", 15);
 		mGUIGroup.add(mDescription);
 		
+		//The chat box below it.
+		mDescriptionBox.loadGraphic(Assets.getBitmapData("shop/shopchatbox.png"));
+		mDescriptionBox.setPosition(mDescription.x - 20, 
+								    mDescription.y - 20);		
+		
 		//Upgrade Button
 		mStartingX = mDescription.x + mDescription.width + 15;
 		mUpgradeButton = new FlxButton(mStartingX, mStartingY, null, Upgrade);
@@ -168,6 +187,8 @@ class ShopManager
 		
 		mDescription.text = GameDataManager.mTimerDescription;
 		mSelected = ShopSelection.TIMERUPGRADE;
+		
+		mShopCharacter.animation.play("talk");
 	}
 	
 	private static function onUpgradeArrowNoClick():Void
@@ -179,6 +200,8 @@ class ShopManager
 		
 		mDescription.text = GameDataManager.mArrowNoDescription;
 		mSelected = ShopSelection.ARROWNUMBERUPGRADE;
+		
+		mShopCharacter.animation.play("talk");
 	}
 	
 	private static function onUpgradeGoldClick():Void
@@ -190,6 +213,8 @@ class ShopManager
 		
 		mDescription.text = GameDataManager.mGoldDescription;
 		mSelected = ShopSelection.GOLDUPGRADE;
+		
+		mShopCharacter.animation.play("talk");
 	}
 	
 	private static function onUpgradeAppleClick():Void
@@ -201,6 +226,8 @@ class ShopManager
 		
 		mDescription.text = GameDataManager.mAppleDescription;
 		mSelected = ShopSelection.APPLEUPGRADE;
+		
+		mShopCharacter.animation.play("talk");
 	}
 	
 	/*******************/
@@ -225,6 +252,7 @@ class ShopManager
 				if (GlobalGameData.deductGold(GameDataManager.mTimerMap.get(GlobalGameData.timerLevel).cost))
 				{
 					mStatusText.text = "Timer Leveled Up";
+					GameDataManager.increaseTimeLevel();
 				}
 				else
 					notEnough = true;
@@ -287,6 +315,14 @@ class ShopManager
 		
 		if (notEnough)
 			mStatusText.text = "Not Enough Gold";
+		else
+		{
+			//Update the gold data.
+			mShopCharacter.animation.play("buy");
+			mGold.text = Std.string(GlobalGameData.getGold());
+			GlobalGameData.save();
+			//Save it
+		}
 		
 	}
 	

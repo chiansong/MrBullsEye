@@ -125,6 +125,11 @@ class GameDataManager
 			EventManager.triggerEvent(EventType.GAME_OVER);
 	}
 	
+	public static function increaseTimeLevel():Void
+	{
+		GlobalGameData.timerLevel += 1;
+	}
+	
 	public static function addTime(time:Float):Void
 	{
 		mGameTimer += time;
