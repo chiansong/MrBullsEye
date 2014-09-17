@@ -20,12 +20,22 @@ class Player extends GameObject
 		super();
 		loadGraphic(Assets.getBitmapData("character/player.png"), true, false, 80, 80);
 		animation.add("idle", [0, 1, 2, 3], 6, true);
+		animation.add("shoot", [7, 8, 9, 10, 11, 12, 13], 12, false);
+		animation.callback = animationCallback;
 	}
-	
+
 	override public function init()
 	{
 		DisplayManager.addToLayer(this, DisplayLayers.OBJECT1LAYER.getIndex());
 		animation.play("idle");
+	}
+	
+	private function animationCallback(name:String, frameNum:Int, frameIndex:Int):Void
+	{
+		if (name == "shoot" && animation.finished)
+		{
+			animation.play("idle");
+		}
 	}
 	
 	override public function update()
@@ -34,12 +44,15 @@ class Player extends GameObject
 		
 		//Let not care about anything. the game is over.
 		if (GameObjectManager.mGameOver)
+		{
+			animation.pause();
 			return;
-		
+		}
 		//Shoot it.
 		if (KeyBinding.justPressed["click"]())
 		{
 			EventManager.triggerEvent(EventType.ARROW_FIRED);
+			animation.play("shoot");
 		}
 	}
 }

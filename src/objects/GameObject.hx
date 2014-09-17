@@ -14,6 +14,10 @@ class GameObject extends FlxSprite
 {
 	public var mSpeedX:Float;
 	public var mSpeedY:Float;
+	public var mStartingPositionY:Float;
+	public var mShootingPositionY:Float;
+	public var mStartingScale:Float;
+	public var mShootingScale:Float;
 	public var mState:Int;
 	public var mActive:Bool;
 	
@@ -33,7 +37,8 @@ class GameObject extends FlxSprite
 	
 	public function init()
 	{
-		
+		mStartingPositionY = 0;
+		mShootingPositionY = 0;
 	}
 	
 	public function activate(_pos:FlxPoint, _speedX:Float, _speedY:Float):Void
@@ -63,5 +68,11 @@ class GameObject extends FlxSprite
 	public override function update():Void
 	{
 		super.update();
+	}
+	
+	public function SetScaleBasedOnPosition():Void
+	{
+		scale.x = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * y;
+		scale.y = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * y;
 	}
 }

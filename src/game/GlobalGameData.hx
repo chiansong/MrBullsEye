@@ -43,6 +43,7 @@ class GlobalGameData
 		gameSaveData.data.arrowNoLevel = arrowNoLevel;
 		gameSaveData.data.goldLevel = goldLevel;
 		gameSaveData.data.appleLevel = appleLevel; 
+		
 		//Save it
 		gameSaveData.flush();
 	}

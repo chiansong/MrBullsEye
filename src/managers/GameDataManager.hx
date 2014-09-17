@@ -70,6 +70,7 @@ class GameDataManager
 	public static var mAppleChance:Int;
 	public static var mGoldChance:Int;
 	public static var mGameTimer:Float;
+	public static var mTotalTimer:Float;
 	
 	public static function init():Void
 	{
@@ -105,6 +106,7 @@ class GameDataManager
 		mHighestCombo = 0;
 		mCriticalCount = 0;
 		mGameTimer = mTimerMap.get(GlobalGameData.timerLevel).data;
+		mTotalTimer = 0;
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
@@ -120,6 +122,7 @@ class GameDataManager
 			return;
 		
 		mGameTimer -= FlxG.elapsed;
+		mTotalTimer += FlxG.elapsed;
 		
 		if (mGameTimer <= 0)
 			EventManager.triggerEvent(EventType.GAME_OVER);

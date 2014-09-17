@@ -19,6 +19,7 @@ class ShopManager
 	public static var mGUIGroup:FlxGroup; //Shop GUI
 	//Background
 	public static var mBackground:FlxSprite; //Background.
+	public static var mBackgroundRay:FlxSprite; //BackgroundRay
 	public static var mUpgradeGrid:FlxSprite; //Upgrade Grid.
 	
 	//Top
@@ -56,8 +57,13 @@ class ShopManager
 	{
 		//The background
 		mBackground = new FlxSprite();
-		mBackground.loadGraphic(Assets.getBitmapData("shop/shopbackground.png"));
+		mBackground.loadGraphic(Assets.getBitmapData("shop/backgroundbase.png"));
 		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2, FlxG.height / 2 - mBackground.height / 2);
+		mBackgroundRay = new FlxSprite();
+		mBackgroundRay.loadGraphic(Assets.getBitmapData("shop/backgroundRay.png"));
+		mBackgroundRay.setPosition(FlxG.width / 2 - mBackgroundRay.width / 2, FlxG.height / 2 - mBackgroundRay.height / 2);
+		mBackgroundRay.angularVelocity = 2.5;
+		
 		//The upgrade grid background
 		mUpgradeGrid = new FlxSprite();
 		mUpgradeGrid.loadGraphic(Assets.getBitmapData("shop/upgradegrid.png"));
@@ -77,6 +83,7 @@ class ShopManager
 
 		//Let add it
 		mGUIGroup.add(mBackground);
+		mGUIGroup.add(mBackgroundRay);
 		mGUIGroup.add(mUpgradeGrid);
 		mGUIGroup.add(mDescriptionBox);
 		mGUIGroup.add(mShopCharacter);
@@ -137,7 +144,7 @@ class ShopManager
 		mUpgradeGoldCost.alignment = "center";
 		mGUIGroup.add(mUpgradeGoldCost);
 		
-		//Upgrade Gold No
+		//Upgrade Apple No
 		mUpgradeAppleButton = new FlxButton(mUpgradeGoldButton.x + mUpgradeGoldButton.width + 20, mStartingY, null, onUpgradeAppleClick);
 		mUpgradeAppleButton.loadGraphic(Assets.getBitmapData("shop/arrowspeed.png"), true, false, 80, 80);
 		mGUIGroup.add(mUpgradeAppleButton);

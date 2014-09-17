@@ -93,7 +93,7 @@ class GameObjectManager
 		mGoldPool = new ObjectPool<GoldBag>(10, createGoldBag);
 		
 		mStartingPosition = new FlxPoint();
-		setPosition(FlxG.width/2 + FlxG.width/3, -34);
+		setPosition(FlxG.width/2 + FlxG.width/3, 20);
 		mPreviousMovementSpeedY = 0;
 		mMovementSpeedY = 100;
 		mGameLevel = 1;

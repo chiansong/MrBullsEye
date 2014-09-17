@@ -48,8 +48,14 @@ class BullsEye extends GameObject
 	{
 		animation.play("level" + level);
 		mScore = level + 1;
-		scale.x = 0.25;
-		scale.y = 0.25;
+		
+		mStartingScale = 0.25;
+		mShootingScale = 1;
+		
+		mStartingPositionY = 50;
+		mShootingPositionY = FlxG.height / 2 + height;
+		
+		scale.x = scale.y = 0;
 	}
 	
 	public function onHit(evt:Int, params:Dynamic):Void
@@ -78,8 +84,8 @@ class BullsEye extends GameObject
 		
 		super.update();
 		
-		scale.x += 0.25 * FlxG.elapsed;
-		scale.y += 0.25 * FlxG.elapsed;
+		//Update the position
+		SetScaleBasedOnPosition();
 		
 		//Move Downward.
 		if (mState == GameObject.IDLE)

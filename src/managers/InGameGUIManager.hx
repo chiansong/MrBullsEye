@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import openfl.Assets;
@@ -40,11 +41,15 @@ class InGameGUIManager
 	public static var mTimer:FlxText;
 	public static var mAddedTimer:FlxText;
 	
-	//G3
+	//G3 After Game Text.
 	public static var mGoldEarned:FlxText;
 	public static var mBestCombo:FlxText;
 	public static var mNoOfCritical:FlxText;
+	private static var mTimeGained:FlxText;
+	private static var mMultiple:FlxText;
+	private static var mFinalScore:FlxText;
 	public static var mUpgradeShop:FlxButton;
+	public static var mResultBackground:FlxSprite;
 	
 	//G4
 	private static var mLighting:FlxSprite;
@@ -121,14 +126,21 @@ class InGameGUIManager
 	private static function setupAfterGameText():Void
 	{
 		//Group 3: Stats After Game
-		var mStartingX:Float = FlxG.width / 3 - 250;
-		var mStartingY:Float = FlxG.height / 3;
-		var mDiff:Float = 50;
+		//Create Image
+		mResultBackground = new FlxSprite();
+		mResultBackground.loadGraphic(Assets.getBitmapData("background/result.png"));
+		mResultBackground.setPosition(FlxG.width / 2 - mResultBackground.width / 2, 
+									  FlxG.height / 2 - mResultBackground.height / 2);
+		mGUIGroup3.add(mResultBackground);
+									  
+		var mStartingX:Float = -FlxG.width;
+		var mStartingY:Float = FlxG.height / 4;
+		var mDiff:Float = 40;
 		
-		mGoldEarned = new FlxText(mStartingX, mStartingY, 500, "", 24);
-		mGoldEarned.text = "Gold Earned: ";
-		mGoldEarned.alignment = "right";
-		mGUIGroup3.add(mGoldEarned);
+		mTimeGained = new FlxText(mStartingX, mStartingY, 500, "", 24);
+		mTimeGained.text = "Total Time: ";
+		mTimeGained.alignment = "right";
+		mGUIGroup3.add(mTimeGained);
 		
 		mBestCombo = new FlxText(mStartingX, mStartingY + mDiff, 500, "", 24);
 		mBestCombo.text = "Best Combo: ";
@@ -136,12 +148,27 @@ class InGameGUIManager
 		mGUIGroup3.add(mBestCombo);
 		
 		mNoOfCritical = new FlxText(mStartingX,  mStartingY + mDiff * 2, 500, "", 24);
-		mNoOfCritical.text = "No Of Critical: ";
+		mNoOfCritical.text = "BullEyes: ";
 		mNoOfCritical.alignment = "right";
 		mGUIGroup3.add(mNoOfCritical);
-	
+		
+		mMultiple = new FlxText(mStartingX,  mStartingY + mDiff * 3, 500, "", 24);
+		mMultiple.text = "Mulitple: ";
+		mMultiple.alignment = "right";
+		mGUIGroup3.add(mMultiple);
+		
+		mFinalScore = new FlxText(mStartingX, mStartingY + mDiff * 4, 500, "", 24);
+		mFinalScore.text = "Final Score: ";
+		mFinalScore.alignment = "right";
+		mGUIGroup3.add(mFinalScore);
+		
+		mGoldEarned = new FlxText(mStartingX, mStartingY + mDiff * 5, 500, "", 24);
+		mGoldEarned.text = "Gold: ";
+		mGoldEarned.alignment = "right";
+		mGUIGroup3.add(mGoldEarned);
+		
 		mStartingX = FlxG.width / 2 + FlxG.width / 4;
-		mStartingY = mStartingY + mDiff * 4;
+		mStartingY = mGoldEarned.y + mDiff;
 		mUpgradeShop = new FlxButton(mStartingX, mStartingY, "Shop", onClick);
 		mGUIGroup3.add(mUpgradeShop);
 		
@@ -163,21 +190,21 @@ class InGameGUIManager
 		//Group 1 //Stuff in front of background ... railing , crowd
 		//Audience behind crowd mah so let add that first
 		mAudienceRow1 = new FlxSprite(0, 0);
-		mAudienceRow1.loadGraphic(Assets.getBitmapData("background/audiencerow1.png"), true, false, 840, 30, false);
+		mAudienceRow1.loadGraphic(Assets.getBitmapData("background/audiencerow1.png"), true, false, 990, 25, false);
 		mAudienceRow1.animation.add("idle", [0, 1, 2], 3, true);
 		mAudienceRow1.animation.add("cheer", [0, 1, 2, 0, 1, 2], 12, false);
 		mAudienceRow1.animation.play("idle");
 		mAudienceRow1.color = 0xffbebebe;
 		
 		mAudienceRow2 = new FlxSprite(0, 0);
-		mAudienceRow2.loadGraphic(Assets.getBitmapData("background/audiencerow1.png"), true, false, 840, 30, false);
+		mAudienceRow2.loadGraphic(Assets.getBitmapData("background/audiencerow1.png"), true, false, 990, 25, false);
 		mAudienceRow2.animation.add("idle", [0, 1, 2], 3, true);
 		mAudienceRow2.animation.add("cheer", [0, 1, 2, 0, 1, 2], 12, false);
 		mAudienceRow2.animation.play("idle");
 		mAudienceRow2.color = 0xff7b7b7b;
 		
 		mAudienceRow3 = new FlxSprite(0, 0);
-		mAudienceRow3.loadGraphic(Assets.getBitmapData("background/audiencerow1.png"), true, false, 840, 30, false);
+		mAudienceRow3.loadGraphic(Assets.getBitmapData("background/audiencerow1.png"), true, false, 990, 25, false);
 		mAudienceRow3.animation.add("idle", [0, 1, 2], 3, true);
 		mAudienceRow3.animation.add("cheer", [0, 1, 2, 0, 1, 2], 12, false);
 		mAudienceRow3.animation.play("idle");
@@ -236,10 +263,21 @@ class InGameGUIManager
 		mGUIGroup3.visible = true;
 		mUpgradeShop.revive();
 		
+		var mStartingX:Float = FlxG.width / 3 - 250;
+		FlxTween.tween(mTimeGained, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.15});
+		FlxTween.tween(mBestCombo, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.30});
+		FlxTween.tween(mNoOfCritical, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.45});
+		FlxTween.tween(mMultiple, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.60});
+		FlxTween.tween(mFinalScore, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.75});
+		FlxTween.tween(mGoldEarned, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.90});
+		
 		//Update the information ... remove the text in the future.
-		mGoldEarned.text = "Gold Earned: " + GameDataManager.mGoldEarned;
+		mTimeGained.text = "Total Time: " + (Std.int(GameDataManager.mTotalTimer));
 		mBestCombo.text = "Highest Combo: " + GameDataManager.mHighestCombo;
-		mNoOfCritical.text = "No. of Critical: " + GameDataManager.mCriticalCount;
+		mNoOfCritical.text = "Bulls-eyes: " + GameDataManager.mCriticalCount;
+		mMultiple.text = "Multiple: " + ScoreManager.mMultipler;
+		mFinalScore.text = "Score: " + ScoreManager.mScore;
+		mGoldEarned.text = "Gold: " + GameDataManager.mGoldEarned;
 	}
 	
 	private static function onAddedTime(evt:Int, params:Dynamic):Void

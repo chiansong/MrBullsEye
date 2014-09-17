@@ -19,17 +19,26 @@ import openfl.Assets;
 
 class MenuState extends FlxState
 {
-	var screen:FlxSprite;
-	var character:FlxSprite;
-	var bulleye:FlxSprite;
-	var title:FlxSprite;
+	private var mBackground:FlxSprite;
+	private var mBackgroundRay:FlxSprite;
 	
 	var mText:FlxText;
 	
 	override public function create():Void
 	{
+		//The background
+		mBackground = new FlxSprite();
+		mBackground.loadGraphic(Assets.getBitmapData("shop/backgroundbase.png"));
+		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2, FlxG.height / 2 - mBackground.height / 2);
+		mBackgroundRay = new FlxSprite();
+		mBackgroundRay.loadGraphic(Assets.getBitmapData("shop/backgroundRay.png"));
+		mBackgroundRay.setPosition(FlxG.width / 2 - mBackgroundRay.width / 2, FlxG.height / 2 - mBackgroundRay.height / 2);
+		
 		mText = new FlxText(FlxG.width / 2, FlxG.height/2, 100, "Click To Begin");
 		mText.color = FlxColor.WHITE;
+		
+		add(mBackground);
+		add(mBackgroundRay);
 		add(mText);
 		
 		////SCREEN
