@@ -83,6 +83,11 @@ class GameObjectManager
 	private static var mGameLevel:Int;
 	public static var mGameOver:Bool;
 	
+	//The 3 Possible Position that are used to spawn.
+	private static var mPosition1:FlxPoint;
+	private static var mPosition2:FlxPoint;
+	private static var mPosition3:FlxPoint;
+	
 	public static function init():Void
 	{
 		mGroup = new FlxGroup();
@@ -93,8 +98,16 @@ class GameObjectManager
 		mGoldPool = new ObjectPool<GoldBag>(10, createGoldBag);
 		
 		mStartingPosition = new FlxPoint();
+		mPosition1 = new FlxPoint();
+		mPosition2 = new FlxPoint();
+		mPosition3 = new FlxPoint();
 		
-		setPosition(FlxG.width - 3 * FlxG.width/8, 20);
+		setPosition(FlxG.width - 3 * FlxG.width / 8, 20);
+		
+		mPosition1.set(FlxG.width - 3 * FlxG.width / 8, 20);
+		mPosition2.set(FlxG.width - 2 * FlxG.width / 8, 20);
+		mPosition3.set(FlxG.width - FlxG.width / 8, 20);
+		
 		mPreviousMovementSpeedY = 0;
 		mMovementSpeedY = 100;
 		mGameLevel = 1;
@@ -183,6 +196,16 @@ class GameObjectManager
 	
 	private static function onLanuch(evt:Int, params:Dynamic):Void
 	{
+		switch(MathUtil.getRandomBetween(0, 3))
+		{
+			case 0:
+				mStartingPosition = mPosition1;
+			case 1:
+				mStartingPosition = mPosition2;
+			case 2:
+				mStartingPosition = mPosition3;
+		}
+		
 		//Grab an Apple
 		var object:GameObject;
 		if (MathUtil.getRandomBetween(0, 1000) 

@@ -32,6 +32,9 @@ class InGameGUIManager
 	private static var mAudienceRow2:FlxSprite; //Second row \o/ \o/
 	private static var mAudienceRow3:FlxSprite; //Thrid row \o/ \o/
 	private static var mRailing:FlxSprite;// Railing
+	private static var mDoor1:FlxSprite;
+	private static var mDoor2:FlxSprite;
+	private static var mDoor3:FlxSprite;
 	
 	//G2
 	public static var mScore:FlxText;
@@ -227,7 +230,27 @@ class InGameGUIManager
 		mAudienceRow2.setPosition(mAudienceRow1.x - 20,
 								  mAudienceRow1.y - mAudienceRow1.height/3);
 		mAudienceRow3.setPosition(mAudienceRow1.x + 20,
-								  mAudienceRow2.y - mAudienceRow1.height/3);
+								  mAudienceRow2.y - mAudienceRow1.height / 3);
+					
+		//Door Door Door 3 Door Down (The door where the bulleyes spawn)
+		mDoor1 = new FlxSprite();
+		mDoor1.loadGraphic(Assets.getBitmapData("background/door.png"));
+		mDoor1.setPosition(FlxG.width - 3 * FlxG.width/8 - mDoor1.width/2,
+						   FlxG.height / 2 -  140);
+						   
+		mDoor2 = new FlxSprite();
+		mDoor2.loadGraphic(Assets.getBitmapData("background/door.png"));
+		mDoor2.setPosition(FlxG.width - 2 * FlxG.width/8 - mDoor1.width/2,
+						   FlxG.height / 2 -  135);
+						   
+		mDoor3 = new FlxSprite();
+		mDoor3.loadGraphic(Assets.getBitmapData("background/door.png"));
+		mDoor3.setPosition(FlxG.width - FlxG.width/8 - mDoor1.width/2,
+						   FlxG.height / 2 -  130);
+						   
+		mGUIGroup1.add(mDoor1);
+		mGUIGroup1.add(mDoor2);
+		mGUIGroup1.add(mDoor3);
 	}
 	
 	//Set lighting for player

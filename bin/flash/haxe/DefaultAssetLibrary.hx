@@ -52,6 +52,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("background/backtent.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/circus.pyxel", __ASSET__background_circus_pyxel);
 		type.set ("background/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/door copy.png", __ASSET__background_door_copy_png);
+		type.set ("background/door copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/door.png", __ASSET__background_door_png);
+		type.set ("background/door.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/door.pyxel", __ASSET__background_door_pyxel);
+		type.set ("background/door.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("background/gamerailing.png", __ASSET__background_gamerailing_png);
 		type.set ("background/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/gamerailingx.png", __ASSET__background_gamerailingx_png);
@@ -62,6 +68,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("background/lighting.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("background/middlecircle.psd", __ASSET__background_middlecircle_psd);
 		type.set ("background/middlecircle.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/preview.pyxel", __ASSET__background_preview_pyxel);
+		type.set ("background/preview.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("background/railing.png", __ASSET__background_railing_png);
 		type.set ("background/railing.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/railing.pyxel", __ASSET__background_railing_pyxel);
@@ -176,11 +184,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("background/backgroundx.png", "image", "background/backgroundx.png");
 		addExternal("background/backtent.png", "image", "background/backtent.png");
 		addExternal("background/circus.pyxel", "binary", "background/circus.pyxel");
+		addExternal("background/door copy.png", "image", "background/door copy.png");
+		addExternal("background/door.png", "image", "background/door.png");
+		addExternal("background/door.pyxel", "binary", "background/door.pyxel");
 		addExternal("background/gamerailing.png", "image", "background/gamerailing.png");
 		addExternal("background/gamerailingx.png", "image", "background/gamerailingx.png");
 		addExternal("background/lighting.png", "image", "background/lighting.png");
 		addExternal("background/lighting.psd", "binary", "background/lighting.psd");
 		addExternal("background/middlecircle.psd", "binary", "background/middlecircle.psd");
+		addExternal("background/preview.pyxel", "binary", "background/preview.pyxel");
 		addExternal("background/railing.png", "image", "background/railing.png");
 		addExternal("background/railing.pyxel", "binary", "background/railing.pyxel");
 		addExternal("background/railingfull.png", "image", "background/railingfull.png");
@@ -264,6 +276,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("background/circus.pyxel", __ASSET__background_circus_pyxel);
 		type.set ("background/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("background/door copy.png", __ASSET__background_door_copy_png);
+		type.set ("background/door copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/door.png", __ASSET__background_door_png);
+		type.set ("background/door.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/door.pyxel", __ASSET__background_door_pyxel);
+		type.set ("background/door.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
 		className.set ("background/gamerailing.png", __ASSET__background_gamerailing_png);
 		type.set ("background/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
@@ -278,6 +299,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("background/middlecircle.psd", __ASSET__background_middlecircle_psd);
 		type.set ("background/middlecircle.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("background/preview.pyxel", __ASSET__background_preview_pyxel);
+		type.set ("background/preview.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("background/railing.png", __ASSET__background_railing_png);
 		type.set ("background/railing.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -1022,11 +1046,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__background_backgroundx_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_backtent_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_circus_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__background_door_copy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_door_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_door_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__background_gamerailing_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_gamerailingx_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_lighting_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_lighting_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__background_middlecircle_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__background_preview_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__background_railing_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_railing_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__background_railingfull_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1148,6 +1176,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
 #elseif (windows || mac || linux)
 
 
@@ -1159,11 +1191,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/background/backgroundx.png") class __ASSET__background_backgroundx_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/backtent.png") class __ASSET__background_backtent_png extends flash.display.BitmapData {}
 @:file("assets/texture/background/circus.pyxel") class __ASSET__background_circus_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/background/door copy.png") class __ASSET__background_door_copy_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/door.png") class __ASSET__background_door_png extends flash.display.BitmapData {}
+@:file("assets/texture/background/door.pyxel") class __ASSET__background_door_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/background/gamerailing.png") class __ASSET__background_gamerailing_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/gamerailingx.png") class __ASSET__background_gamerailingx_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/lighting.png") class __ASSET__background_lighting_png extends flash.display.BitmapData {}
 @:file("assets/texture/background/lighting.psd") class __ASSET__background_lighting_psd extends flash.utils.ByteArray {}
 @:file("assets/texture/background/middlecircle.psd") class __ASSET__background_middlecircle_psd extends flash.utils.ByteArray {}
+@:file("assets/texture/background/preview.pyxel") class __ASSET__background_preview_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/background/railing.png") class __ASSET__background_railing_png extends flash.display.BitmapData {}
 @:file("assets/texture/background/railing.pyxel") class __ASSET__background_railing_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/background/railingfull.png") class __ASSET__background_railingfull_png extends flash.display.BitmapData {}
