@@ -21,6 +21,7 @@ class MenuState extends FlxState
 {
 	private var mBackground:FlxSprite;
 	private var mBackgroundRay:FlxSprite;
+	private var mCircus:FlxSprite;
 	
 	var mText:FlxText;
 	
@@ -28,17 +29,26 @@ class MenuState extends FlxState
 	{
 		//The background
 		mBackground = new FlxSprite();
-		mBackground.loadGraphic(Assets.getBitmapData("shop/backgroundbase.png"));
+		mBackground.loadGraphic(Assets.getBitmapData("mainmenu/background.png"));
 		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2, FlxG.height / 2 - mBackground.height / 2);
+		//The Background Ray From The Center.
 		mBackgroundRay = new FlxSprite();
-		mBackgroundRay.loadGraphic(Assets.getBitmapData("shop/backgroundRay.png"));
+		mBackgroundRay.loadGraphic(Assets.getBitmapData("mainmenu/backgroundray.png"));
 		mBackgroundRay.setPosition(FlxG.width / 2 - mBackgroundRay.width / 2, FlxG.height / 2 - mBackgroundRay.height / 2);
+		mBackgroundRay.angularVelocity = 2.5;
+		//Circus
+		mCircus = new FlxSprite();
+		mCircus.loadGraphic(Assets.getBitmapData("mainmenu/circus.png"));
+		mCircus.setPosition(FlxG.width / 2 - mCircus.width / 2, FlxG.height / 2 - mCircus.height / 2);
 		
+		//The Text
 		mText = new FlxText(FlxG.width / 2, FlxG.height/2, 100, "Click To Begin");
 		mText.color = FlxColor.WHITE;
 		
+		//Add in to the scene
 		add(mBackground);
 		add(mBackgroundRay);
+		add(mCircus);
 		add(mText);
 		
 		////SCREEN

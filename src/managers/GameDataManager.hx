@@ -138,27 +138,6 @@ class GameDataManager
 		mGameTimer += time;
 	}
 	
-	//public static function parseArrowSpeedData(assetFile:String)
-	//{
-		//var arrowspeedXML = new Fast(Xml.parse(assetFile).firstElement());
-		//mArrowSpeedDescription = arrowspeedXML.node.description.innerData;
-		//
-		//var count:Int = 0;
-		//for (data in arrowspeedXML.nodes.level)
-		//{
-			//var level:Int = Std.parseInt(data.innerData);
-			////The info
-			//var speed:Int = Std.parseInt(data.att.speed);
-			//var cost:Int = Std.parseInt(data.att.cost);
-			//
-			//var arrowData:DataStats = new DataStats(speed, cost);
-			//
-			//++count;
-			//mArrowSpeedMap.set(level, arrowData);
-		//}
-		//mArrowSpeedLevel = count;
-	//}
-	
 	public static function parseArrowNoData(assetFile:String)
 	{
 		var arrownoXML = new Fast(Xml.parse(assetFile).firstElement());

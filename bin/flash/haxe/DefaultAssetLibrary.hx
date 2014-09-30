@@ -50,8 +50,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("background/backgroundx.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/backtent.png", __ASSET__background_backtent_png);
 		type.set ("background/backtent.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("background/Cache.mxc3", __ASSET__background_cache_mxc3);
-		type.set ("background/Cache.mxc3", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/circus.pyxel", __ASSET__background_circus_pyxel);
+		type.set ("background/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("background/gamerailing.png", __ASSET__background_gamerailing_png);
 		type.set ("background/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/gamerailingx.png", __ASSET__background_gamerailingx_png);
@@ -138,6 +138,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("shop/upgrade.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("shop/upgradegrid.png", __ASSET__shop_upgradegrid_png);
 		type.set ("shop/upgradegrid.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/background.png", __ASSET__mainmenu_background_png);
+		type.set ("mainmenu/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/background.psd", __ASSET__mainmenu_background_psd);
+		type.set ("mainmenu/background.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("mainmenu/backgroundray.png", __ASSET__mainmenu_backgroundray_png);
+		type.set ("mainmenu/backgroundray.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/backgroundray.psd", __ASSET__mainmenu_backgroundray_psd);
+		type.set ("mainmenu/backgroundray.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("mainmenu/circus.png", __ASSET__mainmenu_circus_png);
+		type.set ("mainmenu/circus.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/circus.pyxel", __ASSET__mainmenu_circus_pyxel);
+		type.set ("mainmenu/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("data/applechancedata.xml", __ASSET__data_applechancedata_xml);
 		type.set ("data/applechancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("data/arrownumberdata.xml", __ASSET__data_arrownumberdata_xml);
@@ -163,7 +175,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("background/background.png", "image", "background/background.png");
 		addExternal("background/backgroundx.png", "image", "background/backgroundx.png");
 		addExternal("background/backtent.png", "image", "background/backtent.png");
-		addExternal("background/Cache.mxc3", "binary", "background/Cache.mxc3");
+		addExternal("background/circus.pyxel", "binary", "background/circus.pyxel");
 		addExternal("background/gamerailing.png", "image", "background/gamerailing.png");
 		addExternal("background/gamerailingx.png", "image", "background/gamerailingx.png");
 		addExternal("background/lighting.png", "image", "background/lighting.png");
@@ -207,6 +219,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("shop/upgrade.png", "image", "shop/upgrade.png");
 		addExternal("shop/upgrade.psd", "binary", "shop/upgrade.psd");
 		addExternal("shop/upgradegrid.png", "image", "shop/upgradegrid.png");
+		addExternal("mainmenu/background.png", "image", "mainmenu/background.png");
+		addExternal("mainmenu/background.psd", "binary", "mainmenu/background.psd");
+		addExternal("mainmenu/backgroundray.png", "image", "mainmenu/backgroundray.png");
+		addExternal("mainmenu/backgroundray.psd", "binary", "mainmenu/backgroundray.psd");
+		addExternal("mainmenu/circus.png", "image", "mainmenu/circus.png");
+		addExternal("mainmenu/circus.pyxel", "binary", "mainmenu/circus.pyxel");
 		addExternal("data/applechancedata.xml", "text", "data/applechancedata.xml");
 		addExternal("data/arrownumberdata.xml", "text", "data/arrownumberdata.xml");
 		addExternal("data/arrowspeeddata.xml", "text", "data/arrowspeeddata.xml");
@@ -243,8 +261,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("background/backtent.png", __ASSET__background_backtent_png);
 		type.set ("background/backtent.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
-		className.set ("background/Cache.mxc3", __ASSET__background_cache_mxc3);
-		type.set ("background/Cache.mxc3", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("background/circus.pyxel", __ASSET__background_circus_pyxel);
+		type.set ("background/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("background/gamerailing.png", __ASSET__background_gamerailing_png);
 		type.set ("background/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -374,6 +392,24 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("shop/upgradegrid.png", __ASSET__shop_upgradegrid_png);
 		type.set ("shop/upgradegrid.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/background.png", __ASSET__mainmenu_background_png);
+		type.set ("mainmenu/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/background.psd", __ASSET__mainmenu_background_psd);
+		type.set ("mainmenu/background.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("mainmenu/backgroundray.png", __ASSET__mainmenu_backgroundray_png);
+		type.set ("mainmenu/backgroundray.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/backgroundray.psd", __ASSET__mainmenu_backgroundray_psd);
+		type.set ("mainmenu/backgroundray.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("mainmenu/circus.png", __ASSET__mainmenu_circus_png);
+		type.set ("mainmenu/circus.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/circus.pyxel", __ASSET__mainmenu_circus_pyxel);
+		type.set ("mainmenu/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("data/applechancedata.xml", __ASSET__data_applechancedata_xml);
 		type.set ("data/applechancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
@@ -985,7 +1021,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__background_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_backgroundx_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_backtent_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep class __ASSET__background_cache_mxc3 extends flash.utils.ByteArray { }
+@:keep class __ASSET__background_circus_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__background_gamerailing_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_gamerailingx_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_lighting_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1029,6 +1065,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__shop_upgrade_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_upgrade_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__shop_upgradegrid_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_background_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__mainmenu_backgroundray_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_backgroundray_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__mainmenu_circus_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_circus_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_applechancedata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_arrownumberdata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_arrowspeeddata_xml extends flash.utils.ByteArray { }
@@ -1100,6 +1142,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
 #elseif (windows || mac || linux)
 
 
@@ -1110,7 +1158,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/background/background.png") class __ASSET__background_background_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/backgroundx.png") class __ASSET__background_backgroundx_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/backtent.png") class __ASSET__background_backtent_png extends flash.display.BitmapData {}
-@:file("assets/texture/background/Cache.mxc3") class __ASSET__background_cache_mxc3 extends flash.utils.ByteArray {}
+@:file("assets/texture/background/circus.pyxel") class __ASSET__background_circus_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/background/gamerailing.png") class __ASSET__background_gamerailing_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/gamerailingx.png") class __ASSET__background_gamerailingx_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/lighting.png") class __ASSET__background_lighting_png extends flash.display.BitmapData {}
@@ -1154,6 +1202,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/shop/upgrade.png") class __ASSET__shop_upgrade_png extends flash.display.BitmapData {}
 @:file("assets/texture/shop/upgrade.psd") class __ASSET__shop_upgrade_psd extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/shop/upgradegrid.png") class __ASSET__shop_upgradegrid_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/mainmenu/background.png") class __ASSET__mainmenu_background_png extends flash.display.BitmapData {}
+@:file("assets/texture/mainmenu/background.psd") class __ASSET__mainmenu_background_psd extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/mainmenu/backgroundray.png") class __ASSET__mainmenu_backgroundray_png extends flash.display.BitmapData {}
+@:file("assets/texture/mainmenu/backgroundray.psd") class __ASSET__mainmenu_backgroundray_psd extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/mainmenu/circus.png") class __ASSET__mainmenu_circus_png extends flash.display.BitmapData {}
+@:file("assets/texture/mainmenu/circus.pyxel") class __ASSET__mainmenu_circus_pyxel extends flash.utils.ByteArray {}
 @:file("assets/data/applechancedata.xml") class __ASSET__data_applechancedata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/arrownumberdata.xml") class __ASSET__data_arrownumberdata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/arrowspeeddata.xml") class __ASSET__data_arrowspeeddata_xml extends flash.utils.ByteArray {}

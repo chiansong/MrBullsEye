@@ -24,6 +24,7 @@
 	<assets path="assets/texture/background" rename="background" />
 	<assets path="assets/texture/character" rename="character" />
 	<assets path="assets/texture/shop" rename="shop" />
+	<assets path="assets/texture/mainmenu" rename="mainmenu" />
 	<assets path="assets/data" rename="data" />
 	
 	<!-- optimize output
