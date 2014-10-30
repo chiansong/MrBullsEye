@@ -24,17 +24,19 @@ class ArrowManager
 	public static var mFiringPosition:FlxPoint;
 	private static var mArrowPool:ObjectPool<Arrow>;
 	private static var mActiveArrow:Array<Arrow>;
+	private static var mHitArrow:Array<Arrow>;
 	private static var mCurrentArrow:Int = 0;
 	private static var mMaxArrow:Int = 1;
 	private static var mArrowSpeed:Int;
 
 	public static function init():Void
 	{
-		mGroup = new FlxGroup();
-		mActiveArrow = new Array<Arrow>();
-		mArrowPool = new ObjectPool<Arrow>(50, createArrow);
+		mGroup 			= new FlxGroup();
+		mActiveArrow 	= new Array<Arrow>();
+		mHitArrow		= new Array<Arrow>();
+		mArrowPool 		= new ObjectPool<Arrow>(50, createArrow);
 		mFiringPosition = new FlxPoint();
-		mArrowSpeed = 400;
+		mArrowSpeed 	= 400;
 	
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.ARROW_FIRED, onFire);
@@ -102,7 +104,14 @@ class ArrowManager
 	private static function onOut(evt:Int, params:Dynamic):Void
 	{
 		mCurrentArrow += 1;
+		//remove actove arrpw 
 		mActiveArrow.remove(params.object);
+		//we hit something lor.
+		if(!params.object.mCanHit)
+		{
+			mHitArrow.remove(params.object);
+		}
+		
 		params.object.mState = Arrow.IDLE;
 		params.object.kill();
 	}
@@ -119,9 +128,9 @@ class ArrowManager
 	private static function onSpeedUp(evt:Int, params:Dynamic):Void
 	{
 		//Reduce the max and reset combo
-		for (count in 0 ... mActiveArrow.length)
+		for (count in 0 ... mHitArrow.length)
 		{
-			mActiveArrow[count].velocity.y = params.speed;
+			mHitArrow[count].velocity.y = params.speed;
 		}
 	}
 	
@@ -135,15 +144,6 @@ class ArrowManager
 	{
 		var BasicArrow:Arrow = cast(_arrow, Arrow);
 		BasicArrow.mState = Arrow.IDLE;
-		
-		if (BasicArrow.mCanHit)
-		{
-			BasicArrow.mCanHit = false;
-			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
-															  arrow:_arrow,
-															  object:_object } );												  
-		}
-		
 	}
 	
 	private static function onArrowHit(_arrow:FlxObject, _object:FlxObject):Void
@@ -151,9 +151,11 @@ class ArrowManager
 		var BasicArrow:Arrow = cast(_arrow, Arrow);
 		BasicArrow.mState = Arrow.HIT;
 		
+		//we can hit stuff with this arrow
 		if (BasicArrow.mCanHit)
 		{
 			BasicArrow.mCanHit = false;
+			mHitArrow.push(BasicArrow);
 			ScoreManager.increaseCombo();
 			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
 															  arrow:_arrow,
@@ -167,13 +169,7 @@ class ArrowManager
 		GlobalGameData.arrowNoLevel += 1;
 		mMaxArrow = GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).data;
 	}
-	
-	//public static function increaseUpgradeSpeed():Void
-	//{
-		//GlobalGameData.arrowSpeedLevel += 1;
-		//mArrowSpeed = GameDataManager.mArrowSpeedMap.get(GlobalGameData.arrowSpeedLevel).data;
-	//}
-	
+
 	public static function getMaxArrow():Int
 	{
 		return mMaxArrow;

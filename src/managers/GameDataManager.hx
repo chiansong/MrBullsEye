@@ -71,10 +71,12 @@ class GameDataManager
 	public static var mGoldChance:Int;
 	public static var mGameTimer:Float;
 	public static var mTotalTimer:Float;
+	private static var mHasStarted:Bool;
 	
 	public static function init():Void
 	{
 		EventManager.subscrible(EventType.GAME_INIT, onGameEnter);
+		EventManager.subscrible(EventType.GAMESTART, onGameStart);
 		EventManager.subscrible(EventType.GAME_OVER, onGameOver);
 		
 		//mArrowSpeedMap 	= new Map<Int,DataStats>();
@@ -107,6 +109,12 @@ class GameDataManager
 		mCriticalCount = 0;
 		mGameTimer = mTimerMap.get(GlobalGameData.timerLevel).data;
 		mTotalTimer = 0;
+		mHasStarted = false;
+	}
+	
+	private static function onGameStart(evt:Int, params:Dynamic):Void
+	{
+		mHasStarted = true;
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
@@ -119,6 +127,9 @@ class GameDataManager
 	public static function update()
 	{
 		if (GameObjectManager.mGameOver)
+			return;
+		
+		if (!mHasStarted)
 			return;
 		
 		mGameTimer -= FlxG.elapsed;

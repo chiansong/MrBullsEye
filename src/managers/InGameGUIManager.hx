@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
+import flixel.util.FlxPoint;
 import openfl.Assets;
 import states.MenuState;
 import states.ShopState;
@@ -23,6 +24,7 @@ class InGameGUIManager
 	public static var mGUIGroup2:FlxGroup; //In-Game GUI
 	public static var mGUIGroup3:FlxGroup; //Stats GUI
 	public static var mGUIGroup4:FlxGroup; //Lightning.
+	private static var mHasTrigger:Bool; //Has started the game.
 	
 	//G0
 	private static var mBackground:FlxSprite; //Background.
@@ -53,6 +55,7 @@ class InGameGUIManager
 	private static var mFinalScore:FlxText;
 	public static var mUpgradeShop:FlxButton;
 	public static var mResultBackground:FlxSprite;
+	public static var mCountdownTimer:FlxSprite;
 	
 	//G4
 	private static var mLighting:FlxSprite;
@@ -80,6 +83,7 @@ class InGameGUIManager
 		
 		EventManager.subscrible(EventType.GAME_OVER, onGameOver);
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
+		EventManager.subscrible(EventType.GAMESTART, onGameStart);
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
 		
 		//Add score and time
@@ -119,10 +123,22 @@ class InGameGUIManager
 		mAddedTimer = new FlxText(mTimer.x, mTimer.y + 45, 100, "", 20);
 		mGUIGroup2.add(mAddedTimer);
 		
+		//Countdown Timer
+		mCountdownTimer = new FlxSprite();
+		mCountdownTimer.loadGraphic(Assets.getBitmapData("game/timecounter.png"), true, false, 82, 130);
+		mCountdownTimer.animation.add("play", [0, 1, 2], 1, false);
+		mCountdownTimer.setPosition(FlxG.width / 2 - mCountdownTimer.width / 2,
+									FlxG.height / 2 - mCountdownTimer.height / 2);
+		mGUIGroup2.add(mCountdownTimer);
+		
 		//Hide some stuff
 		mCombo.alpha = 0;
 		mAddedScore.alpha = 0;
 		mAddedTimer.alpha = 0;
+		
+		mTimer.alpha = 0;
+		mNumberOfArrowLeft.alpha = 0;
+		mScore.alpha = 0;
 	}
 	
 	//Text after a game
@@ -267,6 +283,13 @@ class InGameGUIManager
 		EventManager.triggerEvent(EventType.ENTER_SHOP);
 	}
 	
+	private static function onGameStart(evt:Int, params:Dynamic):Void
+	{
+		mTimer.alpha = 1;
+		mNumberOfArrowLeft.alpha = 1;
+		mScore.alpha = 1;
+	}
+	
 	private static function onShopEnter(evt:Int, params:Dynamic):Void
 	{
 		mGUIGroup2.visible = false;
@@ -278,6 +301,10 @@ class InGameGUIManager
 		mGUIGroup2.visible = true;
 		mGUIGroup3.visible = false;
 		mUpgradeShop.kill();
+		
+		mHasTrigger = false;
+		mCountdownTimer.revive();
+		mCountdownTimer.animation.play("play");
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
@@ -332,5 +359,38 @@ class InGameGUIManager
 	public static function update():Void
 	{
 		mTimer.text = Std.string(Std.int(GameDataManager.mGameTimer));
+		
+		if (!mHasTrigger && mCountdownTimer.animation.finished)
+		{
+			mHasTrigger = true;
+			mCountdownTimer.kill();
+			EventManager.triggerEvent(EventType.GAMESTART);
+		}
+	}
+	
+	public static function getDoorPosition(type:Int, what:Int):Float
+	{
+		switch(type)
+		{
+			case 1:
+			if (what == 1)
+				return mDoor1.x + mDoor1.width/2.5;
+			else
+				return mDoor1.y;
+		
+			case 2:
+			if (what == 1)
+				return mDoor2.x + mDoor2.width/2.5;
+			else
+				return mDoor2.y;
+			
+			case 3:
+			if (what == 1)
+				return mDoor3.x + mDoor2.width/2.5;
+			else
+				return mDoor3.y;
+		}
+		
+		return 0;
 	}
 }

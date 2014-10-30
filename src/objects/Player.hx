@@ -48,6 +48,12 @@ class Player extends GameObject
 			animation.pause();
 			return;
 		}
+		
+		if (!GameObjectManager.mCanStart)
+		{
+			return;
+		}
+		
 		//Shoot it.
 		if (KeyBinding.justPressed["click"]())
 		{

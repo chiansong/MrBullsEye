@@ -146,6 +146,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("shop/upgrade.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("shop/upgradegrid.png", __ASSET__shop_upgradegrid_png);
 		type.set ("shop/upgradegrid.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("game/counter.psd", __ASSET__game_counter_psd);
+		type.set ("game/counter.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("game/timecounter.png", __ASSET__game_timecounter_png);
+		type.set ("game/timecounter.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("mainmenu/background.png", __ASSET__mainmenu_background_png);
 		type.set ("mainmenu/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("mainmenu/background.psd", __ASSET__mainmenu_background_psd);
@@ -231,6 +235,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("shop/upgrade.png", "image", "shop/upgrade.png");
 		addExternal("shop/upgrade.psd", "binary", "shop/upgrade.psd");
 		addExternal("shop/upgradegrid.png", "image", "shop/upgradegrid.png");
+		addExternal("game/counter.psd", "binary", "game/counter.psd");
+		addExternal("game/timecounter.png", "image", "game/timecounter.png");
 		addExternal("mainmenu/background.png", "image", "mainmenu/background.png");
 		addExternal("mainmenu/background.psd", "binary", "mainmenu/background.psd");
 		addExternal("mainmenu/backgroundray.png", "image", "mainmenu/backgroundray.png");
@@ -416,6 +422,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("shop/upgradegrid.png", __ASSET__shop_upgradegrid_png);
 		type.set ("shop/upgradegrid.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("game/counter.psd", __ASSET__game_counter_psd);
+		type.set ("game/counter.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("game/timecounter.png", __ASSET__game_timecounter_png);
+		type.set ("game/timecounter.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("mainmenu/background.png", __ASSET__mainmenu_background_png);
 		type.set ("mainmenu/background.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -1093,6 +1105,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__shop_upgrade_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__shop_upgrade_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__shop_upgradegrid_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__game_counter_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__game_timecounter_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__mainmenu_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__mainmenu_background_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__mainmenu_backgroundray_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1109,6 +1123,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
 
 
 
@@ -1238,6 +1254,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/shop/upgrade.png") class __ASSET__shop_upgrade_png extends flash.display.BitmapData {}
 @:file("assets/texture/shop/upgrade.psd") class __ASSET__shop_upgrade_psd extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/shop/upgradegrid.png") class __ASSET__shop_upgradegrid_png extends flash.display.BitmapData {}
+@:file("assets/texture/game/counter.psd") class __ASSET__game_counter_psd extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/game/timecounter.png") class __ASSET__game_timecounter_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/mainmenu/background.png") class __ASSET__mainmenu_background_png extends flash.display.BitmapData {}
 @:file("assets/texture/mainmenu/background.psd") class __ASSET__mainmenu_background_psd extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/mainmenu/backgroundray.png") class __ASSET__mainmenu_backgroundray_png extends flash.display.BitmapData {}

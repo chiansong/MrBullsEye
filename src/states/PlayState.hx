@@ -13,6 +13,7 @@ import managers.InGameGUIManager;
 import managers.ScoreManager;
 import managers.ShopManager;
 import objects.Player;
+import utils.Globals;
 import utils.KeyBinding;
 
 /////////////////////////*
@@ -46,13 +47,13 @@ class PlayState extends FlxState
 	{
 		KeyBinding.init();
 		EventManager.init();
-		ArrowManager.init();
-		GameObjectManager.init();
 		DisplayManager.init();
-		ScoreManager.init();
-		InGameGUIManager.init();
+		ArrowManager.init();
 		GameDataManager.init();
-		
+		InGameGUIManager.init();
+		GameObjectManager.init();
+		ScoreManager.init();
+	
 		player = new Player();
 		reset();
 	
@@ -70,8 +71,10 @@ class PlayState extends FlxState
 	public function reset():Void
 	{
 		player.init();
+		Globals.player = player;
+		//set the player slightly towards the bottom.
 		player.setPosition(FlxG.width / 2 - FlxG.width / 2.75, 
-						  (FlxG.height / 2) + player.height / 3);
+						  (FlxG.height / 2) + (FlxG.height / 10) + player.height / 3);
 		ArrowManager.setPosition(player.x + player.width / 2 , 
 								 player.y + player.height / 2);
 	}

@@ -11,6 +11,7 @@ class EventType
 	public static inline var GAME_INIT:Int     	= 1000;
 	public static inline var GAME_OVER:Int     	= 1001;
 	//IN-GAME
+	public static inline var GAMESTART:Int		= 5000;
 	public static inline var TIMEADDED:Int     	= 0501;
 	public static inline var SCOREADDED:Int     = 0502;
 	public static inline var COMBOADDED:Int		= 0503;

@@ -14,6 +14,7 @@ import objects.GameObject;
 import objects.GoldBag;
 import openfl.Assets;
 import utils.DisplayLayers;
+import utils.Globals;
 import utils.MathUtil;
 import utils.ObjectPool;
 
@@ -35,23 +36,8 @@ class GameInfoStats
 
 class GameData
 {
-	public function new(_time:Float,
-						_speedY:Int,
-						_maxPoint:Int,	
-						_gold:Int,
-						_lvl2Chance:Int,	
-						_lvl3Chance:Int,
-						_lvl4Chance:Int,	
-						_lvl5Chance:Int)
+	public function new()
 	{
-		time     	= _time;
-		speedY	    = _speedY;
-		maxPoint	= _maxPoint;
-		gold		= _gold;
-		lvl2Chance	= _lvl2Chance;
-		lvl3Chance	= _lvl3Chance;
-		lvl4Chance	= _lvl4Chance;
-		lvl5Chance	= _lvl5Chance;
 	}
 	
 	public var gold:Int;
@@ -63,6 +49,9 @@ class GameData
 	public var lvl3Chance:Int;
 	public var lvl4Chance:Int;
 	public var lvl5Chance:Int;
+	public var openDoor1:Int;
+	public var openDoor2:Int;
+	public var openDoor3:Int;
 }
  
 class GameObjectManager
@@ -82,6 +71,7 @@ class GameObjectManager
 	private static var mMovementSpeedY:Float;
 	private static var mGameLevel:Int;
 	public static var mGameOver:Bool;
+	public static var mCanStart:Bool;
 	
 	//The 3 Possible Position that are used to spawn.
 	private static var mPosition1:FlxPoint;
@@ -104,9 +94,9 @@ class GameObjectManager
 		
 		setPosition(FlxG.width - 3 * FlxG.width / 8, 20);
 		
-		mPosition1.set(FlxG.width - 3 * FlxG.width / 8, 20);
-		mPosition2.set(FlxG.width - 2 * FlxG.width / 8, 20);
-		mPosition3.set(FlxG.width - FlxG.width / 8, 20);
+		mPosition1.set(InGameGUIManager.getDoorPosition(1,1), InGameGUIManager.getDoorPosition(1,2));
+		mPosition2.set(InGameGUIManager.getDoorPosition(2,1), InGameGUIManager.getDoorPosition(2,2));
+		mPosition3.set(InGameGUIManager.getDoorPosition(3,1), InGameGUIManager.getDoorPosition(3,2));
 		
 		mPreviousMovementSpeedY = 0;
 		mMovementSpeedY = 100;
@@ -124,6 +114,12 @@ class GameObjectManager
 		EventManager.subscrible(EventType.OBJECT_OUT, onOut);
 		EventManager.subscrible(EventType.SPEED_UP, onSpeedUp);
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
+		EventManager.subscrible(EventType.GAMESTART, onGameStart);
+	}
+	
+	private static function onGameStart(evt:Int, params:Dynamic):Void
+	{
+		mCanStart = true;
 	}
 	
 	private static function createBullsEye():BullsEye
@@ -164,6 +160,7 @@ class GameObjectManager
 		mLanuchTime = 1;
 		mLanuchTimer = 0;
 		
+		mCanStart = false;
 		mGameOver = false;
 	}
 	
@@ -196,14 +193,33 @@ class GameObjectManager
 	
 	private static function onLanuch(evt:Int, params:Dynamic):Void
 	{
-		switch(MathUtil.getRandomBetween(0, 3))
+		var chosen:Int;
+		while (true)
 		{
-			case 0:
-				mStartingPosition = mPosition1;
-			case 1:
-				mStartingPosition = mPosition2;
-			case 2:
-				mStartingPosition = mPosition3;
+			chosen = MathUtil.getRandomBetween(0, 3);
+			trace(chosen);
+
+			switch(chosen)
+			{
+				case 0:
+					if (mGameDataMap.get(mGameLevel).openDoor1 == 1)
+					{
+						mStartingPosition = mPosition1;
+						break;
+					}
+				case 1:
+					if (mGameDataMap.get(mGameLevel).openDoor2 == 1)
+					{
+						mStartingPosition = mPosition2;
+						break;
+					}
+				case 2:
+					if (mGameDataMap.get(mGameLevel).openDoor3 == 1)
+					{
+						mStartingPosition = mPosition3;
+						break;
+					}
+			}
 		}
 		
 		//Grab an Apple
@@ -243,8 +259,11 @@ class GameObjectManager
 		//Level 1
 		if (MathUtil.getRandomBetween(0, 100) < mGameDataMap.get(mGameLevel).lvl2Chance)
 			value = 1;
-		//Level 0
+		
+		//set base on the value then 
 		bulleye.setBullEyes(value);	
+		bulleye.setStartingPosition(mStartingPosition.y, 
+									Globals.player.y); 
 		bulleye.activate(mStartingPosition, 0, mMovementSpeedY);
 		mActiveArray.push(bulleye);
 	}
@@ -254,6 +273,9 @@ class GameObjectManager
 		if (mGameOver)
 			return;
 		
+		if (!mCanStart)
+			return;
+			
 		mLanuchTimer += FlxG.elapsed;
 		if (mLanuchTimer > mLanuchTime)
 		{
@@ -278,6 +300,7 @@ class GameObjectManager
 		{
 			mGameLevel += 1;
 		}
+		
 		mLanuchTime = mGameDataMap.get(mGameLevel).time;
 		mMovementSpeedY = mGameDataMap.get(mGameLevel).speedY;
 		
@@ -294,21 +317,26 @@ class GameObjectManager
 		//Let Grab the INFO
 		for (data in gameDataXML.nodes.level)
 		{
+			//Get the data for what level it is.
 			var level:Int = Std.parseInt(data.innerData);
-			var time:Float = Std.parseFloat(data.att.time);
-			var speedY:Int = Std.parseInt(data.att.speedY);
-			var max:Int = Std.parseInt(data.att.max);
-			var gold:Int = Std.parseInt(data.att.gold);
-			//Get the Levels
-			var lvl2:Int = Std.parseInt(data.att.lvl2);
-			var lvl3:Int = Std.parseInt(data.att.lvl3);
-			var lvl4:Int = Std.parseInt(data.att.lvl4);
-			var lvl5:Int = Std.parseInt(data.att.lvl5);
-		
-			var dataStats:GameData = new GameData(time, speedY, max, gold,
-												  lvl2, lvl3, lvl4, lvl5);
-											
 			
+			var dataStats:GameData = new GameData();
+			
+			dataStats.time 		= Std.parseFloat(data.att.time);
+			dataStats.speedY	= Std.parseInt(data.att.speedY);
+			dataStats.maxPoint 	= Std.parseInt(data.att.max);
+			dataStats.gold		= Std.parseInt(data.att.gold);
+			//Get the Levels
+			dataStats.lvl2Chance = Std.parseInt(data.att.lvl2);
+			dataStats.lvl3Chance = Std.parseInt(data.att.lvl3);
+			dataStats.lvl4Chance = Std.parseInt(data.att.lvl4);
+			dataStats.lvl5Chance = Std.parseInt(data.att.lvl5);
+			
+			//Game Data to decide where can be spawn.
+			dataStats.openDoor1 = Std.parseInt(data.att.door1);
+			dataStats.openDoor2 = Std.parseInt(data.att.door2);
+			dataStats.openDoor3 = Std.parseInt(data.att.door3);
+	
 			mGameDataMap.set(level, dataStats);
 		}
 	}

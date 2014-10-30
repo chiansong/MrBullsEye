@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<data>
-<level time="1.5" 	speedY="100" max="1" 	gold="5" 	lvl2="0" 	lvl3="0" 	lvl4="0" 	lvl5="0">1</level>
-<level time="1.45" 	speedY="115" max="5" 	gold="10" 	lvl2="5" 	lvl3="0" 	lvl4="0" 	lvl5="0">2</level>
-<level time="1.45" 	speedY="130" max="20" 	gold="20" 	lvl2="5" 	lvl3="0" 	lvl4="0" 	lvl5="0">3</level>
-<level time="1.35" 	speedY="145" max="250" 	gold="35" 	lvl2="15" 	lvl3="5" 	lvl4="0" 	lvl5="0">4</level>
-<level time="1.35" 	speedY="120" max="500" 	gold="50" 	lvl2="20" 	lvl3="10" 	lvl4="0" 	lvl5="0">5</level>
-<level time="1.25" 	speedY="125" max="1000" gold="100" 	lvl2="30" 	lvl3="10" 	lvl4="5" 	lvl5="0">6</level>
-<level time="1.25" 	speedY="130" max="2500" gold="250" 	lvl2="35" 	lvl3="15" 	lvl4="5" 	lvl5="0">7</level>
-<level time="1.25" 	speedY="135" max="5000" gold="500" 	lvl2="35" 	lvl3="20" 	lvl4="10" 	lvl5="0">8</level>
-<level time="1.25" 	speedY="145" max="7500" gold="750" 	lvl2="35" 	lvl3="20" 	lvl4="10" 	lvl5="0">9</level>
-<level time="1.25" 	speedY="150" max="7500" gold="750" 	lvl2="35" 	lvl3="20" 	lvl4="10" 	lvl5="0">10</level>
+<data>                                                                                                            
+<level time="1.75" 	speedY="80"  max="10" 	gold="5" 	lvl2="0" 	lvl3="0" 	lvl4="0" 	lvl5="0"	door1="0" door2="1" door3="0">1</level>
+<level time="1.70" 	speedY="90"  max="25" 	gold="10" 	lvl2="3" 	lvl3="0" 	lvl4="0" 	lvl5="0"	door1="0" door2="0" door3="1">2</level>
+<level time="1.65" 	speedY="100" max="50" 	gold="20" 	lvl2="5" 	lvl3="0" 	lvl4="0" 	lvl5="0"	door1="1" door2="0" door3="0">3</level>
+<level time="1.35" 	speedY="145" max="250" 	gold="35" 	lvl2="15" 	lvl3="5" 	lvl4="0" 	lvl5="0"	door1="1" door2="1" door3="0">4</level>
+<level time="1.35" 	speedY="120" max="500" 	gold="50" 	lvl2="20" 	lvl3="10" 	lvl4="0" 	lvl5="0"	door1="0" door2="1" door3="1">5</level>
+<level time="1.25" 	speedY="125" max="1000" gold="100" 	lvl2="30" 	lvl3="10" 	lvl4="5" 	lvl5="0"	door1="1" door2="0" door3="1">6</level>
+<level time="1.25" 	speedY="130" max="2500" gold="250" 	lvl2="35" 	lvl3="15" 	lvl4="5" 	lvl5="0"	door1="1" door2="1" door3="1">7</level>
+<level time="1.25" 	speedY="135" max="5000" gold="500" 	lvl2="35" 	lvl3="20" 	lvl4="10" 	lvl5="0"	door1="1" door2="1" door3="1">8</level>
+<level time="1.25" 	speedY="145" max="7500" gold="750" 	lvl2="35" 	lvl3="20" 	lvl4="10" 	lvl5="0"	door1="1" door2="1" door3="1">9</level>
+<level time="1.25" 	speedY="150" max="7500" gold="750" 	lvl2="35" 	lvl3="20" 	lvl4="10" 	lvl5="0"	door1="1" door2="1" door3="1">10</level>
 </data>

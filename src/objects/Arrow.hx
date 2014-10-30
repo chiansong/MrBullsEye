@@ -68,7 +68,7 @@ class Arrow extends FlxSprite
 		//object.mArrow = params.arrow;
 		velocity.x = object.velocity.x;
 		velocity.y = object.velocity.y;
-		
+
 		if (object.mType == ObjectType.APPLE)
 			EventManager.triggerEvent(EventType.APPLE_HIT, {apple:object, arrow:this});
 		else if (object.mType == ObjectType.BULLSEYE)	
@@ -83,11 +83,11 @@ class Arrow extends FlxSprite
 			return;
 		
 		super.update();
-
+			
 		//Get Previous Position
 		mPreviousPosition.x = x;
 		mPreviousPosition.y = y;
-		
+
 		//Set the next Position
 		mCurrentPosition.x = x + velocity.x * FlxG.elapsed;
 		mCurrentPosition.y = y;

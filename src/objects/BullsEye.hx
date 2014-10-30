@@ -44,18 +44,23 @@ class BullsEye extends GameObject
 		EventManager.subscrible(EventType.BULLSEYE_HIT, onHit);
 	}
 	
+	//Set the bulleyes that play with different animation for each level
 	public function setBullEyes(level:Int)
 	{
+		//Play a different animation. Add the score.
 		animation.play("level" + level);
 		mScore = level + 1;
 		
+		//Set the size.
 		mStartingScale = 0.25;
 		mShootingScale = 1;
-		
-		mStartingPositionY = 50;
-		mShootingPositionY = FlxG.height / 2 + height;
-		
 		scale.x = scale.y = 0;
+	}
+	
+	public function setStartingPosition(start:Float, end:Float)
+	{
+		mStartingPositionY = start;
+		mShootingPositionY = end;
 	}
 	
 	public function onHit(evt:Int, params:Dynamic):Void

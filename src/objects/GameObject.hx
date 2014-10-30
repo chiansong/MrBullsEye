@@ -72,7 +72,7 @@ class GameObject extends FlxSprite
 	
 	public function SetScaleBasedOnPosition():Void
 	{
-		scale.x = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * y;
-		scale.y = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * y;
+		scale.x = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * (y - mStartingPositionY);
+		scale.y = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * (y - mStartingPositionY);
 	}
 }
