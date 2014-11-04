@@ -2,6 +2,7 @@ package managers;
 import event.EventType;
 import haxe.xml.Fast;
 import openfl.Assets;
+import utils.StatusStringPool;
 
 /**
  * ...
@@ -68,6 +69,8 @@ class ScoreManager
 		mScore += mMultipler * Std.int(params.time);
 		EventManager.triggerEvent(EventType.SCOREADDED, { score: (mMultipler * params.time) } );
 		InGameGUIManager.mScore.text = Std.string(mScore);
+		
+		StatusStringPool.setText("XXX in 1");
 	}
 	
 	public static function instantAddScore(score:Int):Void

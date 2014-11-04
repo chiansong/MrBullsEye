@@ -15,6 +15,7 @@ import managers.ShopManager;
 import objects.Player;
 import utils.Globals;
 import utils.KeyBinding;
+import utils.StatusStringPool;
 
 /////////////////////////*
 //..					//
@@ -53,7 +54,8 @@ class PlayState extends FlxState
 		InGameGUIManager.init();
 		GameObjectManager.init();
 		ScoreManager.init();
-	
+		StatusStringPool.init();
+		
 		player = new Player();
 		reset();
 	
