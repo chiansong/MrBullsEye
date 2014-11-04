@@ -48,6 +48,7 @@ class ScoreManager
 		mCurrentPoint = 1;
 		
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
+		EventManager.subscrible(EventType.MULTISHOT, onMultiScore);
 		
 		parseBonusData(Assets.getText("data/bonusdata.xml"));
 	}
@@ -59,6 +60,14 @@ class ScoreManager
 		mCombo = 0;
 		mBonusLevel = 1;
 		mCurrentPoint = 1;
+	}
+	
+	private static function onMultiScore(evt:Int, params:Dynamic):Void
+	{
+		//Based on how many multi shot it is.
+		mScore += mMultipler * Std.int(params.time);
+		EventManager.triggerEvent(EventType.SCOREADDED, { score: (mMultipler * params.time) } );
+		InGameGUIManager.mScore.text = Std.string(mScore);
 	}
 	
 	public static function instantAddScore(score:Int):Void

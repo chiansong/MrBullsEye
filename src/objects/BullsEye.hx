@@ -16,7 +16,9 @@ import openfl.Assets;
  */
 class BullsEye extends GameObject
 {	
-	private var mScore = 1;
+	private var mScore:Int = 1; //how much score they are worth
+	private var mNoOfHit:Int = 0; //for multiple hits
+	
 	public function new() 
 	{
 		super();
@@ -55,6 +57,9 @@ class BullsEye extends GameObject
 		mStartingScale = 0.25;
 		mShootingScale = 1;
 		scale.x = scale.y = 0;
+		
+		//reset the number of hit
+		mNoOfHit = 0;
 	}
 	
 	public function setStartingPosition(start:Float, end:Float)
@@ -76,6 +81,13 @@ class BullsEye extends GameObject
 		{
 			score = mScore * 2;
 			GameDataManager.mCriticalCount += 1;
+		}
+		
+		mNoOfHit += 1;
+		//if we hit more than 1.
+		if (mNoOfHit > 1)
+		{
+			EventManager.triggerEvent(EventType.MULTISHOT, { time:mNoOfHit } );
 		}
 		
 		//Add the score

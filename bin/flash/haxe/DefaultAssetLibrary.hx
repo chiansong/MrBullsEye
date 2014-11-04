@@ -86,6 +86,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("background/ring.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/spotlight.png", __ASSET__background_spotlight_png);
+		type.set ("background/spotlight.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("background/spotlight.psd", __ASSET__background_spotlight_psd);
+		type.set ("background/spotlight.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("background/withrailing.psd", __ASSET__background_withrailing_psd);
 		type.set ("background/withrailing.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/apple.png", __ASSET__character_apple_png);
@@ -205,6 +209,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("background/result.png", "image", "background/result.png");
 		addExternal("background/ring.png", "image", "background/ring.png");
 		addExternal("background/splashscreen.png", "image", "background/splashscreen.png");
+		addExternal("background/spotlight.png", "image", "background/spotlight.png");
+		addExternal("background/spotlight.psd", "binary", "background/spotlight.psd");
 		addExternal("background/withrailing.psd", "binary", "background/withrailing.psd");
 		addExternal("character/apple.png", "image", "character/apple.png");
 		addExternal("character/arrow.png", "image", "character/arrow.png");
@@ -332,6 +338,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("background/splashscreen.png", __ASSET__background_splashscreen_png);
 		type.set ("background/splashscreen.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/spotlight.png", __ASSET__background_spotlight_png);
+		type.set ("background/spotlight.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("background/spotlight.psd", __ASSET__background_spotlight_psd);
+		type.set ("background/spotlight.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("background/withrailing.psd", __ASSET__background_withrailing_psd);
 		type.set ("background/withrailing.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
@@ -1075,6 +1087,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__background_result_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_ring_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__background_splashscreen_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_spotlight_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__background_spotlight_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__background_withrailing_psd extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_apple_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_arrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1196,6 +1210,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 #elseif (windows || mac || linux)
 
 
@@ -1224,6 +1240,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/background/result.png") class __ASSET__background_result_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/ring.png") class __ASSET__background_ring_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/background/splashscreen.png") class __ASSET__background_splashscreen_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/background/spotlight.png") class __ASSET__background_spotlight_png extends flash.display.BitmapData {}
+@:file("assets/texture/background/spotlight.psd") class __ASSET__background_spotlight_psd extends flash.utils.ByteArray {}
 @:file("assets/texture/background/withrailing.psd") class __ASSET__background_withrailing_psd extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/apple.png") class __ASSET__character_apple_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/arrow.png") class __ASSET__character_arrow_png extends flash.display.BitmapData {}

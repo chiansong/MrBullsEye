@@ -37,6 +37,8 @@ class InGameGUIManager
 	private static var mDoor1:FlxSprite;
 	private static var mDoor2:FlxSprite;
 	private static var mDoor3:FlxSprite;
+	private static var mLight1:FlxSprite;
+	private static var mLight2:FlxSprite;
 	
 	//G2
 	public static var mScore:FlxText;
@@ -45,6 +47,7 @@ class InGameGUIManager
 	public static var mCombo:FlxText;
 	public static var mTimer:FlxText;
 	public static var mAddedTimer:FlxText;
+	public static var mLevelUpText:FlxText;
 	
 	//G3 After Game Text.
 	public static var mGoldEarned:FlxText;
@@ -85,6 +88,7 @@ class InGameGUIManager
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.GAMESTART, onGameStart);
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
+		EventManager.subscrible(EventType.LEVELUP, onLevelUp);
 		
 		//Add score and time
 		EventManager.subscrible(EventType.SCOREADDED, onAddedScore);
@@ -131,11 +135,20 @@ class InGameGUIManager
 									FlxG.height / 2 - mCountdownTimer.height / 2);
 		mGUIGroup2.add(mCountdownTimer);
 		
+		//Level up text
+		mLevelUpText = new FlxText(FlxG.width / 2, 0, 300, "", 64);
+		mLevelUpText.width = FlxG.width;
+		mLevelUpText.alignment = "center";
+		mGUIGroup2.add(mLevelUpText);
+		
 		//Hide some stuff
+		//Fading alpha
 		mCombo.alpha = 0;
 		mAddedScore.alpha = 0;
 		mAddedTimer.alpha = 0;
+		mLevelUpText.alpha = 0;
 		
+		//Perm animation.
 		mTimer.alpha = 0;
 		mNumberOfArrowLeft.alpha = 0;
 		mScore.alpha = 0;
@@ -267,6 +280,23 @@ class InGameGUIManager
 		mGUIGroup1.add(mDoor1);
 		mGUIGroup1.add(mDoor2);
 		mGUIGroup1.add(mDoor3);
+		
+		mLight1 = new FlxSprite();
+		mLight1.loadGraphic(Assets.getBitmapData("background/spotlight.png"), 
+							true, false, 350, 400);
+		mLight1.setPosition(FlxG.width / 2 - mLight1.width / 2 - mLight1.width / 4, 0);
+		mLight1.animation.add("play", [0, 1, 2, 3, 4, 3, 2, 1, 9, 8, 7, 6, 5, 6, 7, 8], 6);
+		mLight1.alpha = 0.25;
+		
+		mLight2 = new FlxSprite();
+		mLight2.loadGraphic(Assets.getBitmapData("background/spotlight.png"), 
+							true, false, 350, 400);
+		mLight2.setPosition(FlxG.width / 2 - mLight1.width / 2 + mLight1.width / 4, 0);
+		mLight2.animation.add("play", [9, 8, 7, 6, 5, 6, 7, 8, 0, 1, 2, 3, 4, 3, 2, 1], 6);
+		mLight2.alpha = 0.25;
+		
+		mGUIGroup1.add(mLight1);
+		mGUIGroup1.add(mLight2);
 	}
 	
 	//Set lighting for player
@@ -304,7 +334,10 @@ class InGameGUIManager
 		
 		mHasTrigger = false;
 		mCountdownTimer.revive();
+		
 		mCountdownTimer.animation.play("play");
+		mLight1.animation.play("play");
+		mLight2.animation.play("play");
 	}
 	
 	private static function onGameOver(evt:Int, params:Dynamic):Void
@@ -335,6 +368,25 @@ class InGameGUIManager
 		mAddedTimer.alpha = 1;
 		mAddedTimer.text = "+" + params.time + "s";
 		FlxTween.tween(mAddedTimer, {alpha:0}, 1.5);
+	}
+	
+	private static function onLevelUp(evt:Int, params:Dynamic):Void
+	{
+		//Setup the level
+		mLevelUpText.text = "Level " + params.level;
+		
+		//Set it at the far left 
+		mLevelUpText.x = 0 - mLevelUpText.width;
+		mLevelUpText.y = FlxG.height / 4;
+		mLevelUpText.alpha = 1;
+		
+		//Move it
+		FlxTween.tween(mLevelUpText, { x: 0 }, 0.5, { ease:FlxEase.bounceInOut, complete:startBounceOut} );
+	}
+	
+	private static function startBounceOut(tween:FlxTween):Void
+	{
+		FlxTween.tween(mLevelUpText, { x: FlxG.width }, 0.5, { ease:FlxEase.bounceInOut , startDelay:1} );
 	}
 	
 	private static function onAddedScore(evt:Int, params:Dynamic):Void

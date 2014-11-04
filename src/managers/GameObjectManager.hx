@@ -299,6 +299,9 @@ class GameObjectManager
 		if (ScoreManager.mScore > mGameDataMap.get(mGameLevel).maxPoint)
 		{
 			mGameLevel += 1;
+						
+			//Level Up, 
+			EventManager.triggerEvent(EventType.LEVELUP, { level:mGameLevel } );
 		}
 		
 		mLanuchTime = mGameDataMap.get(mGameLevel).time;
