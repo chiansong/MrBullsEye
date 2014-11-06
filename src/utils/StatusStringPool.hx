@@ -73,28 +73,32 @@ class StatusStringPool
 		//set status text.
 		mActiveArray.push(statusText);
 		FlxTween.tween(statusText, { x:FlxG.width - Std.int(FlxG.width/2.25) }, 0.25, { ease:FlxEase.backInOut} );
-		FlxTween.tween(statusText, { alpha:0 }, 0.5, { startDelay:0.75} );
+		FlxTween.tween(statusText, { alpha:0 }, 0.5, { startDelay:0.75 ,complete:timeToDie} ).userData = statusText;
+	}
+	
+	private static function timeToDie(tween:FlxTween):Void
+	{
+		mActiveArray.remove(tween.userData);
 	}
 	
 	//Assuming the one
 	private static function moveDown(text:FlxText, num:Int):Void
 	{
-		var moveBase:Float = 25;
-		moveBase *= num;
-		FlxTween.tween(text, { y:mBaseY + moveBase }, 0.15);
+		var count:Int = (mActiveArray.length - num) * 25;
+		FlxTween.tween(text, { y:mBaseY + count }, 0.15);
 	}
 	
 	//Check if it is visible then kill and remove it.
-	public static function update():Void
-	{
-		//Move and kill them when it is dead
-		for (count in 0 ... mActiveArray.length)
-		{
-			if (mActiveArray[count].alpha == 0)
-			{
-				mActiveArray[count].y = mBaseY;
-				mActiveArray[count].kill();
-			}
-		}
-	}
+	//public static function update():Void
+	//{
+		////Move and kill them when it is dead
+		//for (count in 0 ... mActiveArray.length)
+		//{
+			//if (mActiveArray[count].alpha == 0)
+			//{
+				//mActiveArray[count].y = mBaseY;
+				//mActiveArray[count].kill();
+			//}
+		//}
+	//}
 }

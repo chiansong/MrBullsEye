@@ -9,6 +9,7 @@ import managers.GameDataManager;
 import managers.GameObjectManager;
 import managers.ScoreManager;
 import openfl.Assets;
+import utils.StatusStringPool;
 
 /**
  * ...
@@ -81,6 +82,7 @@ class BullsEye extends GameObject
 		{
 			score = mScore * 2;
 			GameDataManager.mCriticalCount += 1;
+			StatusStringPool.setText("B-U-L-L-S-E-Y-E !");
 		}
 		
 		mNoOfHit += 1;

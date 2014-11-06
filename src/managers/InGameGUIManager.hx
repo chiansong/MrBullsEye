@@ -12,6 +12,7 @@ import openfl.Assets;
 import states.MenuState;
 import states.ShopState;
 import utils.DisplayLayers;
+import utils.StatusStringPool;
 
 /**
  * ...
@@ -376,13 +377,14 @@ class InGameGUIManager
 	{
 		//Setup the level
 		mLevelUpText.text = "Level " + params.level;
+		StatusStringPool.setText("Level " + params.level + " Bonus !");
 		
-		//Set it at the far left 
+		//Set it at the far left.
 		mLevelUpText.x = 0 - mLevelUpText.width;
 		mLevelUpText.y = FlxG.height / 4;
 		mLevelUpText.alpha = 1;
 		
-		//Move it
+		//Move it.
 		FlxTween.tween(mLevelUpText, { x: 0 }, 0.5, { ease:FlxEase.bounceInOut, complete:startBounceOut} );
 	}
 	
