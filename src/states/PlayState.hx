@@ -96,5 +96,6 @@ class PlayState extends FlxState
 		GameObjectManager.update();
 		InGameGUIManager.update();
 		GameDataManager.update();
+		StatusStringPool.update();
 	}
 }

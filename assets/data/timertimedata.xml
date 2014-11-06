@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 <description>"Increase Mr BullsEye's Performance Time allow you to earn more money"</description>
-<level time="30" cost="250">0</level>
-<level time="35" cost="500">1</level>
-<level time="40" cost="1000">2</level>
-<level time="45" cost="1500">3</level>
-<level time="50" cost="2500">4</level>
-<level time="55" cost="3500">5</level>
-<level time="60" cost="5000">6</level>
-<level time="65" cost="6500">7</level>
-<level time="70" cost="9000">8</level>
-<level time="75" cost="12500">9</level> 
+<level time="45" cost="250">0</level>
+<level time="50" cost="500">1</level>
+<level time="55" cost="1000">2</level>
+<level time="60" cost="1500">3</level>
+<level time="70" cost="2500">4</level>
+<level time="80" cost="3500">5</level>
+<level time="90" cost="5000">6</level>
+<level time="100" cost="6500">7</level>
+<level time="120" cost="9000">8</level>
+<level time="145" cost="12500">9</level> 
 </data>

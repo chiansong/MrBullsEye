@@ -116,7 +116,7 @@ class InGameGUIManager
 		mGUIGroup2.add(mNumberOfArrowLeft);
 		
 		//Combos
-		mCombo = new FlxText(FlxG.width - FlxG.width/2.5, FlxG.height/2 - 10, 250, 36);
+		mCombo = new FlxText(FlxG.width - 250, FlxG.height/2 - 50, 250, 42);
 		mCombo.text = Std.string(ScoreManager.mCombo);
 		mCombo.alignment = "right";
 		mGUIGroup2.add(mCombo);
@@ -340,19 +340,21 @@ class InGameGUIManager
 		mLight2.animation.play("play");
 	}
 	
+	//When it is Game Over.
 	private static function onGameOver(evt:Int, params:Dynamic):Void
 	{
 		mGUIGroup2.visible = false;
 		mGUIGroup3.visible = true;
 		mUpgradeShop.revive();
 		
+		//Tween the different properities to the screen.
 		var mStartingX:Float = FlxG.width / 3 - 250;
-		FlxTween.tween(mTimeGained, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.15});
-		FlxTween.tween(mBestCombo, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.30});
-		FlxTween.tween(mNoOfCritical, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.45});
-		FlxTween.tween(mMultiple, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.60});
-		FlxTween.tween(mFinalScore, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.75});
-		FlxTween.tween(mGoldEarned, { x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.90});
+		FlxTween.tween(mTimeGained, 	{ x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.15});
+		FlxTween.tween(mBestCombo, 		{ x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.30});
+		FlxTween.tween(mNoOfCritical, 	{ x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.45});
+		FlxTween.tween(mMultiple,	 	{ x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.60});
+		FlxTween.tween(mFinalScore, 	{ x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.75});
+		FlxTween.tween(mGoldEarned, 	{ x:mStartingX }, 0.35, {ease:FlxEase.backOut, startDelay:0.90});
 		
 		//Update the information ... remove the text in the future.
 		mTimeGained.text = "Total Time: " + (Std.int(GameDataManager.mTotalTimer));
@@ -420,22 +422,24 @@ class InGameGUIManager
 		}
 	}
 	
+	//Get the door position
 	public static function getDoorPosition(type:Int, what:Int):Float
 	{
 		switch(type)
 		{
+			//Door 1
 			case 1:
 			if (what == 1)
 				return mDoor1.x + mDoor1.width/2.5;
 			else
 				return mDoor1.y;
-		
+			//Door 2
 			case 2:
 			if (what == 1)
 				return mDoor2.x + mDoor2.width/2.5;
 			else
 				return mDoor2.y;
-			
+			//Door 3
 			case 3:
 			if (what == 1)
 				return mDoor3.x + mDoor2.width/2.5;

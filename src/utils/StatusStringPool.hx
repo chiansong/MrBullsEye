@@ -18,6 +18,7 @@ class StatusStringPool
 {
 	private static var mGroup:FlxGroup;
 	private static var mStatusPool:ObjectPool<FlxText>;
+	private static var mActiveArray:Array<FlxText>;
 	private static var mCurrentCount:Int;
 	private static var mBaseY:Float;
 	private static var mDiff:Float = 20;
@@ -26,6 +27,7 @@ class StatusStringPool
 	public static function init():Void
 	{
 		mGroup = new FlxGroup();
+		mActiveArray = new Array<FlxText>();
 		mStatusPool = new ObjectPool<FlxText>(10, createStatusText);
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 	}
@@ -33,7 +35,7 @@ class StatusStringPool
 	//Create text
 	private static function createStatusText():FlxText
 	{
-		var text = new FlxText(0, 0, Std.int(FlxG.width/3), "", 12);
+		var text = new FlxText(0, 0, Std.int(FlxG.width/2.5), "", 16);
 		text.kill();
 		mGroup.add(text);
 		return text;
@@ -48,6 +50,7 @@ class StatusStringPool
 	public static function setText(text:String):Void
 	{
 		var statusText:FlxText = mStatusPool.get();
+		statusText.alpha = 1;
 		
 		//Change the text;
 		statusText.text = text;
@@ -55,19 +58,43 @@ class StatusStringPool
 		if (mCurrentCount > 9)
 			mCurrentCount = 0;
 			
+		//Set the position
 		statusText.x = 0;
 		statusText.alignment = "right";
-		statusText.reset(FlxG.width - FlxG.width/3,
-						 getPosition(mCurrentCount));
+		statusText.reset(FlxG.width, mBaseY);
 		
+		//Move the active array
+		for (count in 0 ... mActiveArray.length)
+		{
+			moveDown(mActiveArray[count], count);
+			trace("count:"+count);
+		}
 		
-		FlxTween.tween(statusText, { x:FlxG.width/2 }, 0.50, { ease:FlxEase.elasticInOut } );
+		//set status text.
+		mActiveArray.push(statusText);
+		FlxTween.tween(statusText, { x:FlxG.width - Std.int(FlxG.width/2.25) }, 0.25, { ease:FlxEase.backInOut} );
+		FlxTween.tween(statusText, { alpha:0 }, 0.5, { startDelay:0.75} );
 	}
 	
-	private static function getPosition(count:Int):Float
+	//Assuming the one
+	private static function moveDown(text:FlxText, num:Int):Void
 	{
-		var result:Float = 0;
-		var pos:Int = count % 5;
-		return result = mBaseY + (pos * mDiff);
+		var moveBase:Float = 25;
+		moveBase *= num;
+		FlxTween.tween(text, { y:mBaseY + moveBase }, 0.15);
+	}
+	
+	//Check if it is visible then kill and remove it.
+	public static function update():Void
+	{
+		//Move and kill them when it is dead
+		for (count in 0 ... mActiveArray.length)
+		{
+			if (mActiveArray[count].alpha == 0)
+			{
+				mActiveArray[count].y = mBaseY;
+				mActiveArray[count].kill();
+			}
+		}
 	}
 }

@@ -70,7 +70,7 @@ class ScoreManager
 		EventManager.triggerEvent(EventType.SCOREADDED, { score: (mMultipler * params.time) } );
 		InGameGUIManager.mScore.text = Std.string(mScore);
 		
-		StatusStringPool.setText("XXX in 1");
+		StatusStringPool.setText(Std.int(params.time) + " in 1 Shot Bonus");
 	}
 	
 	public static function instantAddScore(score:Int):Void
@@ -84,7 +84,6 @@ class ScoreManager
 		mScore += mMultipler * _point;
 		EventManager.triggerEvent(EventType.SCOREADDED, {score: (mMultipler * _point)});
 		InGameGUIManager.mScore.text = Std.string(mScore);
-		
 	}
 	
 	public static function increaseMultipler():Void
@@ -111,6 +110,7 @@ class ScoreManager
 			//Time Added ... show it
 			EventManager.triggerEvent(EventType.TIMEADDED, {time: mBonusMap.get(mBonusLevel).time});
 			EventManager.triggerEvent(EventType.SCOREADDED, {score: mBonusMap.get(mBonusLevel).points});
+			StatusStringPool.setText(mCombo + " Combo Bonus");
 			
 			//Next Level
 			mBonusLevel += 1;

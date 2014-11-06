@@ -199,6 +199,7 @@ class GameObjectManager
 			chosen = MathUtil.getRandomBetween(0, 3);
 			trace(chosen);
 
+			//Chose where to start
 			switch(chosen)
 			{
 				case 0:
