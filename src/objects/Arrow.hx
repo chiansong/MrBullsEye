@@ -22,6 +22,7 @@ class Arrow extends FlxSprite
 	
 	public var mCurrentPosition:FlxPoint;
 	public var mPreviousPosition:FlxPoint;
+	public var mObject:GameObject;
 	
 	public inline static var IDLE:Int = 0;
 	public inline static var FIRED:Int = 1;
@@ -32,6 +33,8 @@ class Arrow extends FlxSprite
 		super();
 		
 		loadGraphic(Assets.getBitmapData("character/arrow.png"), true, false, 32, 8);
+		animation.add("fire", [0], 0, false);
+		animation.add("hit", [1], 0, false);
 		mState = IDLE;
 		visible = false;
 		
@@ -56,6 +59,9 @@ class Arrow extends FlxSprite
 		
 		visible = true;
 		mCanHit = true;
+		
+		//play the animation fire.
+		animation.play("fire");
 	}
 	
 	public function onObjectHit(evt:Int, params:Dynamic):Void
@@ -74,7 +80,13 @@ class Arrow extends FlxSprite
 		else if (object.mType == ObjectType.BULLSEYE)	
 			EventManager.triggerEvent(EventType.BULLSEYE_HIT, {bullseye:object, arrow:this});
 		else if (object.mType == ObjectType.GOLD)
-			EventManager.triggerEvent(EventType.GOLDBAG_HIT, {gold:object, arrow:this});
+			EventManager.triggerEvent(EventType.GOLDBAG_HIT, { gold:object, arrow:this } );
+		
+		//play the animation hit.
+		animation.play("hit");
+		
+		//Link it
+		mObject = object;
 	}
 	
 	public override function update():Void
@@ -91,7 +103,7 @@ class Arrow extends FlxSprite
 		//Set the next Position
 		mCurrentPosition.x = x + velocity.x * FlxG.elapsed;
 		mCurrentPosition.y = y;
-		
+
 		if (mState == FIRED)
 		{
 			velocity.x = mSpeed;
@@ -123,10 +135,16 @@ class Arrow extends FlxSprite
 		}
 		else if (mState == HIT)
 		{
+			//Resize it	
+			scale.x = mObject.scale.x;
+			scale.y = mObject.scale.y;
+			x -= FlxG.elapsed * 5;
+		
 			//Check if it belong the screen
 			if (y > FlxG.height)
 			{
-				EventManager.triggerEvent(EventType.ARROW_OUT, {object:this});
+				EventManager.triggerEvent(EventType.ARROW_OUT, { object:this } );
+				mObject = null;
 			}
 		}
 	}

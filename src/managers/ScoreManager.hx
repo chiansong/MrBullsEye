@@ -119,8 +119,6 @@ class ScoreManager
 	
 	public static function resetOnMiss():Void
 	{
-		if(ScoreManager.mCombo > 2)
-			StatusStringPool.setText("Combo Breaker !!!");
 		//Reset combo and bonus level.
 		ScoreManager.mCombo = 0;
 		ScoreManager.mBonusLevel = 1;

@@ -38,8 +38,8 @@ class BullsEye extends GameObject
 		mState = GameObject.IDLE;
 		
 		//Resize the Collision Detection
-		width = width / 2;
-		height *= 0.85;
+		width = width / 3;
+		height *= 0.80;
 		centerOffsets();
 		
 		mType = ObjectType.BULLSEYE;

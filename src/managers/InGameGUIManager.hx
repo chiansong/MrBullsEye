@@ -117,7 +117,7 @@ class InGameGUIManager
 		mGUIGroup2.add(mNumberOfArrowLeft);
 		
 		//Combos
-		mCombo = new FlxText(FlxG.width - 250, FlxG.height/2 - 50, 250, 42);
+		mCombo = new FlxText(FlxG.width - 450, FlxG.height/2 - 50, 450, 42);
 		mCombo.text = Std.string(ScoreManager.mCombo);
 		mCombo.alignment = "right";
 		mGUIGroup2.add(mCombo);

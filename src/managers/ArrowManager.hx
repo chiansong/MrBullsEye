@@ -61,7 +61,7 @@ class ArrowManager
 	
 	private static function onGameInit(evt:Int, params:Dynamic):Void
 	{
-		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT1LAYER.getIndex());
+		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT0LAYER.getIndex());
 		mMaxArrow = GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).data;
 		mCurrentArrow = mMaxArrow;
 		
@@ -159,7 +159,7 @@ class ArrowManager
 			ScoreManager.increaseCombo();
 			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
 															  arrow:_arrow,
-															  object:_object } );												  
+															  object:_object } );	
 		}
 		
 	}
