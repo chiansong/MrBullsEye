@@ -52,11 +52,13 @@ class Arrow extends FlxSprite
 		mSpeed = _speed;
 		mPower = _power;
 		
+		//Set position
 		offset.x += width - 4;
 		offset.y += 2;
 		width = 4;
 		height = 4;
 		
+		//Show it and let it be free
 		visible = true;
 		mCanHit = true;
 		

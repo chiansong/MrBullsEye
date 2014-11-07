@@ -1,4 +1,6 @@
 package managers;
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.system.FlxCollisionType;
@@ -10,6 +12,7 @@ import managers.EventManager;
 import event.EventType;
 import flixel.group.FlxGroup;
 import objects.Arrow;
+import openfl.Assets;
 import utils.DisplayLayers;
 import utils.MathUtil;
 import utils.ObjectPool;
@@ -22,6 +25,8 @@ class ArrowManager
 {
 	public static var mGroup:FlxGroup;
 	public static var mFiringPosition:FlxPoint;
+	private static var mEmitter:FlxEmitter;
+	private static var mParticle:FlxParticle;
 	private static var mArrowPool:ObjectPool<Arrow>;
 	private static var mActiveArrow:Array<Arrow>;
 	private static var mHitArrow:Array<Arrow>;
@@ -38,9 +43,25 @@ class ArrowManager
 		mFiringPosition = new FlxPoint();
 		mArrowSpeed 	= 400;
 	
+		mEmitter = new FlxEmitter(0, 0, 50);
+		mEmitter.setXSpeed(-100, -50);
+		mEmitter.setYSpeed( -50, 50);
+		mEmitter.setAlpha(0.75, 0.65, 0.25, 0.25);
+		mGroup.add(mEmitter);
+		
+		//Fill the emittor with particle system.
+		for (count in 0 ... (Std.int(mEmitter.maxSize / 2)))
+		{
+			mParticle = new FlxParticle();
+			mParticle.loadGraphic(Assets.getBitmapData("character/smoke.png"), false, false);
+			mParticle.visible = false;
+			mEmitter.add(mParticle);
+		}
+		
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.ARROW_FIRED, onFire);
 		EventManager.subscrible(EventType.ARROW_MISSED, onMiss);
+		EventManager.subscrible(EventType.OBJECT_HIT, onObjectHit);
 		EventManager.subscrible(EventType.ARROW_OUT, onOut);
 		EventManager.subscrible(EventType.SPEED_UP, onSpeedUp);
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
@@ -160,8 +181,16 @@ class ArrowManager
 			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
 															  arrow:_arrow,
 															  object:_object } );	
+			
+			
 		}
-		
+	}
+	
+	public static function onObjectHit(evt:Int, params:Dynamic):Void
+	{
+		//Spray the emitter.
+		mEmitter.setPosition(params.arrow.x + params.arrow.width, params.arrow.y);
+		mEmitter.start(true, 1.5, 0, 5, 0.25); 
 	}
 	
 	public static function increaseUpgradeNo():Void
