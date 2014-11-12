@@ -3,6 +3,7 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -19,73 +20,176 @@ import openfl.Assets;
 
 class MenuState extends FlxState
 {
-	private var mBackground:FlxSprite;
-	private var mBackgroundRay:FlxSprite;
-	private var mCircus:FlxSprite;
+	public var mGUIGroup0:FlxGroup; //Background
+	public var mGUIGroup1:FlxGroup; //Railing ... Fans Area 
+	public var mGUIGroup2:FlxGroup; //In-Game GUI
 	
+	//Top
+	private var mBorder:FlxSprite;
+	private var mBackgroundBack:FlxSprite;
+	private var mBackgroundRay:FlxSprite;
+	
+	//G0
+	private static var mBackground:FlxSprite; //Background.
+	
+	//G1
+	private static var mAudienceRow1:FlxSprite; //First row \o/ \o/
+	private static var mAudienceRow2:FlxSprite; //Second row \o/ \o/
+	private static var mAudienceRow3:FlxSprite; //Thrid row \o/ \o/
+	private static var mRailing:FlxSprite;// Railing
+	private static var mDoor1:FlxSprite;
+	private static var mDoor2:FlxSprite;
+	private static var mDoor3:FlxSprite;
+	private static var mLight1:FlxSprite;
+	private static var mLight2:FlxSprite;
+	
+	//G4
+	private static var mLighting:FlxSprite;
 	var mText:FlxText;
 	
 	override public function create():Void
 	{
-		//The background
-		mBackground = new FlxSprite();
-		mBackground.loadGraphic(Assets.getBitmapData("mainmenu/background.png"));
-		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2, FlxG.height / 2 - mBackground.height / 2);
+		//Create the group.
+		mGUIGroup0 = new FlxGroup();
+		mGUIGroup1 = new FlxGroup();
+		mGUIGroup2 = new FlxGroup();
+			
 		//The Background Ray From The Center.
 		mBackgroundRay = new FlxSprite();
 		mBackgroundRay.loadGraphic(Assets.getBitmapData("mainmenu/backgroundray.png"));
 		mBackgroundRay.setPosition(FlxG.width / 2 - mBackgroundRay.width / 2, FlxG.height / 2 - mBackgroundRay.height / 2);
 		mBackgroundRay.angularVelocity = 2.5;
-		//Circus
-		mCircus = new FlxSprite();
-		mCircus.loadGraphic(Assets.getBitmapData("mainmenu/circus.png"));
-		mCircus.setPosition(FlxG.width / 2 - mCircus.width / 2, FlxG.height / 2 - mCircus.height / 2);
+			
+		//Border
+		mBorder = new FlxSprite();
+		mBorder.loadGraphic(Assets.getBitmapData("mainmenu/border.png"));
+		mBorder.setPosition(FlxG.width / 2 - mBorder.width / 2, FlxG.height / 2 - mBorder.height / 2);
+		
+		mBackgroundBack = new FlxSprite();
+		mBackgroundBack.loadGraphic(Assets.getBitmapData("mainmenu/backgroundx.png"));
+		mBackgroundBack.setPosition(FlxG.width / 2 - mBackgroundBack.width / 2, FlxG.height / 2 - mBackgroundBack.height / 2);
 		
 		//The Text
 		mText = new FlxText(FlxG.width / 2, FlxG.height/2, 100, "Click To Begin");
 		mText.color = FlxColor.WHITE;
 		
-		//Add in to the scene
-		add(mBackground);
-		add(mBackgroundRay);
-		add(mCircus);
-		add(mText);
+		setupBackgroundAudience();
+		setupLighting();
 		
-		////SCREEN
-		//screen = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
-		//screen.loadGraphic("img/background.png", false, false, 640, 480);
-		//add(screen);
-		////reset it.
-		//screen.x -= screen.width / 2;
-		//screen.y -= screen.height / 2;
-		//
-		//character = new FlxSprite(35, 185);
-		//character.loadGraphic("img/player.png", true, false, 64, 64);
-		//character.animation.add("shoot", [3, 4, 3, 5], 12, false);
-		//character.scale.x = 7;
-		//character.scale.y = 7;
-		//add(character);
-		//
-		//bulleye = new FlxSprite(FlxG.width - 75, 195);
-		//bulleye.loadGraphic("img/bulleye.png", true, false, 32, 68);
-		//bulleye.animation.add("Walk", [0, 1, 0, 1], 6, false);
-		//bulleye.scale.x = 6;
-		//bulleye.scale.y = 6;
-		//add(bulleye);
-		//
-		//title = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
-		//title.loadGraphic("img/title.png", false, false);
-		//title.x -= title.width / 2;
-		//title.y -= title.height / 2 + 135;
-		//add(title);
-		//
-		//FlxTween.linearMotion(character, -200, character.y, character.x, character.y, 1, true, { ease:FlxEase.backOut } );
-		//FlxTween.linearMotion(bulleye, 800, bulleye.y, bulleye.x, bulleye.y, 1.5, true, { ease:FlxEase.backOut} );
-		//FlxTween.linearMotion(title, title.x, -200, title.x, title.y, 2.5, true, { ease:FlxEase.bounceOut} );
-		//
-		//playerShoot();
-		//bullMove();
-		//FlxG.mouse.show();
+		add(mBackgroundBack);
+		add(mBackgroundRay);
+		add(mBackground);
+		
+		//Add the group
+		add(mGUIGroup0);
+		add(mGUIGroup1);
+		add(mGUIGroup2);
+		
+		//Add in to the scene
+		add(mText);
+		add(mBorder);
+	}
+	
+	private function setupBackgroundAudience():Void
+	{
+		//Group 0
+		mBackground = new FlxSprite(0, 0);
+		mBackground.loadGraphic(Assets.getBitmapData("mainmenu/background.png"));
+		//Let setup the position properly
+		mBackground.setPosition(FlxG.width / 2 - mBackground.width / 2,
+								FlxG.height / 2 - mBackground.height / 2);
+		mGUIGroup0.add(mBackground);
+		
+		//Group 1 //Stuff in front of background ... railing , crowd
+		//Audience behind crowd mah so let add that first
+		mAudienceRow1 = new FlxSprite(0, 0);
+		mAudienceRow1.loadGraphic(Assets.getBitmapData("mainmenu/audience.png"), true, false, 580, 25, false);
+		mAudienceRow1.animation.add("idle", [0, 1, 2], 3, true);
+		mAudienceRow1.animation.add("cheer", [0, 1, 2, 0, 1, 2], 12, false);
+		mAudienceRow1.animation.play("idle");
+		mAudienceRow1.color = 0xffbebebe;
+		
+		mAudienceRow2 = new FlxSprite(0, 0);
+		mAudienceRow2.loadGraphic(Assets.getBitmapData("mainmenu/audience.png"), true, false, 580, 25, false);
+		mAudienceRow2.animation.add("idle", [0, 1, 2], 3, true);
+		mAudienceRow2.animation.add("cheer", [0, 1, 2, 0, 1, 2], 12, false);
+		mAudienceRow2.animation.play("idle");
+		mAudienceRow2.color = 0xff7b7b7b;
+		
+		mAudienceRow3 = new FlxSprite(0, 0);
+		mAudienceRow3.loadGraphic(Assets.getBitmapData("mainmenu/audience.png"), true, false, 580, 25, false);
+		mAudienceRow3.animation.add("idle", [0, 1, 2], 3, true);
+		mAudienceRow3.animation.add("cheer", [0, 1, 2, 0, 1, 2], 12, false);
+		mAudienceRow3.animation.play("idle");
+		mAudienceRow3.color = 0xff474747;
+		
+		mGUIGroup1.add(mAudienceRow3);
+		mGUIGroup1.add(mAudienceRow2);
+		mGUIGroup1.add(mAudienceRow1);
+		
+		mRailing = new FlxSprite(0, 0);
+		mRailing.loadGraphic(Assets.getBitmapData("mainmenu/gamerailing.png"));
+		//Setup the position.
+		mRailing.setPosition(FlxG.width / 2 - mRailing.width / 2,
+							 FlxG.height / 2 -  155);
+		mGUIGroup1.add(mRailing);
+							 
+		//Setup the Audience After the railing
+		mAudienceRow1.setPosition(mRailing.x + 20,
+								  mRailing.y - mAudienceRow1.height/2);
+		mAudienceRow2.setPosition(mAudienceRow1.x - 20,
+								  mAudienceRow1.y - mAudienceRow1.height/3);
+		mAudienceRow3.setPosition(mAudienceRow1.x + 20,
+								  mAudienceRow2.y - mAudienceRow1.height / 3);
+					
+		//Door Door Door 3 Door Down (The door where the bulleyes spawn)
+		mDoor1 = new FlxSprite();
+		mDoor1.loadGraphic(Assets.getBitmapData("background/door.png"));
+		mDoor1.setPosition(FlxG.width - 3 * FlxG.width/8 - mDoor1.width/2,
+						   FlxG.height / 2 -  140);
+						   
+		mDoor2 = new FlxSprite();
+		mDoor2.loadGraphic(Assets.getBitmapData("background/door.png"));
+		mDoor2.setPosition(FlxG.width - 2 * FlxG.width/8 - mDoor1.width/2,
+						   FlxG.height / 2 -  135);
+						   
+		mDoor3 = new FlxSprite();
+		mDoor3.loadGraphic(Assets.getBitmapData("background/door.png"));
+		mDoor3.setPosition(FlxG.width - FlxG.width/8 - mDoor1.width/2,
+						   FlxG.height / 2 -  130);
+						   
+		mGUIGroup1.add(mDoor1);
+		mGUIGroup1.add(mDoor2);
+		//mGUIGroup1.add(mDoor3);
+		
+		mLight1 = new FlxSprite();
+		mLight1.loadGraphic(Assets.getBitmapData("background/spotlight.png"), 
+							true, false, 350, 400);
+		mLight1.setPosition(FlxG.width / 2 - mLight1.width / 2 - mLight1.width / 4, 0);
+		mLight1.animation.add("play", [0, 1, 2, 3, 4, 3, 2, 1, 9, 8, 7, 6, 5, 6, 7, 8], 6);
+		mLight1.alpha = 0.25;
+		
+		mLight2 = new FlxSprite();
+		mLight2.loadGraphic(Assets.getBitmapData("background/spotlight.png"), 
+							true, false, 350, 400);
+		mLight2.setPosition(FlxG.width / 2 - mLight1.width / 2 + mLight1.width / 4, 0);
+		mLight2.animation.add("play", [9, 8, 7, 6, 5, 6, 7, 8, 0, 1, 2, 3, 4, 3, 2, 1], 6);
+		mLight2.alpha = 0.25;
+		
+		mLight1.animation.play("play");
+		mLight2.animation.play("play");
+		
+		mGUIGroup1.add(mLight1);
+		mGUIGroup1.add(mLight2);
+	}
+	
+	//Set lighting for background
+	private function setupLighting():Void
+	{
+		mLighting = new FlxSprite();
+		mLighting.loadGraphic(Assets.getBitmapData("mainmenu/lighting.png"));
+		mLighting.setPosition(FlxG.width/2 - mLighting.width/2, FlxG.height/2 - mLighting.height/2);
+		mGUIGroup2.add(mLighting);
 	}
 	
 	override public function update():Void

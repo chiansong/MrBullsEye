@@ -24,8 +24,10 @@ import utils.ObjectPool;
 class ArrowManager
 {
 	public static var mGroup:FlxGroup;
+	public static var mFrontGroup:FlxGroup;
 	public static var mFiringPosition:FlxPoint;
 	private static var mEmitter:FlxEmitter;
+	private static var mStarEmitter:FlxEmitter;
 	private static var mParticle:FlxParticle;
 	private static var mArrowPool:ObjectPool<Arrow>;
 	private static var mActiveArrow:Array<Arrow>;
@@ -37,20 +39,23 @@ class ArrowManager
 	public static function init():Void
 	{
 		mGroup 			= new FlxGroup();
+		mFrontGroup		= new FlxGroup();
 		mActiveArrow 	= new Array<Arrow>();
 		mHitArrow		= new Array<Arrow>();
 		mArrowPool 		= new ObjectPool<Arrow>(50, createArrow);
 		mFiringPosition = new FlxPoint();
 		mArrowSpeed 	= 400;
 	
+		//Dust Emittor
 		mEmitter = new FlxEmitter(0, 0, 50);
-		mEmitter.setXSpeed(-100, -50);
-		mEmitter.setYSpeed( -50, 50);
-		mEmitter.setAlpha(0.75, 0.65, 0.25, 0.25);
+		mEmitter.setXSpeed(-65, -35);
+		mEmitter.setYSpeed( 50, 100);
+		mEmitter.setAlpha(0.75, 0.65, 0.15, 0.05);
+		mEmitter.setScale(1.25, 1.35, 0.0, 0.15);
 		mGroup.add(mEmitter);
 		
 		//Fill the emittor with particle system.
-		for (count in 0 ... (Std.int(mEmitter.maxSize / 2)))
+		for (count in 0 ... (Std.int(mEmitter.maxSize)))
 		{
 			mParticle = new FlxParticle();
 			mParticle.loadGraphic(Assets.getBitmapData("character/smoke.png"), false, false);
@@ -58,10 +63,32 @@ class ArrowManager
 			mEmitter.add(mParticle);
 		}
 		
+		//Star Emittor
+		mStarEmitter = new FlxEmitter(0, 0, 25);
+		mStarEmitter.setXSpeed(0, 0);
+		mStarEmitter.setYSpeed( 25, 30);
+		mStarEmitter.setAlpha(1.0, 1.0, 0.75, 0.85);
+		mStarEmitter.setScale(1, 1, 1.25, 1.25);
+		mStarEmitter.setRotation(0, 0);
+		mFrontGroup.add(mStarEmitter);
+		
+		//Fill the emittor with particle system.
+		for (count in 0 ... (Std.int(mStarEmitter.maxSize)))
+		{
+			mParticle = new FlxParticle();
+			mParticle.loadGraphic(Assets.getBitmapData("character/critical.png"), true, false, 90, 48);
+			mParticle.animation.add("play", [0, 1, 2, 3], 12, true);
+			mParticle.visible = false;
+			mParticle.animation.play("play");
+			mStarEmitter.add(mParticle);
+		}
+		
+		//Subscrible to the following
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);
 		EventManager.subscrible(EventType.ARROW_FIRED, onFire);
 		EventManager.subscrible(EventType.ARROW_MISSED, onMiss);
 		EventManager.subscrible(EventType.OBJECT_HIT, onObjectHit);
+		EventManager.subscrible(EventType.CRITICAL_HIT, onCriticalHit);
 		EventManager.subscrible(EventType.ARROW_OUT, onOut);
 		EventManager.subscrible(EventType.SPEED_UP, onSpeedUp);
 		EventManager.subscrible(EventType.ENTER_SHOP, onShopEnter);
@@ -83,6 +110,7 @@ class ArrowManager
 	private static function onGameInit(evt:Int, params:Dynamic):Void
 	{
 		DisplayManager.addToLayer(mGroup, DisplayLayers.OBJECT0LAYER.getIndex());
+		DisplayManager.addToLayer(mFrontGroup, DisplayLayers.GUILAYER.getIndex());
 		mMaxArrow = GameDataManager.mArrowNoMap.get(GlobalGameData.arrowNoLevel).data;
 		mCurrentArrow = mMaxArrow;
 		
@@ -178,19 +206,21 @@ class ArrowManager
 			BasicArrow.mCanHit = false;
 			mHitArrow.push(BasicArrow);
 			ScoreManager.increaseCombo();
-			EventManager.triggerEvent(EventType.OBJECT_HIT, { score:1 ,
-															  arrow:_arrow,
-															  object:_object } );	
-			
-			
 		}
+	}
+		
+	//When you hit critical portion.
+	private static function onCriticalHit(evt:Int, params:Dynamic):Void
+	{
+		mStarEmitter.setPosition(params.arrow.x + params.arrow.width, params.arrow.y);
+		mStarEmitter.start(true, 0.55, 0, 1, 0.20);
 	}
 	
 	public static function onObjectHit(evt:Int, params:Dynamic):Void
 	{
 		//Spray the emitter.
 		mEmitter.setPosition(params.arrow.x + params.arrow.width, params.arrow.y);
-		mEmitter.start(true, 1.5, 0, 5, 0.25); 
+		mEmitter.start(true, 0.75, 0, 3, 0.25);
 	}
 	
 	public static function increaseUpgradeNo():Void

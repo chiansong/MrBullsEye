@@ -25,7 +25,8 @@ class EventType
 	public static inline var OBJECT_MOVE:Int 	= 2101;
 	public static inline var OBJECT_HIT:Int  	= 2102;
 	public static inline var OBJECT_OUT:Int  	= 2103;
-	public static inline var SPEED_UP:Int		= 2104;
+	public static inline var CRITICAL_HIT:Int 	= 2104;
+	public static inline var SPEED_UP:Int		= 2105;
 	//GAME OBJECT
 	public static inline var BULLSEYE_HIT:Int	= 2150;
 	public static inline var APPLE_HIT:Int		= 2151;

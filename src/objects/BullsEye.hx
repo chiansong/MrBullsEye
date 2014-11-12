@@ -83,6 +83,9 @@ class BullsEye extends GameObject
 			score = mScore * 2;
 			GameDataManager.mCriticalCount += 1;
 			StatusStringPool.setText("B-U-L-L-S-E-Y-E !");
+			
+			//We have hit CRITICAL HIT.
+			EventManager.triggerEvent(EventType.CRITICAL_HIT,{arrow:params.arrow});
 		}
 		
 		mNoOfHit += 1;
