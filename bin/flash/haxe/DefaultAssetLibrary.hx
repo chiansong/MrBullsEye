@@ -116,6 +116,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("character/goldbag.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/knife.pyxel", __ASSET__character_knife_pyxel);
 		type.set ("character/knife.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/name.pyxel", __ASSET__character_name_pyxel);
+		type.set ("character/name.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/player - Copy.png", __ASSET__character_player___copy_png);
 		type.set ("character/player - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/player.png", __ASSET__character_player_png);
@@ -184,10 +186,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("mainmenu/circus.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("mainmenu/circus.pyxel", __ASSET__mainmenu_circus_pyxel);
 		type.set ("mainmenu/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("mainmenu/circusname.png", __ASSET__mainmenu_circusname_png);
+		type.set ("mainmenu/circusname.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/E.png", __ASSET__mainmenu_e_png);
+		type.set ("mainmenu/E.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/G.png", __ASSET__mainmenu_g_png);
+		type.set ("mainmenu/G.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("mainmenu/gamerailing.png", __ASSET__mainmenu_gamerailing_png);
 		type.set ("mainmenu/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("mainmenu/lighting.png", __ASSET__mainmenu_lighting_png);
 		type.set ("mainmenu/lighting.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/M.png", __ASSET__mainmenu_m_png);
+		type.set ("mainmenu/M.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("mainmenu/main.psd", __ASSET__mainmenu_main_psd);
+		type.set ("mainmenu/main.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("mainmenu/N.png", __ASSET__mainmenu_n_png);
+		type.set ("mainmenu/N.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("data/applechancedata.xml", __ASSET__data_applechancedata_xml);
 		type.set ("data/applechancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("data/arrownumberdata.xml", __ASSET__data_arrownumberdata_xml);
@@ -246,6 +260,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("character/eggman2.pyxel", "binary", "character/eggman2.pyxel");
 		addExternal("character/goldbag.png", "image", "character/goldbag.png");
 		addExternal("character/knife.pyxel", "binary", "character/knife.pyxel");
+		addExternal("character/name.pyxel", "binary", "character/name.pyxel");
 		addExternal("character/player - Copy.png", "image", "character/player - Copy.png");
 		addExternal("character/player.png", "image", "character/player.png");
 		addExternal("character/player.png.pyxel", "binary", "character/player.png.pyxel");
@@ -280,8 +295,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("mainmenu/border.png", "image", "mainmenu/border.png");
 		addExternal("mainmenu/circus.png", "image", "mainmenu/circus.png");
 		addExternal("mainmenu/circus.pyxel", "binary", "mainmenu/circus.pyxel");
+		addExternal("mainmenu/circusname.png", "image", "mainmenu/circusname.png");
+		addExternal("mainmenu/E.png", "image", "mainmenu/E.png");
+		addExternal("mainmenu/G.png", "image", "mainmenu/G.png");
 		addExternal("mainmenu/gamerailing.png", "image", "mainmenu/gamerailing.png");
 		addExternal("mainmenu/lighting.png", "image", "mainmenu/lighting.png");
+		addExternal("mainmenu/M.png", "image", "mainmenu/M.png");
+		addExternal("mainmenu/main.psd", "binary", "mainmenu/main.psd");
+		addExternal("mainmenu/N.png", "image", "mainmenu/N.png");
 		addExternal("data/applechancedata.xml", "text", "data/applechancedata.xml");
 		addExternal("data/arrownumberdata.xml", "text", "data/arrownumberdata.xml");
 		addExternal("data/arrowspeeddata.xml", "text", "data/arrowspeeddata.xml");
@@ -417,6 +438,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("character/knife.pyxel", __ASSET__character_knife_pyxel);
 		type.set ("character/knife.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("character/name.pyxel", __ASSET__character_name_pyxel);
+		type.set ("character/name.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
 		className.set ("character/player - Copy.png", __ASSET__character_player___copy_png);
 		type.set ("character/player - Copy.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
@@ -519,11 +543,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("mainmenu/circus.pyxel", __ASSET__mainmenu_circus_pyxel);
 		type.set ("mainmenu/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("mainmenu/circusname.png", __ASSET__mainmenu_circusname_png);
+		type.set ("mainmenu/circusname.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/E.png", __ASSET__mainmenu_e_png);
+		type.set ("mainmenu/E.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/G.png", __ASSET__mainmenu_g_png);
+		type.set ("mainmenu/G.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("mainmenu/gamerailing.png", __ASSET__mainmenu_gamerailing_png);
 		type.set ("mainmenu/gamerailing.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("mainmenu/lighting.png", __ASSET__mainmenu_lighting_png);
 		type.set ("mainmenu/lighting.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/M.png", __ASSET__mainmenu_m_png);
+		type.set ("mainmenu/M.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("mainmenu/main.psd", __ASSET__mainmenu_main_psd);
+		type.set ("mainmenu/main.psd", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("mainmenu/N.png", __ASSET__mainmenu_n_png);
+		type.set ("mainmenu/N.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("data/applechancedata.xml", __ASSET__data_applechancedata_xml);
 		type.set ("data/applechancedata.xml", Reflect.field (AssetType, "text".toUpperCase ()));
@@ -1168,6 +1210,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__character_eggman2_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_goldbag_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_knife_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_name_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_player___copy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_player_png_pyxel extends flash.utils.ByteArray { }
@@ -1202,8 +1245,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__mainmenu_border_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__mainmenu_circus_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__mainmenu_circus_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__mainmenu_circusname_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_e_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_g_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__mainmenu_gamerailing_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__mainmenu_lighting_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_m_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__mainmenu_main_psd extends flash.utils.ByteArray { }
+@:keep class __ASSET__mainmenu_n_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__data_applechancedata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_arrownumberdata_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__data_arrowspeeddata_xml extends flash.utils.ByteArray { }
@@ -1214,6 +1263,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
+
+
 
 
 
@@ -1343,6 +1399,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/texture/character/eggman2.pyxel") class __ASSET__character_eggman2_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/goldbag.png") class __ASSET__character_goldbag_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/knife.pyxel") class __ASSET__character_knife_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/name.pyxel") class __ASSET__character_name_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/player - Copy.png") class __ASSET__character_player___copy_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/player.png.pyxel") class __ASSET__character_player_png_pyxel extends flash.utils.ByteArray {}
@@ -1377,8 +1434,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/texture/mainmenu/border.png") class __ASSET__mainmenu_border_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/mainmenu/circus.png") class __ASSET__mainmenu_circus_png extends flash.display.BitmapData {}
 @:file("assets/texture/mainmenu/circus.pyxel") class __ASSET__mainmenu_circus_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/mainmenu/circusname.png") class __ASSET__mainmenu_circusname_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/mainmenu/E.png") class __ASSET__mainmenu_e_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/mainmenu/G.png") class __ASSET__mainmenu_g_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/mainmenu/gamerailing.png") class __ASSET__mainmenu_gamerailing_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/mainmenu/lighting.png") class __ASSET__mainmenu_lighting_png extends flash.display.BitmapData {}
+@:bitmap("assets/texture/mainmenu/M.png") class __ASSET__mainmenu_m_png extends flash.display.BitmapData {}
+@:file("assets/texture/mainmenu/main.psd") class __ASSET__mainmenu_main_psd extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/mainmenu/N.png") class __ASSET__mainmenu_n_png extends flash.display.BitmapData {}
 @:file("assets/data/applechancedata.xml") class __ASSET__data_applechancedata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/arrownumberdata.xml") class __ASSET__data_arrownumberdata_xml extends flash.utils.ByteArray {}
 @:file("assets/data/arrowspeeddata.xml") class __ASSET__data_arrowspeeddata_xml extends flash.utils.ByteArray {}

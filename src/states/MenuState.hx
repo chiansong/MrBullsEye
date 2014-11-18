@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxArrayUtil;
 import flixel.util.FlxColor;
 import flixel.util.FlxRandom;
 import flixel.util.FlxTimer;
@@ -20,14 +21,20 @@ import openfl.Assets;
 
 class MenuState extends FlxState
 {
-	public var mGUIGroup0:FlxGroup; //Background
-	public var mGUIGroup1:FlxGroup; //Railing ... Fans Area 
-	public var mGUIGroup2:FlxGroup; //In-Game GUI
+	public static var mGUIGroup0:FlxGroup; //Background
+	public static var mGUIGroup1:FlxGroup; //Railing ... Fans Area 
+	public static var mGUIGroup2:FlxGroup; //In-Game GUI
+	public static var mGUIGroup3:FlxGroup; //Title Text Array
 	
 	//Top
-	private var mBorder:FlxSprite;
-	private var mBackgroundBack:FlxSprite;
-	private var mBackgroundRay:FlxSprite;
+	private static var mBorder:FlxSprite;
+	private static var mBackgroundBack:FlxSprite;
+	private static var mBackgroundRay:FlxSprite;
+	
+	//Name
+	private static var mEggmenTextArray:Array<FlxSprite>; //EGGMAN -CIRCUS
+	private static var mCharacter:FlxSprite;
+	
 	
 	//G0
 	private static var mBackground:FlxSprite; //Background.
@@ -47,12 +54,17 @@ class MenuState extends FlxState
 	private static var mLighting:FlxSprite;
 	var mText:FlxText;
 	
+	//Title Counter
+	private static var mCounter:Int;
+	
 	override public function create():Void
 	{
 		//Create the group.
 		mGUIGroup0 = new FlxGroup();
 		mGUIGroup1 = new FlxGroup();
 		mGUIGroup2 = new FlxGroup();
+		mGUIGroup3 = new FlxGroup();
+		mEggmenTextArray = new Array<FlxSprite>();
 			
 		//The Background Ray From The Center.
 		mBackgroundRay = new FlxSprite();
@@ -88,6 +100,12 @@ class MenuState extends FlxState
 		//Add in to the scene
 		add(mText);
 		add(mBorder);
+		setupEggNameTitle();
+		add(mGUIGroup3);
+		
+		//Let Play It
+		mCounter = 0;
+		playTitle(null);
 	}
 	
 	private function setupBackgroundAudience():Void
@@ -183,6 +201,93 @@ class MenuState extends FlxState
 		mGUIGroup1.add(mLight2);
 	}
 	
+	private function setupEggNameTitle():Void
+	{
+		var mSprite:FlxSprite;
+		var mStartingX:Int = Std.int(FlxG.width / 2) - 250;
+		var mStartingY:Int = 0;
+		
+		//First E.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/E.png"),
+							true, false, 75, 99);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		mStartingX += 55;
+		
+		//First G.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/G.png"),
+							true, false, 85, 112);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		mStartingX += 55;
+		
+		//Second G.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/G.png"),
+							true, false, 85, 112);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		mStartingX += 55;
+		
+		//First M.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/M.png"),
+							true, false, 105, 101);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		mStartingX += 75;
+		
+		//Second E.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/E.png"),
+							true, false, 75, 99);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		mStartingX += 55;
+		
+		//Second N.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/N.png"),
+							true, false, 101, 96);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		mStartingX = Std.int(FlxG.width / 2) - 100;
+		
+		//Circus.
+		mSprite = new FlxSprite();
+		mSprite.loadGraphic(Assets.getBitmapData("mainmenu/circusname.png"),
+							true, false, 338, 114);
+		mSprite.setPosition(mStartingX, mStartingY - mSprite.height);
+		mSprite.animation.add("play", [0, 1, 2, 1, 0, 3, 4, 3, 0], 12, false);
+		mEggmenTextArray.push(mSprite);
+		mGUIGroup3.add(mSprite);
+		
+		//Character
+		mCharacter = new FlxSprite();
+		mCharacter.loadGraphic(Assets.getBitmapData("shop/shopcharacter.png"),true,false,80,80);
+		mCharacter.setPosition(FlxG.width / 5 - mCharacter.width, 
+							   FlxG.height - mCharacter.height / 1.05);
+		mCharacter.animation.add("talk", [3, 4, 5, 3, 5, 0, 4, 3, 0], 12, false);
+		mCharacter.animation.add("buy", [0, 1, 0, 2, 0, 1, 0, 2, 0], 12, false);
+		mCharacter.scale.x = 3;
+		mCharacter.scale.y = 3;
+		mGUIGroup3.add(mCharacter);
+	}
+	
 	//Set lighting for background
 	private function setupLighting():Void
 	{
@@ -190,6 +295,26 @@ class MenuState extends FlxState
 		mLighting.loadGraphic(Assets.getBitmapData("mainmenu/lighting.png"));
 		mLighting.setPosition(FlxG.width/2 - mLighting.width/2, FlxG.height/2 - mLighting.height/2);
 		mGUIGroup2.add(mLighting);
+	}
+	
+	private function playTitle(tween:FlxTween):Void
+	{
+		var delay:Float = 0;
+		if (mEggmenTextArray.length <= mCounter)
+			return;
+		
+		if (mCounter == 0)
+			delay = 0.5;
+		
+		//The ending height of the title.
+		var newHeight:Float = FlxG.height / 2 - mEggmenTextArray[0].height - 75;
+		if (mCounter == mEggmenTextArray.length - 1)
+			newHeight =  FlxG.height / 2 - mEggmenTextArray[0].height - 15;
+		
+		FlxTween.tween(mEggmenTextArray[mCounter], { y: newHeight }, 0.15, { ease:FlxEase.backOut, startDelay:delay, complete:playTitle } );
+		
+		//Add the counter
+		mCounter += 1;
 	}
 	
 	override public function update():Void
