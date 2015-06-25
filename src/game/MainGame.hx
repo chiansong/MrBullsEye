@@ -4,6 +4,7 @@ import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxGame;
 import states.SplashState;
+import states.MenuState;
 import flixel.plugin.MouseEventManager;
 /**
  * ...
@@ -24,7 +25,7 @@ class MainGame extends FlxGame
 			
 			super(Math.ceil(stageWidth / ratio), 
 				  Math.ceil(stageHeight / ratio), 
-				  SplashState, ratio, fps, fps);
+				  MenuState, ratio, fps, fps);
 	}
 	
 	public override function update():Void
