@@ -70,6 +70,12 @@ class GameObject extends FlxSprite
 		super.update();
 	}
 	
+	public function setStartingPosition(start:Float, end:Float)
+	{
+		mStartingPositionY = start;
+		mShootingPositionY = end;
+	}
+	
 	public function SetScaleBasedOnPosition():Void
 	{
 		scale.x = (mShootingScale - mStartingScale)/(mShootingPositionY - mStartingPositionY) * (y - mStartingPositionY);

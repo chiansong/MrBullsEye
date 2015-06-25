@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 <description>"Money Make The World Go Round."</description>
-<level precent="5" cost="250">0</level>
+<level precent="1000" cost="250">0</level>
 <level precent="10" cost="500">1</level>
 <level precent="15" cost="1000">2</level>
 <level precent="20" cost="1500">3</level>

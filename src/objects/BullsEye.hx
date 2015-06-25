@@ -62,13 +62,7 @@ class BullsEye extends GameObject
 		//reset the number of hit
 		mNoOfHit = 0;
 	}
-	
-	public function setStartingPosition(start:Float, end:Float)
-	{
-		mStartingPositionY = start;
-		mShootingPositionY = end;
-	}
-	
+
 	public function onHit(evt:Int, params:Dynamic):Void
 	{
 		if (params.bullseye != this)

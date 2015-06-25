@@ -231,6 +231,8 @@ class GameObjectManager
 			object = mApplePool.get();
 			object.activate(mStartingPosition, 0, mMovementSpeedY);
 			mActiveArray.push(object);
+			object.setStartingPosition(mStartingPosition.y, 
+									   Globals.player.y); 
 			return;
 		}
 		
@@ -241,6 +243,8 @@ class GameObjectManager
 			object = mGoldPool.get();
 			object.activate(mStartingPosition, 0, mMovementSpeedY);
 			mActiveArray.push(object);
+			object.setStartingPosition(mStartingPosition.y, 
+									   Globals.player.y); 
 			return;
 		}
 		

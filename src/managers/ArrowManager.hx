@@ -26,8 +26,10 @@ class ArrowManager
 	public static var mGroup:FlxGroup;
 	public static var mFrontGroup:FlxGroup;
 	public static var mFiringPosition:FlxPoint;
+	
 	private static var mEmitter:FlxEmitter;
 	private static var mStarEmitter:FlxEmitter;
+	private static var mGoldEmitter:FlxEmitter;
 	private static var mParticle:FlxParticle;
 	private static var mArrowPool:ObjectPool<Arrow>;
 	private static var mActiveArrow:Array<Arrow>;
@@ -82,6 +84,8 @@ class ArrowManager
 			mParticle.animation.play("play");
 			mStarEmitter.add(mParticle);
 		}
+		
+		
 		
 		//Subscrible to the following
 		EventManager.subscrible(EventType.GAME_INIT, onGameInit);

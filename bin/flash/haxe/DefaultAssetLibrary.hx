@@ -102,20 +102,36 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("character/bulleye.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/bulleye.pyxel", __ASSET__character_bulleye_pyxel);
 		type.set ("character/bulleye.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/circus.pyxel", __ASSET__character_circus_pyxel);
+		type.set ("character/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/critical.png", __ASSET__character_critical_png);
 		type.set ("character/critical.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/critical.pyxel", __ASSET__character_critical_pyxel);
 		type.set ("character/critical.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/e.pyxel", __ASSET__character_e_pyxel);
+		type.set ("character/e.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/eggman.pyxel", __ASSET__character_eggman_pyxel);
 		type.set ("character/eggman.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/eggman2.png", __ASSET__character_eggman2_png);
 		type.set ("character/eggman2.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/eggman2.pyxel", __ASSET__character_eggman2_pyxel);
 		type.set ("character/eggman2.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/g.pyxel", __ASSET__character_g_pyxel);
+		type.set ("character/g.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/goincoin.pyxel", __ASSET__character_goincoin_pyxel);
+		type.set ("character/goincoin.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/goldbag.png", __ASSET__character_goldbag_png);
 		type.set ("character/goldbag.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("character/goldbag.pyxel", __ASSET__character_goldbag_pyxel);
+		type.set ("character/goldbag.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/goldcoin.png", __ASSET__character_goldcoin_png);
+		type.set ("character/goldcoin.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("character/knife.pyxel", __ASSET__character_knife_pyxel);
 		type.set ("character/knife.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/m.pyxel", __ASSET__character_m_pyxel);
+		type.set ("character/m.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("character/n.pyxel", __ASSET__character_n_pyxel);
+		type.set ("character/n.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/name.pyxel", __ASSET__character_name_pyxel);
 		type.set ("character/name.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		className.set ("character/player - Copy.png", __ASSET__character_player___copy_png);
@@ -253,13 +269,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("character/arrowXML.xml", "text", "character/arrowXML.xml");
 		addExternal("character/bulleye.png", "image", "character/bulleye.png");
 		addExternal("character/bulleye.pyxel", "binary", "character/bulleye.pyxel");
+		addExternal("character/circus.pyxel", "binary", "character/circus.pyxel");
 		addExternal("character/critical.png", "image", "character/critical.png");
 		addExternal("character/critical.pyxel", "binary", "character/critical.pyxel");
+		addExternal("character/e.pyxel", "binary", "character/e.pyxel");
 		addExternal("character/eggman.pyxel", "binary", "character/eggman.pyxel");
 		addExternal("character/eggman2.png", "image", "character/eggman2.png");
 		addExternal("character/eggman2.pyxel", "binary", "character/eggman2.pyxel");
+		addExternal("character/g.pyxel", "binary", "character/g.pyxel");
+		addExternal("character/goincoin.pyxel", "binary", "character/goincoin.pyxel");
 		addExternal("character/goldbag.png", "image", "character/goldbag.png");
+		addExternal("character/goldbag.pyxel", "binary", "character/goldbag.pyxel");
+		addExternal("character/goldcoin.png", "image", "character/goldcoin.png");
 		addExternal("character/knife.pyxel", "binary", "character/knife.pyxel");
+		addExternal("character/m.pyxel", "binary", "character/m.pyxel");
+		addExternal("character/n.pyxel", "binary", "character/n.pyxel");
 		addExternal("character/name.pyxel", "binary", "character/name.pyxel");
 		addExternal("character/player - Copy.png", "image", "character/player - Copy.png");
 		addExternal("character/player.png", "image", "character/player.png");
@@ -417,11 +441,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("character/bulleye.pyxel", __ASSET__character_bulleye_pyxel);
 		type.set ("character/bulleye.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("character/circus.pyxel", __ASSET__character_circus_pyxel);
+		type.set ("character/circus.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
 		className.set ("character/critical.png", __ASSET__character_critical_png);
 		type.set ("character/critical.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("character/critical.pyxel", __ASSET__character_critical_pyxel);
 		type.set ("character/critical.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/e.pyxel", __ASSET__character_e_pyxel);
+		type.set ("character/e.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("character/eggman.pyxel", __ASSET__character_eggman_pyxel);
 		type.set ("character/eggman.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
@@ -432,11 +462,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("character/eggman2.pyxel", __ASSET__character_eggman2_pyxel);
 		type.set ("character/eggman2.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
+		className.set ("character/g.pyxel", __ASSET__character_g_pyxel);
+		type.set ("character/g.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/goincoin.pyxel", __ASSET__character_goincoin_pyxel);
+		type.set ("character/goincoin.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
 		className.set ("character/goldbag.png", __ASSET__character_goldbag_png);
 		type.set ("character/goldbag.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
+		className.set ("character/goldbag.pyxel", __ASSET__character_goldbag_pyxel);
+		type.set ("character/goldbag.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/goldcoin.png", __ASSET__character_goldcoin_png);
+		type.set ("character/goldcoin.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("character/knife.pyxel", __ASSET__character_knife_pyxel);
 		type.set ("character/knife.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/m.pyxel", __ASSET__character_m_pyxel);
+		type.set ("character/m.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("character/n.pyxel", __ASSET__character_n_pyxel);
+		type.set ("character/n.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 		
 		className.set ("character/name.pyxel", __ASSET__character_name_pyxel);
 		type.set ("character/name.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
@@ -1203,13 +1251,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_bulleye_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_bulleye_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_circus_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_critical_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_critical_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_e_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_eggman_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_eggman2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_eggman2_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_g_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_goincoin_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_goldbag_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__character_goldbag_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_goldcoin_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_knife_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_m_pyxel extends flash.utils.ByteArray { }
+@:keep class __ASSET__character_n_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_name_pyxel extends flash.utils.ByteArray { }
 @:keep class __ASSET__character_player___copy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__character_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1356,6 +1412,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
 #elseif (windows || mac || linux)
 
 
@@ -1392,13 +1456,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/texture/character/arrowXML.xml") class __ASSET__character_arrowxml_xml extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/bulleye.png") class __ASSET__character_bulleye_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/bulleye.pyxel") class __ASSET__character_bulleye_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/circus.pyxel") class __ASSET__character_circus_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/critical.png") class __ASSET__character_critical_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/critical.pyxel") class __ASSET__character_critical_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/e.pyxel") class __ASSET__character_e_pyxel extends flash.utils.ByteArray {}
 @:file("assets/texture/character/eggman.pyxel") class __ASSET__character_eggman_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/eggman2.png") class __ASSET__character_eggman2_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/eggman2.pyxel") class __ASSET__character_eggman2_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/g.pyxel") class __ASSET__character_g_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/goincoin.pyxel") class __ASSET__character_goincoin_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/goldbag.png") class __ASSET__character_goldbag_png extends flash.display.BitmapData {}
+@:file("assets/texture/character/goldbag.pyxel") class __ASSET__character_goldbag_pyxel extends flash.utils.ByteArray {}
+@:bitmap("assets/texture/character/goldcoin.png") class __ASSET__character_goldcoin_png extends flash.display.BitmapData {}
 @:file("assets/texture/character/knife.pyxel") class __ASSET__character_knife_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/m.pyxel") class __ASSET__character_m_pyxel extends flash.utils.ByteArray {}
+@:file("assets/texture/character/n.pyxel") class __ASSET__character_n_pyxel extends flash.utils.ByteArray {}
 @:file("assets/texture/character/name.pyxel") class __ASSET__character_name_pyxel extends flash.utils.ByteArray {}
 @:bitmap("assets/texture/character/player - Copy.png") class __ASSET__character_player___copy_png extends flash.display.BitmapData {}
 @:bitmap("assets/texture/character/player.png") class __ASSET__character_player_png extends flash.display.BitmapData {}

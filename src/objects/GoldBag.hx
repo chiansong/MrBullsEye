@@ -12,10 +12,15 @@ import openfl.Assets;
  */
 class GoldBag extends GameObject
 {
+	public var mHealth:Int;
 	public function new() 
 	{
 		super();
-		loadGraphic(Assets.getBitmapData("character/goldbag.png"), false, false, 64, 64);
+		loadGraphic(Assets.getBitmapData("character/goldbag.png"), false, false, 44, 50);
+		animation.add("gold0", [0], 0);
+		animation.add("gold1", [1], 0);
+		animation.add("gold2", [2], 0);
+		animation.play("gold" + mHealth % 3);
 		
 		mSpeedX = 0;
 		mSpeedY = 0;
@@ -25,6 +30,12 @@ class GoldBag extends GameObject
 		height *= 0.60;
 		centerOffsets();
 		
+		//Set the size.
+		mStartingScale = 0.25;
+		mShootingScale = 1;
+		scale.x = scale.y = 0;
+		
+		mHealth = 3;
 		mType = ObjectType.GOLD;
 
 		EventManager.subscrible(EventType.GOLDBAG_HIT, onHit);
@@ -32,9 +43,17 @@ class GoldBag extends GameObject
 	
 	public function onHit(evt:Int, params:Dynamic):Void
 	{
-		//Not the apple u are looking for
+		//Not the GOLDBAG u are looking for
 		if (params.gold != this)
 			return;
+		
+		mHealth -= 1;
+		//Play animation
+		animation.play("gold" + (3 - mHealth));	
+		//Check the health first
+		if (mHealth > 0)
+			return;
+		
 		
 		//Increase Multipler and Add Score by it worth
 		GameDataManager.addGoldEarned(25);
@@ -44,6 +63,10 @@ class GoldBag extends GameObject
 	public override function update():Void
 	{
 		super.update();
+		
+		//Update the size
+		SetScaleBasedOnPosition();
+		
 		//Move Downward.
 		if (mState == GameObject.IDLE)
 		{
