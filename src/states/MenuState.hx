@@ -3,6 +3,7 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.FlxObject;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -34,7 +35,11 @@ class MenuState extends FlxState
 	//Name
 	private static var mEggmenTextArray:Array<FlxSprite>; //EGGMAN -CIRCUS
 	private static var mCharacter:FlxSprite;
-	
+	private static var mCharacterFlip:Bool;
+	private static var mCharacterFlipY:Bool;
+	private static var mCharacterInitialY:Float;
+	private static var moveAmount = 25;
+	private static var moveAmountY = 15;
 	
 	//G0
 	private static var mBackground:FlxSprite; //Background.
@@ -106,6 +111,9 @@ class MenuState extends FlxState
 		//Let Play It
 		mCounter = 0;
 		playTitle(null);
+		
+		mCharacterFlip = false;
+		mCharacterFlipY = false;
 	}
 	
 	private function setupBackgroundAudience():Void
@@ -278,13 +286,16 @@ class MenuState extends FlxState
 		
 		//Character
 		mCharacter = new FlxSprite();
-		mCharacter.loadGraphic(Assets.getBitmapData("shop/shopcharacter.png"),true,false,80,80);
+		mCharacter.loadGraphic(Assets.getBitmapData("shop/shopcharacter.png"),true,true,80,80);
 		mCharacter.setPosition(FlxG.width / 5 - mCharacter.width, 
 							   FlxG.height - mCharacter.height / 1.05);
 		mCharacter.animation.add("talk", [3, 4, 5, 3, 5, 0, 4, 3, 0], 12, false);
 		mCharacter.animation.add("buy", [0, 1, 0, 2, 0, 1, 0, 2, 0], 12, false);
-		mCharacter.scale.x = 3;
-		mCharacter.scale.y = 3;
+		mCharacter.facing = FlxObject.RIGHT;
+		mCharacter.scale.x = 2;
+		mCharacter.scale.y = 2;
+		mCharacterInitialY = mCharacter.y;
+		
 		mGUIGroup3.add(mCharacter);
 	}
 	
@@ -323,7 +334,41 @@ class MenuState extends FlxState
 		{
 			FlxG.switchState(new PlayState());
 		}
+		
+		moveCharacter();
 		super.update();
+	}
+	
+	//Yo hooo let move the character
+	private function moveCharacter():Void
+	{
+		//Walking to the left
+		if (mCharacterFlip && mCharacter.x < 0)
+		{
+			moveAmount = -moveAmount;
+			mCharacterFlip = false;
+			mCharacter.facing = FlxObject.RIGHT;
+		}
+		else if(!mCharacterFlip && mCharacter.x > FlxG.width - mCharacter.width)
+		{
+			moveAmount = -moveAmount;
+			mCharacterFlip = true;
+			mCharacter.facing = FlxObject.LEFT;
+		}
+		
+		//Walking to the left
+		if (mCharacterFlipY && mCharacter.y < mCharacterInitialY - 5)
+		{
+			moveAmountY = -moveAmountY;
+			mCharacterFlipY = false;
+		}
+		else if(!mCharacterFlipY && mCharacter.y > mCharacterInitialY + 5)
+		{
+			moveAmountY = -moveAmountY;
+			mCharacterFlipY = true;
+		}
+		mCharacter.x += FlxG.elapsed * moveAmount;
+		mCharacter.y += FlxG.elapsed * moveAmountY;
 	}
 	
 	////************//
